@@ -40,10 +40,8 @@ func _physics_process(delta):
 	velocity -= velocity * friction * delta
 	
 	if Input.is_action_pressed("run"):
-		$AnimationTree.playback_speed = 2
 		acc = default_acc * 1.75
 	else:
-		$AnimationPlayer.playback_speed = 1
 		acc = default_acc
 	
-	move_and_slide(velocity)	
+	move_and_slide(velocity)
