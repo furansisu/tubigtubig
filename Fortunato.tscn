@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://Resources/PNG/bernilla.png" type="Texture" id=2]
+[ext_resource path="res://Resources/PNG/fortunato.png" type="Texture" id=1]
+[ext_resource path="res://Player.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=25]
 radius = 4.0
@@ -81,10 +81,10 @@ tracks/0/keys = {
 }
 
 [node name="Character" type="KinematicBody2D"]
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+texture = ExtResource( 1 )
 hframes = 7
 vframes = 3
 frame = 8
