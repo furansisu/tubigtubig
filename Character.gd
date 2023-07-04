@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 
 # Declare member variables here. Examples:
@@ -29,9 +29,9 @@ func _physics_process(delta):
 	if input_vector != Vector2.ZERO:
 		$AnimationTree.get("parameters/playback").travel("Walk")
 		if input_vector.x <= -0.1:
-			$Sprite.flip_h = true
+			$Sprite2D.flip_h = true
 		if input_vector.x >= 0.1:
-			$Sprite.flip_h = false
+			$Sprite2D.flip_h = false
 			
 	else:
 		$AnimationTree.get("parameters/playback").travel("Idle")
@@ -44,4 +44,5 @@ func _physics_process(delta):
 	else:
 		acc = default_acc
 	
-	move_and_slide(velocity)
+	set_velocity(velocity)
+	move_and_slide()

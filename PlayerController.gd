@@ -7,7 +7,7 @@ extends Node2D
 
 var currchar = []
 var numchar = 0
-export var currnumchar = 0
+@export var currnumchar = 0
 
 # Called when the node enters the scene tree for the first time.
 

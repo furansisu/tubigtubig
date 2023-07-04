@@ -1,239 +1,356 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=22 format=3 uid="uid://bggvajerk84s4"]
 
-[ext_resource path="res://Bernilla.tscn" type="PackedScene" id=1]
-[ext_resource path="res://PlayerController.gd" type="Script" id=2]
-[ext_resource path="res://Resources/PNG/grasstileset.png" type="Texture" id=3]
-[ext_resource path="res://Resources/PNG/darkgrass.png" type="Texture" id=4]
-[ext_resource path="res://JunJun.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Fortunato.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Analyn.tscn" type="PackedScene" id=7]
+[ext_resource type="PackedScene" uid="uid://dqb3dyykbfq7e" path="res://Bernilla.tscn" id="1"]
+[ext_resource type="Script" path="res://PlayerController.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://qb3dgtnwsbn5" path="res://Resources/PNG/grasstileset.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bb84h0w3yqgmh" path="res://Resources/PNG/darkgrass.png" id="4"]
+[ext_resource type="PackedScene" uid="uid://ddjb2ona7174k" path="res://JunJun.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://c0ewtyawx6gl3" path="res://Fortunato.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://cxnynaphrajeq" path="res://Analyn.tscn" id="7"]
 
-[sub_resource type="TileSet" id=1]
-0/name = "grasstileset.png 0"
-0/texture = ExtResource( 3 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 32, 224, 80 )
-0/tile_mode = 1
-0/autotile/bitmask_mode = 1
-0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 432, Vector2( 0, 1 ), 438, Vector2( 0, 2 ), 54, Vector2( 0, 3 ), 48, Vector2( 0, 4 ), 495, Vector2( 1, 0 ), 504, Vector2( 1, 1 ), 511, Vector2( 1, 2 ), 63, Vector2( 1, 3 ), 56, Vector2( 1, 4 ), 16, Vector2( 2, 0 ), 216, Vector2( 2, 1 ), 219, Vector2( 2, 2 ), 27, Vector2( 2, 3 ), 24, Vector2( 3, 0 ), 144, Vector2( 3, 1 ), 146, Vector2( 3, 2 ), 18, Vector2( 3, 3 ), 186, Vector2( 4, 0 ), 510, Vector2( 4, 1 ), 447, Vector2( 4, 2 ), 254, Vector2( 4, 3 ), 443, Vector2( 5, 0 ), 507, Vector2( 5, 1 ), 255, Vector2( 5, 2 ), 443, Vector2( 5, 3 ), 254, Vector2( 6, 0 ), 434, Vector2( 6, 1 ), 182, Vector2( 6, 2 ), 442, Vector2( 6, 3 ), 190, Vector2( 7, 0 ), 218, Vector2( 7, 1 ), 155, Vector2( 7, 2 ), 250, Vector2( 7, 3 ), 187, Vector2( 8, 0 ), 154, Vector2( 8, 1 ), 178, Vector2( 8, 2 ), 440, Vector2( 8, 3 ), 62, Vector2( 9, 0 ), 184, Vector2( 9, 1 ), 58, Vector2( 9, 2 ), 248, Vector2( 9, 3 ), 59, Vector2( 10, 0 ), 506, Vector2( 10, 1 ), 191, Vector2( 10, 2 ), 184, Vector2( 10, 3 ), 58, Vector2( 11, 0 ), 446, Vector2( 11, 1 ), 251, Vector2( 11, 2 ), 176, Vector2( 11, 3 ), 50, Vector2( 12, 2 ), 152, Vector2( 12, 3 ), 26 ]
-0/autotile/icon_coordinate = Vector2( 0, 0 )
-0/autotile/tile_size = Vector2( 16, 16 )
-0/autotile/spacing = 0
-0/autotile/occluder_map = [  ]
-0/autotile/navpoly_map = [  ]
-0/autotile/priority_map = [  ]
-0/autotile/z_index_map = [  ]
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-1/name = "grasstileset.png 1"
-1/texture = ExtResource( 3 )
-1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 16, 0, 16, 16 )
-1/tile_mode = 0
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shape_offset = Vector2( 0, 0 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape_one_way = false
-1/shape_one_way_margin = 0.0
-1/shapes = [  ]
-1/z_index = 0
-2/name = "grasstileset.png 2"
-2/texture = ExtResource( 3 )
-2/tex_offset = Vector2( 0, 0 )
-2/modulate = Color( 1, 1, 1, 1 )
-2/region = Rect2( 48, 0, 16, 16 )
-2/tile_mode = 0
-2/occluder_offset = Vector2( 0, 0 )
-2/navigation_offset = Vector2( 0, 0 )
-2/shape_offset = Vector2( 0, 0 )
-2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-2/shape_one_way = false
-2/shape_one_way_margin = 0.0
-2/shapes = [  ]
-2/z_index = 0
-3/name = "grasstileset.png 3"
-3/texture = ExtResource( 3 )
-3/tex_offset = Vector2( 0, 0 )
-3/modulate = Color( 1, 1, 1, 1 )
-3/region = Rect2( 64, 0, 16, 16 )
-3/tile_mode = 0
-3/occluder_offset = Vector2( 0, 0 )
-3/navigation_offset = Vector2( 0, 0 )
-3/shape_offset = Vector2( 0, 0 )
-3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-3/shape_one_way = false
-3/shape_one_way_margin = 0.0
-3/shapes = [  ]
-3/z_index = 0
-4/name = "grasstileset.png 4"
-4/texture = ExtResource( 3 )
-4/tex_offset = Vector2( 0, 0 )
-4/modulate = Color( 1, 1, 1, 1 )
-4/region = Rect2( 80, 0, 16, 16 )
-4/tile_mode = 0
-4/occluder_offset = Vector2( 0, 0 )
-4/navigation_offset = Vector2( 0, 0 )
-4/shape_offset = Vector2( 0, 0 )
-4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-4/shape_one_way = false
-4/shape_one_way_margin = 0.0
-4/shapes = [  ]
-4/z_index = 0
-5/name = "grasstileset.png 5"
-5/texture = ExtResource( 3 )
-5/tex_offset = Vector2( 0, 0 )
-5/modulate = Color( 1, 1, 1, 1 )
-5/region = Rect2( 32, 0, 16, 16 )
-5/tile_mode = 0
-5/occluder_offset = Vector2( 0, 0 )
-5/navigation_offset = Vector2( 0, 0 )
-5/shape_offset = Vector2( 0, 0 )
-5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-5/shape_one_way = false
-5/shape_one_way_margin = 0.0
-5/shapes = [  ]
-5/z_index = 0
-6/name = "grasstileset.png 6"
-6/texture = ExtResource( 3 )
-6/tex_offset = Vector2( 0, 0 )
-6/modulate = Color( 1, 1, 1, 1 )
-6/region = Rect2( 0, 0, 16, 16 )
-6/tile_mode = 0
-6/occluder_offset = Vector2( 0, 0 )
-6/navigation_offset = Vector2( 0, 0 )
-6/shape_offset = Vector2( 0, 0 )
-6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-6/shape_one_way = false
-6/shape_one_way_margin = 0.0
-6/shapes = [  ]
-6/z_index = 0
-7/name = "grasstileset.png 7"
-7/texture = ExtResource( 3 )
-7/tex_offset = Vector2( 0, 0 )
-7/modulate = Color( 1, 1, 1, 1 )
-7/region = Rect2( 16, 16, 16, 16 )
-7/tile_mode = 0
-7/occluder_offset = Vector2( 0, 0 )
-7/navigation_offset = Vector2( 0, 0 )
-7/shape_offset = Vector2( 0, 0 )
-7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-7/shape_one_way = false
-7/shape_one_way_margin = 0.0
-7/shapes = [  ]
-7/z_index = 0
-8/name = "grasstileset.png 8"
-8/texture = ExtResource( 3 )
-8/tex_offset = Vector2( 0, 0 )
-8/modulate = Color( 1, 1, 1, 1 )
-8/region = Rect2( 96, 0, 16, 16 )
-8/tile_mode = 0
-8/occluder_offset = Vector2( 0, 0 )
-8/navigation_offset = Vector2( 0, 0 )
-8/shape_offset = Vector2( 0, 0 )
-8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-8/shape_one_way = false
-8/shape_one_way_margin = 0.0
-8/shapes = [  ]
-8/z_index = 0
-9/name = "grasstileset.png 9"
-9/texture = ExtResource( 3 )
-9/tex_offset = Vector2( 0, 0 )
-9/modulate = Color( 1, 1, 1, 1 )
-9/region = Rect2( 32, 16, 16, 16 )
-9/tile_mode = 0
-9/occluder_offset = Vector2( 0, 0 )
-9/navigation_offset = Vector2( 0, 0 )
-9/shape_offset = Vector2( 0, 0 )
-9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-9/shape_one_way = false
-9/shape_one_way_margin = 0.0
-9/shapes = [  ]
-9/z_index = 0
-10/name = "grasstileset.png 10"
-10/texture = ExtResource( 3 )
-10/tex_offset = Vector2( 0, 0 )
-10/modulate = Color( 1, 1, 1, 1 )
-10/region = Rect2( 80, 16, 16, 16 )
-10/tile_mode = 0
-10/occluder_offset = Vector2( 0, 0 )
-10/navigation_offset = Vector2( 0, 0 )
-10/shape_offset = Vector2( 0, 0 )
-10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-10/shape_one_way = false
-10/shape_one_way_margin = 0.0
-10/shapes = [  ]
-10/z_index = 0
-11/name = "grasstileset.png 11"
-11/texture = ExtResource( 3 )
-11/tex_offset = Vector2( 0, 0 )
-11/modulate = Color( 1, 1, 1, 1 )
-11/region = Rect2( 64, 16, 16, 16 )
-11/tile_mode = 2
-11/autotile/icon_coordinate = Vector2( 0, 0 )
-11/autotile/tile_size = Vector2( 16, 16 )
-11/autotile/spacing = 0
-11/autotile/occluder_map = [  ]
-11/autotile/navpoly_map = [  ]
-11/autotile/priority_map = [  ]
-11/autotile/z_index_map = [  ]
-11/occluder_offset = Vector2( 0, 0 )
-11/navigation_offset = Vector2( 0, 0 )
-11/shape_offset = Vector2( 0, 0 )
-11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-11/shape_one_way = false
-11/shape_one_way_margin = 0.0
-11/shapes = [  ]
-11/z_index = 0
-12/name = "grasstileset.png 12"
-12/texture = ExtResource( 3 )
-12/tex_offset = Vector2( 0, 0 )
-12/modulate = Color( 1, 1, 1, 1 )
-12/region = Rect2( 112, 16, 16, 16 )
-12/tile_mode = 0
-12/occluder_offset = Vector2( 0, 0 )
-12/navigation_offset = Vector2( 0, 0 )
-12/shape_offset = Vector2( 0, 0 )
-12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-12/shape_one_way = false
-12/shape_one_way_margin = 0.0
-12/shapes = [  ]
-12/z_index = 0
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0k6y"]
+texture = ExtResource("3")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u2xe1"]
+texture = ExtResource("3")
+margins = Vector2i(16, 0)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e8epx"]
+texture = ExtResource("3")
+margins = Vector2i(80, 16)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yxb7s"]
+texture = ExtResource("3")
+margins = Vector2i(64, 16)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5sk5a"]
+texture = ExtResource("3")
+margins = Vector2i(112, 16)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h1jqv"]
+texture = ExtResource("3")
+margins = Vector2i(48, 0)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3vgu"]
+texture = ExtResource("3")
+margins = Vector2i(64, 0)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7d2ug"]
+texture = ExtResource("3")
+margins = Vector2i(80, 0)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ke5js"]
+texture = ExtResource("3")
+margins = Vector2i(32, 0)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mvobs"]
+texture = ExtResource("3")
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7r3ts"]
+texture = ExtResource("3")
+margins = Vector2i(16, 16)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0rxr5"]
+texture = ExtResource("3")
+margins = Vector2i(96, 0)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gtc44"]
+texture = ExtResource("3")
+margins = Vector2i(32, 16)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[sub_resource type="TileSet" id="1"]
+sources/0 = SubResource("TileSetAtlasSource_e0k6y")
+sources/1 = SubResource("TileSetAtlasSource_u2xe1")
+sources/2 = SubResource("TileSetAtlasSource_h1jqv")
+sources/3 = SubResource("TileSetAtlasSource_f3vgu")
+sources/4 = SubResource("TileSetAtlasSource_7d2ug")
+sources/5 = SubResource("TileSetAtlasSource_ke5js")
+sources/6 = SubResource("TileSetAtlasSource_mvobs")
+sources/7 = SubResource("TileSetAtlasSource_7r3ts")
+sources/8 = SubResource("TileSetAtlasSource_0rxr5")
+sources/9 = SubResource("TileSetAtlasSource_gtc44")
+sources/10 = SubResource("TileSetAtlasSource_e8epx")
+sources/11 = SubResource("TileSetAtlasSource_yxb7s")
+sources/12 = SubResource("TileSetAtlasSource_5sk5a")
 
 [node name="World" type="Node2D"]
-script = ExtResource( 2 )
+y_sort_enabled = true
+script = ExtResource("2")
 
-[node name="Background" type="Sprite" parent="."]
-position = Vector2( 163.5, 72.5 )
-scale = Vector2( 22.6875, 15.1875 )
-texture = ExtResource( 4 )
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(163.5, 72.5)
+scale = Vector2(22.6875, 15.1875)
+texture = ExtResource("4")
 
 [node name="TileMap" type="TileMap" parent="."]
 light_mask = 64
-tile_set = SubResource( 1 )
-cell_size = Vector2( 16, 16 )
-collision_layer = 2
-format = 1
-tile_data = PoolIntArray( -196594, 0, 0, -196593, 0, 1, -196592, 0, 1, -196591, 0, 1, -196590, 0, 2, -131061, 0, 3, -131059, 0, 0, -131058, 0, 4, -131057, 0, 65537, -131056, 0, 65537, -131055, 0, 65541, -131054, 0, 131074, -65525, 0, 6, -65524, 0, 1, -65523, 0, 4, -65522, 0, 65537, -65521, 0, 65537, -65520, 0, 65541, -65519, 0, 131074, 3, 0, 0, 4, 0, 1, 5, 0, 1, 6, 0, 1, 7, 0, 1, 8, 0, 1, 9, 0, 1, 10, 0, 1, 11, 0, 4, 12, 0, 65537, 13, 0, 65537, 14, 0, 65537, 15, 0, 65541, 16, 0, 131074, 65538, 0, 0, 65539, 0, 4, 65540, 0, 65537, 65541, 0, 65537, 65542, 0, 65537, 65543, 0, 65537, 65544, 0, 65537, 65545, 0, 65541, 65546, 0, 131073, 65547, 0, 131073, 65548, 0, 65540, 65549, 0, 65537, 65550, 0, 65537, 65551, 0, 65538, 131073, 0, 0, 131074, 0, 4, 131075, 0, 65537, 131076, 0, 65537, 131077, 0, 65541, 131078, 0, 131073, 131079, 0, 131073, 131080, 0, 131073, 131081, 0, 131074, 131084, 0, 65536, 131085, 0, 65537, 131086, 0, 65537, 131087, 0, 5, 131088, 0, 1, 131089, 0, 2, 131091, 0, 3, 196609, 0, 65536, 196610, 0, 65537, 196611, 0, 65537, 196612, 0, 65537, 196613, 0, 65538, 196620, 0, 131072, 196621, 0, 65540, 196622, 0, 65537, 196623, 0, 65537, 196624, 0, 65537, 196625, 0, 5, 196626, 0, 1, 196627, 0, 7, 262145, 0, 65536, 262146, 0, 65537, 262147, 0, 65541, 262148, 0, 131073, 262149, 0, 196612, 262150, 0, 1, 262151, 0, 1, 262152, 0, 1, 262153, 0, 1, 262154, 0, 2, 262157, 0, 65536, 262158, 0, 65537, 262159, 0, 65537, 262160, 0, 65537, 262161, 0, 65537, 262162, 0, 65537, 262163, 0, 65538, 327681, 0, 65536, 327682, 0, 65537, 327683, 0, 65538, 327685, 0, 65542, 327686, 0, 131073, 327687, 0, 65540, 327688, 0, 65541, 327689, 0, 131073, 327690, 0, 65543, 327693, 0, 65542, 327694, 0, 131073, 327695, 0, 65540, 327696, 0, 65537, 327697, 0, 65537, 327698, 0, 65537, 327699, 0, 65538, 393217, 0, 65536, 393218, 0, 65537, 393219, 0, 5, 393220, 0, 1, 393221, 0, 7, 393223, 0, 131072, 393224, 0, 131074, 393226, 0, 196619, 393227, 0, 196610, 393229, 0, 65539, 393231, 0, 65536, 393232, 0, 65537, 393233, 0, 65537, 393234, 0, 65541, 393235, 0, 131074, 458752, 0, 196608, 458753, 0, 11, 458754, 0, 65537, 458755, 0, 65537, 458756, 0, 65537, 458757, 0, 65538, 458764, 0, 0, 458765, 0, 10, 458766, 0, 1, 458767, 0, 4, 458768, 0, 65541, 458769, 0, 131073, 458770, 0, 131074, 524289, 0, 131072, 524290, 0, 131073, 524291, 0, 65540, 524292, 0, 65537, 524293, 0, 5, 524294, 0, 1, 524295, 0, 2, 524299, 0, 196608, 524300, 0, 196616, 524301, 0, 65540, 524302, 0, 65537, 524303, 0, 65541, 524304, 0, 131074, 589827, 0, 131072, 589828, 0, 131073, 589829, 0, 131073, 589830, 0, 131073, 589831, 0, 131077, 589832, 0, 1, 589833, 0, 1, 589834, 0, 2, 589837, 0, 65536, 589838, 0, 65541, 589839, 0, 131074, 655367, 0, 131072, 655368, 0, 131073, 655369, 0, 131073, 655370, 0, 196617, 655371, 0, 196609, 655372, 0, 196609, 655373, 0, 196616, 655374, 0, 131074 )
+tile_set = SubResource("1")
+format = 2
 
-[node name="Players" type="YSort" parent="."]
+[node name="Players" type="Node2D" parent="."]
+y_sort_enabled = true
 
-[node name="Character" parent="Players" instance=ExtResource( 5 )]
-position = Vector2( 90, 91 )
+[node name="Character" parent="Players" instance=ExtResource("5")]
+position = Vector2(90, 91)
 
-[node name="Character2" parent="Players" instance=ExtResource( 1 )]
-position = Vector2( 132, 68 )
+[node name="Character2" parent="Players" instance=ExtResource("1")]
+position = Vector2(132, 68)
 
-[node name="Character3" parent="Players" instance=ExtResource( 7 )]
-position = Vector2( 83, 47 )
+[node name="Character3" parent="Players" instance=ExtResource("7")]
+position = Vector2(96, 56)
 
-[node name="Character4" parent="Players" instance=ExtResource( 6 )]
-position = Vector2( 140, 93 )
+[node name="Character4" parent="Players" instance=ExtResource("6")]
+position = Vector2(140, 93)
