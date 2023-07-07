@@ -17,23 +17,18 @@ func _ready():
 		i.selection = numchar
 		print(i.selection)
 		numchar += 1
+	currchar[currnumchar].selected = true
 
 var input_vector = Vector2.ZERO
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-
-	input_vector = input_vector.normalized()
-	
-	currchar[currnumchar].move(input_vector)
-	
+# Called every frame. 'delta' is the elapsed time since the previous frame.	
 func _input(ev):
 	if ev.is_action_pressed("changechar"):
+		currchar[currnumchar].selected = false
 		print("Changed character")
 		if currnumchar == numchar-1:
 			currnumchar = 0
 		else:
 			currnumchar += 1
-		print(currnumchar)
+		
+		currchar[currnumchar].selected = true

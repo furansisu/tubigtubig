@@ -2,34 +2,35 @@ extends CharacterBody2D
 
 # Called when the node enters the scene tree for the first time.
 
-var velocity1 = Vector2.ZERO
 @export var default_acc = 1500
 var acc = default_acc
-@export var maxspeed = 200
+@export var maxspeed = 100
 @export var selection = 0
-var friction = (acc/maxspeed) * 2.5
-var motion = Vector2.ZERO
+@export var selected = false
+var friction = (acc/maxspeed)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 func _physics_process(delta):
+	var direction = Input.get_vector("left", "right", "up", "down")
+	print(direction.x)
+	
 	# animation handling
-	if motion != Vector2.ZERO:
+	if direction != Vector2.ZERO and selected == true:
 		if Input.is_action_pressed("run"):
 			$AnimationPlayer.play("Run")
 		else:
 			$AnimationPlayer.play("WalkRight")
-		if motion.x <= -0.1:
+		if direction.x < 0:
 			$Sprite2D.flip_h = true
-		if motion.x >= 0.1:
+		if direction.x > 0:
 			$Sprite2D.flip_h = false
 	else:
 		$AnimationPlayer.play("Idle")
 	
-	# calculation
-	velocity1 += motion * acc * delta
-	velocity1 -= velocity1 * friction * delta
+	velocity += direction * acc * delta
+	velocity -= velocity * friction * delta
 	
 	# moving other bodies
 	for i in get_slide_collision_count():
@@ -39,7 +40,7 @@ func _physics_process(delta):
 		if collider is CharacterBody2D:
 			collider.set_velocity(-normal * friction)
 			collider.move_and_slide()
-			velocity1 = velocity1/2
+			velocity = velocity/2
 		
 	# run test
 	if Input.is_action_pressed("run"):
@@ -48,11 +49,6 @@ func _physics_process(delta):
 		acc = default_acc
 	
 	# actual moving
-	set_velocity(velocity1)
-	move_and_slide()
 	
-	if !selection == get_owner().currnumchar:
-		motion = Vector2.ZERO
-
-func move(input):
-	motion = input
+	if selected == true:
+		move_and_slide()
