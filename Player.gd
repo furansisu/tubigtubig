@@ -14,7 +14,6 @@ var friction = (acc/maxspeed)
 #	pass
 func _physics_process(delta):
 	var direction = Input.get_vector("left", "right", "up", "down")
-	print(direction.x)
 	
 	# animation handling
 	if direction != Vector2.ZERO and selected == true:

@@ -1,8 +1,8 @@
 res://default_env.tres
 res://World.tscn
 res://Player.gd
+res://PlayerController.gd
 res://Analyn.tscn
 res://JunJun.tscn
 res://Fortunato.tscn
 res://Bernilla.tscn
-res://PlayerController.gd

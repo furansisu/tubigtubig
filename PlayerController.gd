@@ -19,8 +19,6 @@ func _ready():
 		numchar += 1
 	currchar[currnumchar].selected = true
 
-var input_vector = Vector2.ZERO
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.	
 func _input(ev):
 	if ev.is_action_pressed("changechar"):
