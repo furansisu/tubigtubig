@@ -85,7 +85,7 @@ _data = {
 "WalkRight": SubResource("4")
 }
 
-[node name="Character" type="CharacterBody2D"]
+[node name="Analyn" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("2")
 
@@ -105,3 +105,6 @@ root_node = NodePath("../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_fmy4n")
 }
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true

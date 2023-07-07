@@ -106,3 +106,6 @@ root_node = NodePath("../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_sxwnh")
 }
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
