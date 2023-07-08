@@ -87,6 +87,7 @@ _data = {
 
 [node name="Analyn" type="CharacterBody2D"]
 y_sort_enabled = true
+platform_floor_layers = 4294901760
 script = ExtResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -105,6 +106,3 @@ root_node = NodePath("../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_fmy4n")
 }
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true

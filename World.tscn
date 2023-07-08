@@ -1246,7 +1246,6 @@ sources/11 = SubResource("TileSetAtlasSource_yxb7s")
 sources/12 = SubResource("TileSetAtlasSource_5sk5a")
 
 [node name="World" type="Node2D"]
-y_sort_enabled = true
 script = ExtResource("2")
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -1265,13 +1264,19 @@ layer_0/tile_data = PackedInt32Array(720916, 0, 6, 655380, 0, 6, 589844, 0, 6, 5
 y_sort_enabled = true
 
 [node name="Character" parent="Players" instance=ExtResource("5")]
+y_sort_enabled = false
 position = Vector2(90, 91)
 
 [node name="Character2" parent="Players" instance=ExtResource("1")]
+y_sort_enabled = false
 position = Vector2(132, 68)
 
 [node name="Character3" parent="Players" instance=ExtResource("7")]
+y_sort_enabled = false
 position = Vector2(96, 56)
 
 [node name="Character4" parent="Players" instance=ExtResource("6")]
+y_sort_enabled = false
 position = Vector2(140, 93)
+
+[node name="Camera" type="Camera2D" parent="."]
