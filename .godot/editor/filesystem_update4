@@ -1,7 +1,2 @@
 res://default_env.tres
 res://Scenes/World.tscn
-res://Scripts/Player.gd
-res://Characters/Analyn.tscn
-res://Characters/Bernilla.tscn
-res://Characters/Fortunato.tscn
-res://Characters/JunJun.tscn

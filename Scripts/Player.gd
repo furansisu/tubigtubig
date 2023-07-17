@@ -2,9 +2,9 @@ extends CharacterBody2D
 
 # Called when the node enters the scene tree for the first time.
 
-@export var default_acc = 1500
+@export var default_acc = 350
 var acc = default_acc
-@export var maxspeed = 100
+@export var maxspeed = 75
 @export var selection = 0
 @export var selected = false
 var friction = (acc/maxspeed)
@@ -22,16 +22,18 @@ func MoveTo(Position: Vector2):
 
 func _input(event):
 	if event.is_action_pressed("click"):
-		target_position = get_global_mouse_position()
 		target_position_reached = false
+	if event.is_action_released("click"):
+		target_position_reached = true
 
 func _physics_process(delta):
 	direction = Input.get_vector("left", "right", "up", "down")
 	if not target_position_reached:
+		target_position = get_global_mouse_position()
 		target_position_reached = MoveTo(target_position)
 	
 	# animation handling
-	if (direction != Vector2.ZERO or velocity > Vector2.ZERO) and selected == true:
+	if (direction != Vector2.ZERO and (velocity > Vector2.ZERO or velocity < Vector2.ZERO)) and selected == true:
 		if Input.is_action_pressed("run"):
 			$AnimationPlayer.play("Run")
 		else:
@@ -48,7 +50,7 @@ func _physics_process(delta):
 		
 	# run test
 	if Input.is_action_pressed("run"):
-		acc = default_acc * 1.75
+		acc = default_acc * 1.5
 	else:
 		acc = default_acc
 	
