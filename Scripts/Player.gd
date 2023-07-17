@@ -9,13 +9,26 @@ var acc = default_acc
 @export var selected = false
 var friction = (acc/maxspeed)
 
-@export var target = Vector2.ZERO
+var direction = Vector2.ZERO
+@export var target_position = position
+@export var target_position_reached = true
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func MoveTo(Position: Vector2):
+	if position.distance_to(Position) < 1 or direction.length() > .1:
+		return true
+	else:
+		direction = position.direction_to(Position)
+		return false
+
+func _input(event):
+	if event.is_action_pressed("click"):
+		target_position = get_global_mouse_position()
+		target_position_reached = false
+
 func _physics_process(delta):
-	var direction = Input.get_vector("left", "right", "up", "down")
+	direction = Input.get_vector("left", "right", "up", "down")
+	if not target_position_reached:
+		target_position_reached = MoveTo(target_position)
 	
 	# animation handling
 	if (direction != Vector2.ZERO or velocity > Vector2.ZERO) and selected == true:
@@ -44,15 +57,3 @@ func _physics_process(delta):
 	if selected == true:
 		move_and_slide()
 	
-	# POSITION MOVEMENT TEST	
-	if target != Vector2.ZERO and selected == true:
-		velocity = position.direction_to(target) * maxspeed
-		
-		if position.distance_to(target) > 10:
-			move_and_slide()
-		else:
-			target = Vector2.ZERO
-			
-func _input(event):
-	if event.is_action_pressed("click"):
-		target = get_global_mouse_position()
