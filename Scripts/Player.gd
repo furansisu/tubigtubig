@@ -9,6 +9,8 @@ var acc = default_acc
 @export var selected = false
 var friction = (acc/maxspeed)
 
+@export var target = Vector2.ZERO
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
@@ -16,7 +18,7 @@ func _physics_process(delta):
 	var direction = Input.get_vector("left", "right", "up", "down")
 	
 	# animation handling
-	if direction != Vector2.ZERO and selected == true:
+	if (direction != Vector2.ZERO or velocity > Vector2.ZERO) and selected == true:
 		if Input.is_action_pressed("run"):
 			$AnimationPlayer.play("Run")
 		else:
@@ -30,16 +32,6 @@ func _physics_process(delta):
 	
 	velocity += direction * acc * delta
 	velocity -= velocity * friction * delta
-	
-	# moving other bodies
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		var collider = collision.get_collider()
-		var normal = collision.get_normal()
-		if collider is CharacterBody2D:
-			collider.set_velocity(-normal * friction)
-			collider.move_and_slide()
-			velocity = velocity/2
 		
 	# run test
 	if Input.is_action_pressed("run"):
@@ -51,3 +43,16 @@ func _physics_process(delta):
 	
 	if selected == true:
 		move_and_slide()
+	
+	# POSITION MOVEMENT TEST	
+	if target != Vector2.ZERO and selected == true:
+		velocity = position.direction_to(target) * maxspeed
+		
+		if position.distance_to(target) > 10:
+			move_and_slide()
+		else:
+			target = Vector2.ZERO
+			
+func _input(event):
+	if event.is_action_pressed("click"):
+		target = get_global_mouse_position()
