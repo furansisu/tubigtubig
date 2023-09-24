@@ -2541,3 +2541,10 @@ position = Vector2(-15, 21)
 [node name="Sprite2D" type="Sprite2D" parent="Marker"]
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("7_to70h")
+
+[node name="Force" type="Node2D" parent="."]
+position = Vector2(35, 36)
+
+[node name="Sprite2D" type="Sprite2D" parent="Force"]
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("7_to70h")

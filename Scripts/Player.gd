@@ -13,15 +13,24 @@ var direction = Vector2.ZERO
 @export var MovingTo = false
 
 var Marker
+var Force
 var Moving = false
+var ray = RayCast2D.new()
 
 func _ready():
 	Marker = get_node("../../Marker")
+	Force = get_node("../../Force")
+	self.add_child(ray)
+	print(Force.global_position)
+	
 
 func MoveTo(Position: Vector2, StopMoving):
 	Moving = StopMoving
 	Marker.position = Position
 	target_position = Position
+	
+func force():
+	ray.target_position = Force.global_position - self.global_position
 
 func ChangeMotion(newDir):
 	direction = newDir
@@ -29,6 +38,7 @@ func ChangeMotion(newDir):
 		Moving = false
 
 func _physics_process(delta):
+	force()
 	if Moving:
 		if position.distance_to(target_position) < 5:
 			target_position = position
