@@ -1,9 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://bfvq6ggo0uqc2"]
+[gd_scene load_steps=23 format=3 uid="uid://bfvq6ggo0uqc2"]
 
+[ext_resource type="PackedScene" uid="uid://deifhdpsrkxdq" path="res://Characters/Bernilla.tscn" id="1"]
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://qb3dgtnwsbn5" path="res://Resources/PNG/grasstileset.png" id="3"]
 [ext_resource type="Script" path="res://Scripts/AIBase.gd" id="3_6b4vj"]
 [ext_resource type="PackedScene" uid="uid://drpr4dxl2kb0u" path="res://Characters/JunJun.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://ij3q675i38fa" path="res://Characters/Fortunato.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://dbcsgqu8g7wfa" path="res://Characters/Analyn.tscn" id="7"]
 [ext_resource type="Texture2D" uid="uid://dl5v60sc54sfp" path="res://icon.png" id="7_to70h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0k6y"]
@@ -2516,6 +2519,15 @@ script = ExtResource("3_6b4vj")
 
 [node name="JunJun" parent="Players" instance=ExtResource("5")]
 position = Vector2(99, 61)
+
+[node name="Analyn" parent="Players" instance=ExtResource("7")]
+position = Vector2(15, 69)
+
+[node name="Bernilla" parent="Players" instance=ExtResource("1")]
+position = Vector2(65, 81)
+
+[node name="Fortunato" parent="Players" instance=ExtResource("6")]
+position = Vector2(82, 33)
 
 [node name="Camera" type="Camera2D" parent="."]
 
