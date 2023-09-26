@@ -20,12 +20,23 @@ var Moving = false
 
 ## CONTEXT STEERING -------------------------------------------------------------------
 
+var WEIGHTS = {
+	"CharacterBody2D": 10,
+	"TileMap": 1.25,
+	"Area2D": 5
+}
+
 @export var num_rays = 16
 
-var ray_length = 25
+var ray_length = 15
 var ray_directions = []
 var interest = []
 var danger = []
+
+var InterestDirWeights = {}
+var DangerDirWeights = {}
+
+# [DIRECTION, POSITION, WEIGHT]
 
 var debug_dirs = []
 var colors = []
@@ -35,21 +46,34 @@ func getDanger():
 	var space_state = get_world_2d().direct_space_state
 	for i in num_rays:
 		var query = PhysicsRayQueryParameters2D.create(position, position+ray_directions[i].rotated(rotation) * ray_length, 1, [self])
+		query.collide_with_areas = true
 		var result = space_state.intersect_ray(query)
-		danger[i] = clamp(1 - (position.distance_to(result.position) / ray_length),0,1) if result else 0
-		colors[i] = Color.RED if result else Color.YELLOW_GREEN
 		
-		debug_dirs[i*2] = Vector2.ZERO
-		debug_dirs[i*2+1] = ray_directions[i] * ray_length
-		debug_dirs[i*2+1] *= danger[i] if result else interest[i]
+		if result:
+			DangerDirWeights[i] = ([ray_directions[i], result.position, getWeight(result.collider.get_class())])
+			#danger[i] = clamp(1 - (position.distance_to(result.position) / ray_length),0,1)
+			
+		else:
+			DangerDirWeights.erase(i)
+			#danger[i] = 0
+	
+	for i in num_rays:
+		var all = 0
+		for j in DangerDirWeights:
+			var d = ray_directions[i].dot(DangerDirWeights[j][0]) * clamp(1 - (position.distance_to(DangerDirWeights[j][1]) / ray_length),0,1) * DangerDirWeights[j][2]
+			all += d
+		all = clamp(all, 0, 1)
+		danger[i] = max(0, all)
+		colors[i] = Color.RED if danger[i] > 0 else Color.YELLOW_GREEN
 
 func getInterest():
 	var dir = position.direction_to(target_position)
 	for i in num_rays:
-		var d = ray_directions[i].rotated(rotation).dot(dir)
+		var d = ray_directions[i].dot(dir)
 		var opp = getOpposite(i)
 		if danger[opp]:
-			d = max(d, ray_directions[i].rotated(rotation).dot(ray_directions[i]) * danger[opp])
+			d = max(d, danger[opp])
+			pass
 		interest[i] = max(0, d)
 	queue_redraw()
 		
@@ -57,14 +81,32 @@ func chooseDir():
 	prefDir = Vector2.ZERO
 	for i in num_rays:
 		interest[i] = interest[i] - danger[i]
-		prefDir += ray_directions[i] * interest[i]
-	prefDir = prefDir.normalized()
+		#prefDir += ray_directions[i] * interest[i]
+		
+		# DEBUG
+		debug_dirs[i*2] = Vector2.ZERO
+		debug_dirs[i*2+1] = ray_directions[i] * ray_length
+		if interest[i] > 0:
+			debug_dirs[i*2+1] *= interest[i]
+			colors[i] = Color.YELLOW_GREEN
+		else:
+			debug_dirs[i*2+1] *= abs(interest[i])
+			colors[i] = Color.RED
+		# DEBUG
+		
+	var index = findAll(interest, interest.max()).pick_random()
+	prefDir = ray_directions[index]
+
+func getWeight(collider):
+	var result = WEIGHTS.get(collider)
+	print(result if result else "NOTHING")
+	return result if result else 0.5
 
 func getOpposite(i):
 	if i < num_rays / 2:
-		return i + num_rays / 2
+		return i + (num_rays / 2)
 	else:
-		return i - num_rays / 2
+		return i - (num_rays / 2)
 
 var debugText : Array = []
 # [["TEXT", Color, Vector2, Collider], ["COLLIDE", Color, Vector2, TileMap]]
@@ -97,12 +139,18 @@ func _ready():
 	
 	Marker = get_node("../../Marker")
 
-# UNUSED --------------------------------------------------------------------------------
+# OTHER --------------------------------------------------------------------------------
 
-func force():
-	pass
+func findAll(array : Array, value):
+	var indexes = []
+	var index = 0
+	for i in array:
+		if i == value:
+			indexes.append(index)
+		index += 1
+	return indexes
 
-# UNUSED --------------------------------------------------------------------------------
+# OTHER --------------------------------------------------------------------------------
 
 func MoveTo(Position: Vector2, StopMoving):
 	Moving = StopMoving

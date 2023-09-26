@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bfvq6ggo0uqc2"]
+[gd_scene load_steps=23 format=3 uid="uid://bfvq6ggo0uqc2"]
 
 [ext_resource type="PackedScene" uid="uid://deifhdpsrkxdq" path="res://Characters/Bernilla.tscn" id="1"]
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="2"]
@@ -2494,9 +2494,6 @@ sources/10 = SubResource("TileSetAtlasSource_e8epx")
 sources/11 = SubResource("TileSetAtlasSource_yxb7s")
 sources/12 = SubResource("TileSetAtlasSource_5sk5a")
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_4mpyp"]
-b = Vector2(131, 0)
-
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("2")
@@ -2524,7 +2521,6 @@ script = ExtResource("3_6b4vj")
 
 [node name="JunJun" parent="Players" instance=ExtResource("5")]
 position = Vector2(223, 228)
-platform_on_leave = 2
 
 [node name="Analyn" parent="Players" instance=ExtResource("7")]
 position = Vector2(123, 332)
@@ -2551,9 +2547,3 @@ scale = Vector2(0.865848, 0.782176)
 [node name="Sprite2D" type="Sprite2D" parent="Force"]
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("7_to70h")
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(119, 305)
-shape = SubResource("SegmentShape2D_4mpyp")
