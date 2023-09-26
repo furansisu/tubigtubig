@@ -16,9 +16,11 @@ var Marker
 var Force
 var Moving = false
 
+@onready var default_font = load("res://Resources/FONTS/november.tres")
+
 ## CONTEXT STEERING -------------------------------------------------------------------
 
-@export var num_rays = 32
+@export var num_rays = 16
 
 var ray_length = 25
 var ray_directions = []
@@ -47,7 +49,7 @@ func getInterest():
 		var d = ray_directions[i].rotated(rotation).dot(dir)
 		var opp = getOpposite(i)
 		if danger[opp]:
-			d = ray_directions[i].rotated(rotation).dot(ray_directions[i]) * danger[opp] * 2
+			d = max(d, ray_directions[i].rotated(rotation).dot(ray_directions[i]) * danger[opp])
 		interest[i] = max(0, d)
 	queue_redraw()
 		
@@ -57,7 +59,6 @@ func chooseDir():
 		interest[i] = interest[i] - danger[i]
 		prefDir += ray_directions[i] * interest[i]
 	prefDir = prefDir.normalized()
-	print(prefDir)
 
 func getOpposite(i):
 	if i < num_rays / 2:
@@ -65,9 +66,20 @@ func getOpposite(i):
 	else:
 		return i - num_rays / 2
 
+var debugText : Array = []
+# [["TEXT", Color, Vector2, Collider], ["COLLIDE", Color, Vector2, TileMap]]
+
+func drawText(i):
+	var size = 5
+	draw_string(default_font, i[2] - self.global_position - Vector2(size/2,0), i[0], HORIZONTAL_ALIGNMENT_LEFT, -1, size, i[1])
+	await get_tree().create_timer(1).timeout
+	debugText.erase(i)
+
 func _draw():
 	draw_line(Vector2.ZERO, Vector2.ZERO + prefDir.rotated(rotation) * 50, Color.GREEN_YELLOW, 2)
 	draw_multiline_colors(debug_dirs, colors, 0.75)
+	for i in debugText:
+		drawText(i)
 
 ## -----------------------------------------------------------------------------------
 
@@ -107,6 +119,18 @@ func _physics_process(delta):
 	getInterest()
 	getDanger()
 	chooseDir()
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var alreadyCollided = false
+		for j in debugText:
+			if j[3] and j[3] == collision.get_collider():
+				alreadyCollided = true
+				break
+		if not alreadyCollided:
+			var newCollision = ["collide", Color.RED, collision.get_position(), collision.get_collider()]
+			debugText.append(newCollision)
+		
 	
 	if Moving:
 		if position.distance_to(target_position) < 5:

@@ -1,8 +1,8 @@
 res://default_env.tres
-res://Scenes/World.tscn
-res://Scripts/Player.gd
+res://Characters/JunJun.tscn
 res://Characters/Analyn.tscn
 res://Characters/Bernilla.tscn
 res://Characters/Fortunato.tscn
-res://Characters/JunJun.tscn
-res://Scripts/PlayerController.gd
+res://Scenes/World.tscn
+res://Scripts/Player.gd
+res://Resources/FONTS/november.tres

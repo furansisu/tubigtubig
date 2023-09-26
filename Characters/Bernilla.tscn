@@ -91,13 +91,13 @@ platform_floor_layers = 4294901760
 script = ExtResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -4)
 texture = ExtResource("1")
 hframes = 7
 vframes = 3
 frame = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
 rotation = 1.5708
 shape = SubResource("25")
 

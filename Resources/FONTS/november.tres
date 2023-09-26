@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://d3v71ua5j3doh"]
+
+[ext_resource type="FontFile" uid="uid://dk5vsl3naemxf" path="res://Resources/FONTS/november.ttf" id="1_upnwh"]
+
+[resource]
+base_font = ExtResource("1_upnwh")
