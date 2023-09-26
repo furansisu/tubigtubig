@@ -2523,17 +2523,17 @@ y_sort_enabled = true
 script = ExtResource("3_6b4vj")
 
 [node name="JunJun" parent="Players" instance=ExtResource("5")]
-position = Vector2(223, 228)
+position = Vector2(260, 216)
 platform_on_leave = 2
 
 [node name="Analyn" parent="Players" instance=ExtResource("7")]
-position = Vector2(123, 332)
+position = Vector2(32, 115)
 
 [node name="Bernilla" parent="Players" instance=ExtResource("1")]
-position = Vector2(65, 81)
+position = Vector2(582, 216)
 
 [node name="Fortunato" parent="Players" instance=ExtResource("6")]
-position = Vector2(595, 224)
+position = Vector2(119, 373)
 
 [node name="Camera" type="Camera2D" parent="."]
 

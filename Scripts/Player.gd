@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # Called when the node enters the scene tree for the first time.
 
-@export var default_acc = 800
+@export var default_acc = 100
 var acc = default_acc
 @export var maxspeed = 100
 @export var selection = 0
@@ -70,13 +70,16 @@ func getInterest():
 	var dir = position.direction_to(target_position)
 	for i in num_rays:
 		var d = ray_directions[i].dot(dir)
+		#var d = 1 - abs(ray_directions[i].dot(dir) - 0.17)
 		var opp = getOpposite(i)
 		if danger[opp]:
-			d = max(d, danger[opp])
+			d = max(d, danger[opp] * 0.25)
+			#d = max(d, 1 - abs(ray_directions[i].dot(-dir) - 0.5))
 			pass
 		interest[i] = max(0, d)
 	queue_redraw()
-		
+
+var prevMaxInterests : Array = []
 func chooseDir():
 	prefDir = Vector2.ZERO
 	for i in num_rays:
@@ -94,12 +97,36 @@ func chooseDir():
 			colors[i] = Color.RED
 		# DEBUG
 		
-	var index = findAll(interest, interest.max()).pick_random()
+	var indexes = findAll(interest, interest.max())
+	var index
+	if prevMaxInterests.is_empty():
+		prevMaxInterests = savePrevMax(interest, indexes)
+	print("GETTING ALL MAX INTERESTS AND COMPARING WITH CURRENT VELOCITY")
+	var minimum = 100
+	var minIndex = 0
+	for i in indexes:
+		var magnitude = (ray_directions[i] - velocity.normalized()).length()
+		if magnitude < 1:
+			index = i
+		if magnitude < minimum:
+			minimum = magnitude
+			minIndex = i
+		print(i, " magnitude: ", magnitude)
+	print("CHOSEN: ", index)
+	if not index:
+		index = minIndex
+	print(indexes)
 	prefDir = ray_directions[index]
+	prevMaxInterests = savePrevMax(interest, indexes)
+
+func savePrevMax(array: Array, indexes: Array):
+	var newArray = []
+	for i in indexes:
+		newArray.append([array[i],i])
+	return newArray
 
 func getWeight(collider):
 	var result = WEIGHTS.get(collider)
-	print(result if result else "NOTHING")
 	return result if result else 0.5
 
 func getOpposite(i):
@@ -145,7 +172,7 @@ func findAll(array : Array, value):
 	var indexes = []
 	var index = 0
 	for i in array:
-		if i == value:
+		if abs(i - value) <= 0.1:
 			indexes.append(index)
 		index += 1
 	return indexes
@@ -200,14 +227,16 @@ func _physics_process(delta):
 	else:
 		$AnimationPlayer.play("Idle")
 	
-	velocity += direction * acc * delta
-	velocity -= velocity * friction * delta
+	var desired_velocity = direction * maxspeed
+	velocity = velocity.lerp(desired_velocity, 0.125)
+	#velocity += direction * acc * delta
+	#velocity -= velocity * friction * delta
 		
 	# run test
 	if Input.is_action_pressed("run"):
-		acc = default_acc * 1.5
+		maxspeed = default_acc * 1.5
 	else:
-		acc = default_acc
+		maxspeed = default_acc
 	
 	# actual moving
 	
