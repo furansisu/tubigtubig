@@ -1,8 +1,10 @@
+Idle
+Node
+Node2D
 CollisionPolygon2D
 CollisionShape2D
 Line2D
 Area2D
-Node2D
 Sprite2D
 Marker2D
 Camera2D

@@ -4,7 +4,7 @@ const contextsteeringscript = preload("res://Scripts/ContextSteering.gd")
 
 # ------------------------ V A R I A B L E S ------------------------------------------
 
-var maxspd = 65
+@export var maxspd = 50
 var default_acc = maxspd
 @export var selection = 0
 
@@ -16,18 +16,26 @@ var prefDir = Vector2.ZERO
 
 # ------------------------------------------------------------------------------------
 
-var Marker 
+signal ReachedTarget
+@onready var Marker = get_node("../../Marker")
 var Moving = false
+var spd = maxspd
 
-func MoveTo(Position: Vector2, StopMoving):
+func MoveTo(Position: Vector2, StopMoving, newspd):
 	Moving = StopMoving
 	Marker.position = Position
 	target_position = Position
+	SetNewSpd(newspd)
 
-func ChangeMotion(newDir):
+func Move(newDir, newspd):
 	direction = newDir
-	if newDir.length() > .1:
-		Moving = false
+	SetNewSpd(newspd)
+
+func SetNewSpd(newspd):
+	if newspd and newspd < maxspd:
+		spd = newspd
+	else:
+		spd = maxspd
 
 # ------------------------------------------------------------------------------------
 
@@ -36,15 +44,15 @@ func _draw():
 
 func _ready():
 	CSB.setup(self)
-	Marker = get_node("../../Marker")
 
-func _physics_process(delta):
-	var prefDir = CSB.chooseDir()
+func _physics_process(_delta):
+	prefDir = CSB.chooseDir()
 	
 	if Moving:
 		if position.distance_to(target_position) < 5:
 			target_position = position
 			print("Reached target")
+			ReachedTarget.emit()
 			Moving = false
 		direction = prefDir
 	
@@ -63,14 +71,14 @@ func _physics_process(delta):
 	else:
 		$AnimationPlayer.play("Idle")
 	
-	var desired_velocity = direction * maxspd
+	var desired_velocity = direction * spd
 	velocity = velocity.lerp(desired_velocity, 0.15)
 		
 	# run test
 	if Input.is_action_pressed("run"):
-		maxspd = default_acc * 1.5
+		spd = default_acc * 1.5
 	else:
-		maxspd = default_acc
+		spd = default_acc
 	
 	move_and_slide()
 	

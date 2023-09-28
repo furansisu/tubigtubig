@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbcsgqu8g7wfa"]
+[gd_scene load_steps=12 format=3 uid="uid://dbcsgqu8g7wfa"]
 
 [ext_resource type="Texture2D" uid="uid://klr0p8qnfbh4" path="res://Resources/PNG/analyn.png" id="1"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="2"]
+[ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="3_wltia"]
+[ext_resource type="Script" path="res://Scripts/States/Idle.gd" id="4_pxqd0"]
 
 [sub_resource type="CapsuleShape2D" id="25"]
 radius = 4.0
@@ -106,3 +108,11 @@ root_node = NodePath("../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_fmy4n")
 }
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_wltia")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("character")]
+script = ExtResource("4_pxqd0")
+character = NodePath("../..")

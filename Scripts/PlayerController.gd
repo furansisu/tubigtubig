@@ -8,6 +8,7 @@ extends Node2D
 var currchar = []
 var numchar = 0
 var Moving
+var ManualMove = false
 
 @onready var cam = $Camera
 var lerpspeed = .1
@@ -35,7 +36,6 @@ func _input(ev):
 			currnumchar = 0
 		else:
 			currnumchar += 1
-		CurrentlySelected.ChangeMotion(Vector2.ZERO)
 		CurrentlySelected = currchar[currnumchar]
 		cam.reparent(CurrentlySelected)
 	if ev.is_action_pressed("click"):
@@ -43,13 +43,18 @@ func _input(ev):
 	if ev.is_action_released("click"):
 		Moving = false
 		
-func _process(delta):
+func _process(_delta):
 	var direction = Input.get_vector("left", "right", "up", "down")
-	CurrentlySelected.ChangeMotion(direction)
+	if ManualMove:
+		CurrentlySelected.Move(direction, CurrentlySelected.maxspd)
+	if direction == Vector2.ZERO and ManualMove:
+		ManualMove = false
+	if direction != Vector2.ZERO and not ManualMove:
+		ManualMove = true
 	if Moving:
-		CurrentlySelected.MoveTo(get_global_mouse_position(), true)
+		CurrentlySelected.MoveTo(get_global_mouse_position(), true, null)
 
 # Called every physics frame. Used to handle camera follow and tweening.
-func _physics_process(delta):
+func _physics_process(_delta):
 	cam.position = lerp(cam.position, Vector2(0, 0), lerpspeed)
 
