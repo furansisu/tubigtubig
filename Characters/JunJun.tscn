@@ -1,7 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://drpr4dxl2kb0u"]
+[gd_scene load_steps=13 format=3 uid="uid://drpr4dxl2kb0u"]
 
 [ext_resource type="Texture2D" uid="uid://coa4o1xitpsb6" path="res://Resources/PNG/junjun.png" id="1"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="2"]
+[ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="3_oamuv"]
+[ext_resource type="Script" path="res://Scripts/States/Idle.gd" id="4_084sa"]
+[ext_resource type="Script" path="res://Scripts/States/Disable.gd" id="5_137fw"]
 
 [sub_resource type="CapsuleShape2D" id="25"]
 radius = 4.0
@@ -107,3 +110,13 @@ root_node = NodePath("../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_sxwnh")
 }
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_oamuv")
+initial_state = NodePath("")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_084sa")
+
+[node name="Disable" type="Node" parent="StateMachine"]
+script = ExtResource("5_137fw")

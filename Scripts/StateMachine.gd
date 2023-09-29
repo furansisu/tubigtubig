@@ -2,10 +2,14 @@ extends Node
 
 @export var initial_state : State
 
+var character : CharacterBody2D
+
 var current_state : State
 var states : Dictionary = {}
 
 func _ready():
+	character = get_parent()
+	character.Selected.connect(onSelect)
 	for child in get_children():
 			if child is State:
 				states[child.name] = child
@@ -36,3 +40,9 @@ func on_child_transition(state, new_state_name):
 	
 	new_state.Enter()
 	current_state = new_state
+	
+func onSelect(selectedBool):
+	if selectedBool == true:
+		on_child_transition(current_state, "Disable")
+	else:
+		on_child_transition(current_state, "Idle") # create function to check what state I'm supposed to be in?

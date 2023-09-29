@@ -1,7 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://ij3q675i38fa"]
+[gd_scene load_steps=13 format=3 uid="uid://ij3q675i38fa"]
 
 [ext_resource type="Texture2D" uid="uid://cnk7uwaik6tav" path="res://Resources/PNG/fortunato.png" id="1"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="2"]
+[ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="3_xalih"]
+[ext_resource type="Script" path="res://Scripts/States/Idle.gd" id="4_jykm0"]
+[ext_resource type="Script" path="res://Scripts/States/Disable.gd" id="5_whshd"]
 
 [sub_resource type="CapsuleShape2D" id="25"]
 radius = 4.0
@@ -106,3 +109,13 @@ root_node = NodePath("../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_mye1x")
 }
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_xalih")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_jykm0")
+
+[node name="Disable" type="Node" parent="StateMachine"]
+script = ExtResource("5_whshd")

@@ -4,38 +4,57 @@ const contextsteeringscript = preload("res://Scripts/ContextSteering.gd")
 
 # ------------------------ V A R I A B L E S ------------------------------------------
 
-@export var maxspd = 50
-var default_acc = maxspd
+@export var spd = 50
+var defaultspd = spd
+var lastspd = spd
 @export var selection = 0
+
+@export var IsSelected = false
 
 var direction = Vector2.ZERO
 @export var target_position = position
-@export var MovingTo = false
 
 var prefDir = Vector2.ZERO
 
 # ------------------------------------------------------------------------------------
 
 signal ReachedTarget
-@onready var Marker = get_node("../../Marker")
-var Moving = false
-var spd = maxspd
+signal Selected
+var MovingToPoint = false
+var running = false
+var LookAtPoint : Vector2
 
-func MoveTo(Position: Vector2, StopMoving, newspd):
-	Moving = StopMoving
-	Marker.position = Position
+func MoveTo(Position: Vector2, newspd):
+	MovingToPoint = true
 	target_position = Position
+	setLookAt(true, target_position)
 	SetNewSpd(newspd)
 
 func Move(newDir, newspd):
 	direction = newDir
-	SetNewSpd(newspd)
+	if MovingToPoint == true:
+		setLookAt(false, Vector2.ZERO)
+		SetNewSpd(newspd)
+	MovingToPoint = false
 
 func SetNewSpd(newspd):
-	if newspd and newspd < maxspd:
+	if newspd == spd:
+		return
+	if newspd and newspd < defaultspd:
 		spd = newspd
+		lastspd = newspd
 	else:
-		spd = maxspd
+		spd = defaultspd
+		lastspd = spd
+
+func RunBool(newRunning):
+	running = newRunning
+
+func setLookAt(LookAtBool, point : Vector2):
+	if LookAtBool == true:
+		LookAtPoint = point
+	else:
+		LookAtPoint = Vector2.ZERO
 
 # ------------------------------------------------------------------------------------
 
@@ -44,30 +63,37 @@ func _draw():
 
 func _ready():
 	CSB.setup(self)
+	Selected.connect(OnSelect)
 
 func _physics_process(_delta):
 	prefDir = CSB.chooseDir()
 	
-	if Moving:
+	if MovingToPoint:
+		direction = prefDir
 		if position.distance_to(target_position) < 5:
 			target_position = position
-			print("Reached target")
 			ReachedTarget.emit()
-			Moving = false
-		direction = prefDir
+			MovingToPoint = false
+			direction = Vector2.ZERO
 	
 	# animation handling
-	if (direction != Vector2.ZERO and (velocity > Vector2.ZERO or velocity < Vector2.ZERO)):
-		if Input.is_action_pressed("run"):
+	if (direction != Vector2.ZERO and velocity != Vector2.ZERO):
+		if running:
 			$AnimationPlayer.play("Run")
 		else:
 			$AnimationPlayer.play("WalkRight")
-		#if direction.x < 0:
-		if (position - target_position).x > 0:
-			$Sprite2D.flip_h = true
-		#if direction.x > 0:
-		if (position - target_position).x < 0:
-			$Sprite2D.flip_h = false
+		
+		if LookAtPoint != Vector2.ZERO:
+			if (position - LookAtPoint).x >= 0:
+				$Sprite2D.flip_h = true
+			else:
+				$Sprite2D.flip_h = false
+		else:
+			if velocity.x >= 0:
+				$Sprite2D.flip_h = false
+			else:
+				$Sprite2D.flip_h = true
+		
 	else:
 		$AnimationPlayer.play("Idle")
 	
@@ -75,10 +101,12 @@ func _physics_process(_delta):
 	velocity = velocity.lerp(desired_velocity, 0.15)
 		
 	# run test
-	if Input.is_action_pressed("run"):
-		spd = default_acc * 1.5
+	if running:
+		spd = lastspd * 1.5
 	else:
-		spd = default_acc
+		spd = lastspd
 	
 	move_and_slide()
 	
+func OnSelect(selectedBool):
+	IsSelected = selectedBool

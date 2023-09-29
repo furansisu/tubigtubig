@@ -18,6 +18,8 @@ func random_newpos():
 	print("Moving randomly for ", character.name, " ", pos)
 
 func Enter():
+	if not character:
+		character = get_parent().get_parent()
 	random_newpos()
 	character.ReachedTarget.connect(random_newpos)
 
@@ -32,4 +34,4 @@ func Update(delta):
 		
 func Physics_Update(delta):
 	if character:
-		character.MoveTo(pos, true, 15)
+		character.MoveTo(pos, 15)
