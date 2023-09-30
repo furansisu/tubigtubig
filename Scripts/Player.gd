@@ -7,7 +7,6 @@ const contextsteeringscript = preload("res://Scripts/ContextSteering.gd")
 @export var spd = 50
 var defaultspd = spd
 var lastspd = spd
-@export var selection = 0
 
 @export var IsSelected = false
 
@@ -15,6 +14,7 @@ var direction = Vector2.ZERO
 @export var target_position = position
 
 var prefDir = Vector2.ZERO
+var currentArea : Area2D
 
 # ------------------------------------------------------------------------------------
 

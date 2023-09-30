@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bfvq6ggo0uqc2"]
+[gd_scene load_steps=14 format=3 uid="uid://bfvq6ggo0uqc2"]
 
 [ext_resource type="PackedScene" uid="uid://deifhdpsrkxdq" path="res://Characters/Bernilla.tscn" id="1"]
 [ext_resource type="Script" path="res://Scripts/WorldScript.gd" id="1_50kh2"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://drpr4dxl2kb0u" path="res://Characters/JunJun.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://ij3q675i38fa" path="res://Characters/Fortunato.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://dbcsgqu8g7wfa" path="res://Characters/Analyn.tscn" id="7"]
+[ext_resource type="Script" path="res://Scripts/AreaHandler.gd" id="8_56o53"]
+[ext_resource type="Script" path="res://Scripts/Area.gd" id="8_y7syj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0k6y"]
 texture = ExtResource("3")
@@ -2055,7 +2057,7 @@ sources/0 = SubResource("TileSetAtlasSource_e0k6y")
 size = Vector2(38, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jhvgh"]
-size = Vector2(114, 26)
+size = Vector2(38, 26)
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -2099,47 +2101,86 @@ position = Vector2(119, 373)
 position = Vector2(161, 90)
 
 [node name="PlayingAreas" type="Node" parent="."]
+script = ExtResource("8_56o53")
 
-[node name="TopLeft" type="Area2D" parent="PlayingAreas"]
-position = Vector2(-1, 0)
+[node name="TopLeft" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_area_returning")]
+position = Vector2(156, 244)
+script = ExtResource("8_y7syj")
+next_area_from_home = NodePath("../EndLeft")
+side_area = NodePath("../TopRight")
+next_area_returning = NodePath("../BottomLeft")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/TopLeft"]
-position = Vector2(157, 244)
 shape = SubResource("RectangleShape2D_uoexb")
 
-[node name="TopRight" type="Area2D" parent="PlayingAreas"]
-position = Vector2(58, 0)
+[node name="TopRight" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_area_returning")]
+position = Vector2(215, 244)
+script = ExtResource("8_y7syj")
+next_area_from_home = NodePath("../EndRight")
+side_area = NodePath("../TopLeft")
+next_area_returning = NodePath("../BottomRight")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/TopRight"]
-position = Vector2(157, 244)
 shape = SubResource("RectangleShape2D_uoexb")
 
-[node name="BottomLeft" type="Area2D" parent="PlayingAreas"]
-position = Vector2(-1, 52)
+[node name="BottomLeft" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_area_returning")]
+position = Vector2(156, 296)
+script = ExtResource("8_y7syj")
+next_area_from_home = NodePath("../TopLeft")
+side_area = NodePath("../BottomRight")
+next_area_returning = NodePath("../StartingLeft")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/BottomLeft"]
-position = Vector2(157, 244)
 shape = SubResource("RectangleShape2D_uoexb")
 
-[node name="BottomRight" type="Area2D" parent="PlayingAreas"]
-position = Vector2(58, 52)
+[node name="BottomRight" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_area_returning")]
+position = Vector2(215, 296)
+script = ExtResource("8_y7syj")
+next_area_from_home = NodePath("../TopRight")
+side_area = NodePath("../BottomLeft")
+next_area_returning = NodePath("../StartingRight")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/BottomRight"]
-position = Vector2(157, 244)
 shape = SubResource("RectangleShape2D_uoexb")
 
-[node name="TopArea" type="Area2D" parent="PlayingAreas"]
-position = Vector2(-1, -50)
+[node name="EndLeft" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("side_area", "next_area_returning")]
+position = Vector2(156, 192)
+script = ExtResource("8_y7syj")
+side_area = NodePath("../EndRight")
+next_area_returning = NodePath("../TopLeft")
+end_area = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/TopArea"]
-position = Vector2(186, 248)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/EndLeft"]
 shape = SubResource("RectangleShape2D_jhvgh")
 
-[node name="BottomArea" type="Area2D" parent="PlayingAreas"]
-position = Vector2(-1, -50)
+[node name="StartingLeft" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area")]
+position = Vector2(156, 345)
+script = ExtResource("8_y7syj")
+next_area_from_home = NodePath("../BottomLeft")
+side_area = NodePath("../StartingRight")
+start_area = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/BottomArea"]
-position = Vector2(186, 392)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/StartingLeft"]
+shape = SubResource("RectangleShape2D_jhvgh")
+
+[node name="StartingRight" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area")]
+position = Vector2(215, 345)
+script = ExtResource("8_y7syj")
+next_area_from_home = NodePath("../BottomRight")
+side_area = NodePath("../StartingLeft")
+start_area = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/StartingRight"]
+shape = SubResource("RectangleShape2D_jhvgh")
+
+[node name="EndRight" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("side_area", "next_area_returning")]
+position = Vector2(215, 192)
+script = ExtResource("8_y7syj")
+side_area = NodePath("../EndLeft")
+next_area_returning = NodePath("../TopRight")
+end_area = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/EndRight"]
 shape = SubResource("RectangleShape2D_jhvgh")
 
 [node name="LineCollision" type="Area2D" parent="."]

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://6lp47kxxj724" path="res://Resources/PNG/bernilla.png" id="1"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="2"]
 [ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="3_dyos5"]
-[ext_resource type="Script" path="res://Scripts/States/Idle.gd" id="4_aix8t"]
+[ext_resource type="Script" path="res://Scripts/States/Strafe.gd" id="4_76shw"]
 [ext_resource type="Script" path="res://Scripts/States/Disable.gd" id="5_1v568"]
 
 [sub_resource type="CapsuleShape2D" id="25"]
@@ -115,7 +115,7 @@ script = ExtResource("3_dyos5")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("character")]
-script = ExtResource("4_aix8t")
+script = ExtResource("4_76shw")
 character = NodePath("../..")
 
 [node name="Disable" type="Node" parent="StateMachine"]

@@ -8,3 +8,7 @@ res://Scripts/WorldScript.gd
 res://Scripts/States/Idle.gd
 res://Scripts/ContextSteering.gd
 res://Scripts/Player.gd
+res://Scripts/AreaHandler.gd
+res://Scripts/States/Strafe.gd
+res://Scripts/Area.gd
+res://Scripts/StateMachine.gd

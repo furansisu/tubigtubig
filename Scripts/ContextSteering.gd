@@ -53,7 +53,6 @@ func setup(newcharacter : CharacterBody2D):
 	debug_dirs.resize(num_rays*2)
 	colors.resize(num_rays)
 	exceptions.append(character)
-	print(exceptions)
 	for i in num_rays:
 		var angle = i * 2 * PI / num_rays
 		rays[i] = Vector2.RIGHT.rotated(angle)
@@ -179,8 +178,12 @@ func draw():
 	for i in debugText: #TEXT
 		var size = 5.0
 		character.draw_string(default_font, i[2] - character.global_position - Vector2(size/2,0), i[0], HORIZONTAL_ALIGNMENT_LEFT, -1, size, i[1])
-		await character.get_tree().create_timer(1).timeout
-		debugText.erase(i)
+		var newThread = Thread.new()
+		newThread.start(func wait():
+			await character.get_tree().create_timer(1).timeout
+			debugText.erase(i), Thread.PRIORITY_HIGH)
+		newThread.wait_to_finish()
+		
 
 func debugCollision():
 	for i in character.get_slide_collision_count():

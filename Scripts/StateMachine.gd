@@ -4,6 +4,7 @@ extends Node
 
 var character : CharacterBody2D
 
+var targetArea
 var current_state : State
 var states : Dictionary = {}
 

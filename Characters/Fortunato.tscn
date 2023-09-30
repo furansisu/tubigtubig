@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cnk7uwaik6tav" path="res://Resources/PNG/fortunato.png" id="1"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="2"]
 [ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="3_xalih"]
-[ext_resource type="Script" path="res://Scripts/States/Idle.gd" id="4_jykm0"]
+[ext_resource type="Script" path="res://Scripts/States/Strafe.gd" id="4_3ojpl"]
 [ext_resource type="Script" path="res://Scripts/States/Disable.gd" id="5_whshd"]
 
 [sub_resource type="CapsuleShape2D" id="25"]
@@ -115,7 +115,7 @@ script = ExtResource("3_xalih")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("4_jykm0")
+script = ExtResource("4_3ojpl")
 
 [node name="Disable" type="Node" parent="StateMachine"]
 script = ExtResource("5_whshd")

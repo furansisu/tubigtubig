@@ -14,8 +14,6 @@ var currnumchar = 0
 func _ready():
 	for i in get_node("Players").get_children():
 		currchar.append(i)
-		i.selection = numchar
-		print(i.selection)
 		numchar += 1
 	cam.reparent(currchar[currnumchar])
 	CurrentlySelected = currchar[currnumchar]
@@ -41,7 +39,7 @@ func _input(ev : InputEvent):
 		CurrentlySelected.RunBool(false)
 		
 func _process(_delta):
-	var direction = Input.get_vector("left", "right", "up", "down")
+	var direction = Input.get_vector("left", "right", "up", "down")	
 	if ManualMove:
 		CurrentlySelected.Move(direction, CurrentlySelected.defaultspd)
 	if direction == Vector2.ZERO and ManualMove:
