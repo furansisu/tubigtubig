@@ -45,10 +45,8 @@ func _process(_delta):
 	if ManualMove:
 		CurrentlySelected.Move(direction, CurrentlySelected.defaultspd)
 	if direction == Vector2.ZERO and ManualMove:
-		print("DIRECTION IS ZERO AND WAS MANUALLY MOVING: DISABLING MANUAL MOVEMENT")
 		ManualMove = false
 	if direction != Vector2.ZERO and not ManualMove:
-		print("MANUAL MOVEMENT WAS ENABLED!")
 		ManualMove = true
 
 func _physics_process(_delta):

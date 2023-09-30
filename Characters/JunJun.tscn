@@ -111,9 +111,8 @@ libraries = {
 "": SubResource("AnimationLibrary_sxwnh")
 }
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_oamuv")
-initial_state = NodePath("")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("4_084sa")

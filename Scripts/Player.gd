@@ -59,7 +59,7 @@ func setLookAt(LookAtBool, point : Vector2):
 # ------------------------------------------------------------------------------------
 
 func _draw():
-	CSB._draw()
+	CSB.draw()
 
 func _ready():
 	CSB.setup(self)
@@ -70,7 +70,7 @@ func _physics_process(_delta):
 	
 	if MovingToPoint:
 		direction = prefDir
-		if position.distance_to(target_position) < 5:
+		if position.distance_to(target_position) < 10:
 			target_position = position
 			ReachedTarget.emit()
 			MovingToPoint = false
