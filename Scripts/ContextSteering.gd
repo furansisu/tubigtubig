@@ -43,9 +43,11 @@ var colors = []
 # meat of context steering behavior
 # ------------------------------------------------------------------------------------
 @onready var exceptions : Array
+var line
 var character : CharacterBody2D
 func setup(newcharacter : CharacterBody2D):
 	exceptions = get_descendants(newcharacter.get_node("/root/World/PlayingAreas"))
+	line = newcharacter.get_node("/root/World/LineCollision")
 	character = newcharacter
 	rays.resize(num_rays)
 	interest.resize(num_rays)
@@ -58,6 +60,7 @@ func setup(newcharacter : CharacterBody2D):
 		rays[i] = Vector2.RIGHT.rotated(angle)
 		debug_dirs[i*2] = Vector2.ZERO
 		debug_dirs[i*2+1] = rays[i] * ray_length
+	character.DisableAreaRays.connect(disableRays)
 		
 # Sets up context steering for a character.
 # Resizes and sets up all needed arrays and creates all the directions for raycasting around a character and
@@ -144,8 +147,11 @@ func getDanger():
 func getInterest():
 	var dir = character.position.direction_to(character.target_position)
 	for i in num_rays:
-		var d = rays[i].dot(dir)
-		#var d = 1 - abs(ray_directions[i].dot(dir) - 0.2)
+		var d
+		if character.CSBShape == 'default':
+			d = rays[i].dot(dir)
+		if character.CSBShape == 'side':
+			d = 1 - abs(rays[i].dot(dir) - 0.2)
 		var opp = getOpposite(i)
 		if danger[opp]:
 			d = max(d, danger[opp] * 0.25)
@@ -153,6 +159,14 @@ func getInterest():
 			pass
 		interest[i] = max(0, d)
 	character.queue_redraw()
+
+# --------------------------------------
+func disableRays(disableBool : bool):
+	print("Disabling line CSB detection for ", character.name, ": ", disableBool)
+	if disableBool == true:
+		exceptions.append(line)
+	else:
+		exceptions.erase(line)
 
 # ------------------------------------------------------------------------------------
 # DEBUG FUNCTIONS

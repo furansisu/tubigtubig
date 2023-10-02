@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://xxufy8l2hbtw"]
+
+[ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="1_1ovh7"]
+[ext_resource type="Script" path="res://Scripts/States/Disable.gd" id="2_u0qyy"]
+[ext_resource type="Script" path="res://Scripts/States/Forward.gd" id="3_mf734"]
+[ext_resource type="Script" path="res://Scripts/States/Strafe.gd" id="4_uvqow"]
+
+[node name="StateMachine" type="Node" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_1ovh7")
+initial_state = NodePath("Strafe")
+
+[node name="Disable" type="Node" parent="."]
+script = ExtResource("2_u0qyy")
+
+[node name="Forward" type="Node" parent="."]
+script = ExtResource("3_mf734")
+
+[node name="Strafe" type="Node" parent="."]
+script = ExtResource("4_uvqow")

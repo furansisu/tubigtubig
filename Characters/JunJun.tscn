@@ -1,10 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://drpr4dxl2kb0u"]
+[gd_scene load_steps=11 format=3 uid="uid://drpr4dxl2kb0u"]
 
 [ext_resource type="Texture2D" uid="uid://coa4o1xitpsb6" path="res://Resources/PNG/junjun.png" id="1"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="2"]
-[ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="3_oamuv"]
-[ext_resource type="Script" path="res://Scripts/States/Strafe.gd" id="4_57bir"]
-[ext_resource type="Script" path="res://Scripts/States/Disable.gd" id="5_137fw"]
+[ext_resource type="PackedScene" uid="uid://xxufy8l2hbtw" path="res://Scenes/StateMachine.tscn" id="3_to0v5"]
 
 [sub_resource type="CapsuleShape2D" id="25"]
 radius = 4.0
@@ -111,11 +109,4 @@ libraries = {
 "": SubResource("AnimationLibrary_sxwnh")
 }
 
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("3_oamuv")
-
-[node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("4_57bir")
-
-[node name="Disable" type="Node" parent="StateMachine"]
-script = ExtResource("5_137fw")
+[node name="StateMachine" parent="." instance=ExtResource("3_to0v5")]

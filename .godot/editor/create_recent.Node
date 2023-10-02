@@ -1,3 +1,5 @@
+Strafe
+Forward
 CollisionShape2D
 Node
 CollisionPolygon2D

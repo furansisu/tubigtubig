@@ -14,15 +14,17 @@ var direction = Vector2.ZERO
 @export var target_position = position
 
 var prefDir = Vector2.ZERO
-var currentArea : Area2D
+var targetArea : Area
 
 # ------------------------------------------------------------------------------------
 
 signal ReachedTarget
 signal Selected
+signal DisableAreaRays
 var MovingToPoint = false
 var running = false
 var LookAtPoint : Vector2
+var Returning = false
 
 func MoveTo(Position: Vector2, newspd):
 	MovingToPoint = true
@@ -58,6 +60,7 @@ func setLookAt(LookAtBool, point : Vector2):
 
 # ------------------------------------------------------------------------------------
 
+var CSBShape = 'default'
 func _draw():
 	CSB.draw()
 

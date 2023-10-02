@@ -1,5 +1,5 @@
 extends State
-class_name Strafe
+class_name Forward
 
 @export var character : CharacterBody2D
 @onready var AreaHandler = get_node("/root/World/PlayingAreas")
@@ -17,30 +17,27 @@ func random_newpos():
 	wander_time = randf_range(6,10)
 	
 func random_pos_area():
+	if AreaHandler.checkIfInArea(character):
+		Transitioned.emit(self, "Strafe")
 	pos = AreaHandler.random_pos(character.targetArea)
-	character.targetArea = AreaHandler.getNextAreaOfCharacter(character)
-	
-func checkInArea():
-	pass
 
 func Enter():
 	if not character:
 		character = get_parent().get_parent()
-	if not AreaHandler.checkIfInArea(character):
-			Transitioned.emit(self, "Forward")
 	random_pos_area()
+	character.RunBool(true)
 	character.ReachedTarget.connect(random_pos_area)
+	character.DisableAreaRays.emit(true)
 
 func Exit():
+	character.DisableAreaRays.emit(false)
+	character.RunBool(false)
 	character.ReachedTarget.disconnect(random_pos_area)
 	
-func Update(delta):
-	if wander_time > 0:
-		wander_time -= delta
-	if not AreaHandler.checkIfInArea(character):
-		Transitioned.emit(self, "Forward")
-		
+func Update(_delta):
+	pass
+			
 		
 func Physics_Update(_delta):
 	if character:
-		character.MoveTo(pos, 15)
+		character.MoveTo(pos, 50)

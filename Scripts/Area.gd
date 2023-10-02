@@ -13,6 +13,10 @@ var inside : Dictionary = {}
 func Entered(person):
 	print(person.name, " entered ", self.name)
 	inside[person.name] = person
+	if end_area:
+		person.Returning = true
+	if start_area:
+		person.Returning = false
 	
 func Exited(person):
 	print(person.name, " exited ", self.name)

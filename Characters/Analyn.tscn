@@ -1,10 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dbcsgqu8g7wfa"]
+[gd_scene load_steps=11 format=3 uid="uid://dbcsgqu8g7wfa"]
 
 [ext_resource type="Texture2D" uid="uid://klr0p8qnfbh4" path="res://Resources/PNG/analyn.png" id="1"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="2"]
-[ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="3_wltia"]
-[ext_resource type="Script" path="res://Scripts/States/Strafe.gd" id="4_q7bst"]
-[ext_resource type="Script" path="res://Scripts/States/Disable.gd" id="5_fypv2"]
+[ext_resource type="PackedScene" uid="uid://xxufy8l2hbtw" path="res://Scenes/StateMachine.tscn" id="3_7tug6"]
 
 [sub_resource type="CapsuleShape2D" id="25"]
 radius = 4.0
@@ -110,12 +108,4 @@ libraries = {
 "": SubResource("AnimationLibrary_fmy4n")
 }
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_wltia")
-initial_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("4_q7bst")
-
-[node name="Disable" type="Node" parent="StateMachine"]
-script = ExtResource("5_fypv2")
+[node name="StateMachine" parent="." instance=ExtResource("3_7tug6")]

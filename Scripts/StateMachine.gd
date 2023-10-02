@@ -1,16 +1,17 @@
 extends Node
 
 @export var initial_state : State
+@onready var AreaHandler = get_node("/root/World/PlayingAreas")
 
 var character : CharacterBody2D
 
-var targetArea
 var current_state : State
 var states : Dictionary = {}
 
 func _ready():
 	character = get_parent()
 	character.Selected.connect(onSelect)
+	character.targetArea = AreaHandler.setStartingArea()
 	for child in get_children():
 			if child is State:
 				states[child.name] = child
@@ -29,6 +30,7 @@ func _physics_process(delta):
 		current_state.Physics_Update(delta)
 		
 func on_child_transition(state, new_state_name):
+	print(character.name, " has transitioned from ", state.name, " to ", new_state_name)
 	if state != current_state:
 		return
 		
@@ -46,4 +48,4 @@ func onSelect(selectedBool):
 	if selectedBool == true:
 		on_child_transition(current_state, "Disable")
 	else:
-		on_child_transition(current_state, "Idle") # create function to check what state I'm supposed to be in?
+		on_child_transition(current_state, "Strafe") # create function to check what state I'm supposed to be in?

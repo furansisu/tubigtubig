@@ -2188,31 +2188,5 @@ position = Vector2(582, 216)
 [node name="Fortunato" parent="Players" instance=ExtResource("6")]
 position = Vector2(119, 373)
 
-[node name="JunJun2" parent="Players" instance=ExtResource("5")]
-position = Vector2(260, 216)
-platform_on_leave = 2
-
-[node name="JunJun3" parent="Players" instance=ExtResource("5")]
-position = Vector2(260, 216)
-platform_on_leave = 2
-
-[node name="Analyn2" parent="Players" instance=ExtResource("7")]
-position = Vector2(32, 115)
-
-[node name="Analyn3" parent="Players" instance=ExtResource("7")]
-position = Vector2(32, 115)
-
-[node name="Bernilla2" parent="Players" instance=ExtResource("1")]
-position = Vector2(582, 216)
-
-[node name="Bernilla3" parent="Players" instance=ExtResource("1")]
-position = Vector2(582, 216)
-
-[node name="Fortunato2" parent="Players" instance=ExtResource("6")]
-position = Vector2(119, 373)
-
-[node name="Fortunato3" parent="Players" instance=ExtResource("6")]
-position = Vector2(119, 373)
-
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(161, 90)
