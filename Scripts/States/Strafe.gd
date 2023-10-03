@@ -18,6 +18,9 @@ func random_newpos():
 	
 func random_pos_area():
 	pos = AreaHandler.random_pos(character.targetArea)
+	wander_time = randf_range(6,10)
+	
+func changeToNextArea():
 	character.targetArea = AreaHandler.getNextAreaOfCharacter(character)
 	
 func checkInArea():
@@ -29,6 +32,7 @@ func Enter():
 	if not AreaHandler.checkIfInArea(character):
 			Transitioned.emit(self, "Forward")
 	random_pos_area()
+	changeToNextArea()
 	character.ReachedTarget.connect(random_pos_area)
 
 func Exit():
@@ -37,9 +41,9 @@ func Exit():
 func Update(delta):
 	if wander_time > 0:
 		wander_time -= delta
-	if not AreaHandler.checkIfInArea(character):
+	else:
+		changeToNextArea()
 		Transitioned.emit(self, "Forward")
-		
 		
 func Physics_Update(_delta):
 	if character:

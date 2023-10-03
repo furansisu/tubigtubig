@@ -1,8 +1,8 @@
+CollisionShape2D
+CollisionPolygon2D
 Strafe
 Forward
-CollisionShape2D
 Node
-CollisionPolygon2D
 Polygon2D
 Area2D
 Disable

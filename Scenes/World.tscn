@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bfvq6ggo0uqc2"]
+[gd_scene load_steps=16 format=3 uid="uid://bfvq6ggo0uqc2"]
 
 [ext_resource type="PackedScene" uid="uid://deifhdpsrkxdq" path="res://Characters/Bernilla.tscn" id="1"]
 [ext_resource type="Script" path="res://Scripts/WorldScript.gd" id="1_50kh2"]
@@ -2059,6 +2059,12 @@ size = Vector2(38, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jhvgh"]
 size = Vector2(38, 26)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_wf2fa"]
+b = Vector2(0, 187)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ll4x1"]
+b = Vector2(0, 189)
+
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_50kh2")
@@ -2180,39 +2186,24 @@ position = Vector2(260, 216)
 platform_on_leave = 2
 
 [node name="Analyn" parent="Players" instance=ExtResource("7")]
-position = Vector2(32, 115)
+position = Vector2(161, 158)
 
 [node name="Bernilla" parent="Players" instance=ExtResource("1")]
-position = Vector2(582, 216)
+position = Vector2(197, 403)
 
 [node name="Fortunato" parent="Players" instance=ExtResource("6")]
-position = Vector2(119, 373)
-
-[node name="JunJun2" parent="Players" instance=ExtResource("5")]
-position = Vector2(260, 216)
-platform_on_leave = 2
-
-[node name="JunJun3" parent="Players" instance=ExtResource("5")]
-position = Vector2(260, 216)
-platform_on_leave = 2
-
-[node name="Analyn2" parent="Players" instance=ExtResource("7")]
-position = Vector2(32, 115)
-
-[node name="Analyn3" parent="Players" instance=ExtResource("7")]
-position = Vector2(32, 115)
-
-[node name="Bernilla2" parent="Players" instance=ExtResource("1")]
-position = Vector2(582, 216)
-
-[node name="Bernilla3" parent="Players" instance=ExtResource("1")]
-position = Vector2(582, 216)
-
-[node name="Fortunato2" parent="Players" instance=ExtResource("6")]
-position = Vector2(119, 373)
-
-[node name="Fortunato3" parent="Players" instance=ExtResource("6")]
-position = Vector2(119, 373)
+position = Vector2(153, 407)
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(161, 90)
+
+[node name="SideBorder" type="Area2D" parent="."]
+position = Vector2(127, 269)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SideBorder"]
+position = Vector2(0, -95)
+shape = SubResource("SegmentShape2D_wf2fa")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="SideBorder"]
+position = Vector2(117, -95)
+shape = SubResource("SegmentShape2D_ll4x1")

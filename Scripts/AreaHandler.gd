@@ -35,10 +35,14 @@ func setStartingArea():
 func getNextAreaOfCharacter(character):
 	var index = getIndexOfArea(character)
 	var area = areas[index]
+	var returnArea
 	if character.Returning:
-		return area.next_area_returning
+		returnArea = area.next_area_returning
 	else:
-		return area.next_area_from_home
+		returnArea = area.next_area_from_home
+	if not returnArea:
+		returnArea = area
+	return returnArea
 
 func getIndexOfArea(character):
 	var targetArea = character.targetArea

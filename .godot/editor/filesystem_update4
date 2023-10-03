@@ -5,3 +5,5 @@ res://Scenes/StateMachine.tscn
 res://Characters/JunJun.tscn
 res://Characters/Analyn.tscn
 res://Characters/Bernilla.tscn
+res://Scripts/AreaHandler.gd
+res://Scripts/States/Strafe.gd
