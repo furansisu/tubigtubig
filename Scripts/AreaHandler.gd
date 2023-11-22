@@ -45,8 +45,7 @@ func getNextAreaOfCharacter(character):
 	return returnArea
 
 func getIndexOfArea(character):
-	var targetArea = character.targetArea
-	if not targetArea:
-		push_error('Character ', character.name, 'does not have a target area')
-		return
-	return areas.find(targetArea)
+	var area = character.currentArea
+	if not area:
+		area = character.targetArea
+	return areas.find(area)

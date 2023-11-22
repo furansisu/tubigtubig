@@ -184,13 +184,14 @@ func draw():
 		return
 	#character.draw_line(Vector2.ZERO, Vector2.ZERO + character.prefDir.rotated(character.rotation) * 50, Color.GREEN_YELLOW, 2)
 	character.draw_multiline_colors(debug_dirs, colors, 0.75)
+	var size = 5.0
+	character.draw_string(default_font, Vector2(-23,-15), "TARGET: " + str(character.targetArea.name), HORIZONTAL_ALIGNMENT_CENTER, -1, size)
 	# 166 - 167: DRAWING THE CONTEXT STEERING INTEREST AND DANGER
 	if character.target_position and character.MovingToPoint: #WHERE CHARACTER IS INTERESTED TO MOVE TO
 		character.draw_circle(character.target_position - character.global_position, 3, Color.CHARTREUSE)
 	for i in collisions: #COLLISIONS WITH RAYCASTING
 		character.draw_circle(collisions[i].position - character.global_position,1, Color.RED)
 	for i in debugText: #TEXT
-		var size = 5.0
 		character.draw_string(default_font, i[2] - character.global_position - Vector2(size/2,0), i[0], HORIZONTAL_ALIGNMENT_LEFT, -1, size, i[1])
 		var newThread = Thread.new()
 		newThread.start(func wait():

@@ -15,6 +15,9 @@ var direction = Vector2.ZERO
 
 var prefDir = Vector2.ZERO
 var targetArea : Area
+var nextScoreArea : Array
+var currentArea : Area
+@onready var currentTeam = "Runner"
 
 # ------------------------------------------------------------------------------------
 

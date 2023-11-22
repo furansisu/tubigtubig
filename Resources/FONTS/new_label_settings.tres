@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dtogw3x8hsp37"]
+
+[ext_resource type="FontFile" uid="uid://bd8onlx5n7o4m" path="res://Resources/FONTS/ARCADECLASSIC.TTF" id="1_o2fnd"]
+
+[resource]
+line_spacing = 1.0
+font = ExtResource("1_o2fnd")
+font_size = 12

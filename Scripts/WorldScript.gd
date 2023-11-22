@@ -6,7 +6,12 @@ var Moving
 var ManualMove = false
 
 @onready var cam = $Camera
+@onready var ui = %UI
+@onready var Team1Score = 0
+@onready var Team2Score = 0
 var lerpspeed = .1
+
+signal Scored
 
 var currnumchar = 0
 @export var CurrentlySelected: CharacterBody2D
@@ -19,6 +24,7 @@ func _ready():
 	CurrentlySelected = currchar[currnumchar]
 	CurrentlySelected.Selected.emit(true)
 	cam.position = Vector2(0, 0)
+	Scored.connect(score)
 
 func _input(ev : InputEvent):
 	if ev.is_action_pressed("changechar"):
@@ -50,3 +56,6 @@ func _process(_delta):
 func _physics_process(_delta):
 	cam.position = lerp(cam.position, Vector2(0, 0), lerpspeed)
 
+func score():
+	Team1Score += 1
+	ui.scored(Team1Score)

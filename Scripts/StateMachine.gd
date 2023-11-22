@@ -12,6 +12,8 @@ func _ready():
 	character = get_parent()
 	character.Selected.connect(onSelect)
 	character.targetArea = AreaHandler.setStartingArea()
+	var nextArea = AreaHandler.getNextAreaOfCharacter(character)
+	character.nextScoreArea = [nextArea, nextArea.side_area]
 	for child in get_children():
 			if child is State:
 				states[child.name] = child

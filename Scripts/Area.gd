@@ -1,6 +1,8 @@
 extends Area2D
 class_name Area
 
+@onready var AreaHandler = get_node("/root/World/PlayingAreas")
+
 @export var next_area_from_home : Area
 @export var side_area : Area
 @export var next_area_returning : Area
@@ -10,14 +12,46 @@ class_name Area
 
 var inside : Dictionary = {}
 
+@onready var level = get_node("/root/World")
+
 func Entered(person):
 	print(person.name, " entered ", self.name)
 	inside[person.name] = person
+	person.currentArea = self
 	if end_area:
 		person.Returning = true
 	if start_area:
 		person.Returning = false
 	
+	var scoreArea = false
+	for i in person.nextScoreArea:
+		if i == self:
+			scoreArea = true
+	if person.currentTeam == "Runner" and scoreArea:
+		level.Scored.emit()
+		print(person.name + " scored! " + self.name)
+		var nextArea = AreaHandler.getNextAreaOfCharacter(person)
+		person.nextScoreArea = [nextArea, nextArea.side_area]
+		
+		var newCollision = ["+1", Color.ORANGE, person.global_position, person]
+		scoreTexts.append(newCollision)
+
+var scoreTexts : Array = []
+# [["TEXT", Color, Vector2, Collider], ["COLLIDE", Color, Vector2, TileMap]]
+@onready var default_font = load("res://Resources/FONTS/november.tres")
+
+var size = 10
+
+func _draw():
+	for i in scoreTexts:
+		self.draw_string(default_font, i[2] - self.global_position, i[0], HORIZONTAL_ALIGNMENT_LEFT, -1, size, i[1])
+		
+		var newThread = Thread.new()
+		newThread.start(func wait():
+			await self.get_tree().create_timer(1).timeout
+			scoreTexts.erase(i), Thread.PRIORITY_HIGH)
+		newThread.wait_to_finish()	
+
 func Exited(person):
 	print(person.name, " exited ", self.name)
 	inside.erase(person.name)
@@ -29,3 +63,7 @@ func _ready():
 		push_error("ERROR: Area has no collision detection!")
 	self.body_entered.connect(Entered)
 	self.body_exited.connect(Exited)
+	self.z_index = 3
+	
+func _process(_delta):
+	self.queue_redraw()
