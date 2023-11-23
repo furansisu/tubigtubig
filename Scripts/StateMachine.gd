@@ -15,9 +15,9 @@ func _ready():
 	var nextArea = AreaHandler.getNextAreaOfCharacter(character)
 	character.nextScoreArea = [nextArea, nextArea.side_area]
 	for child in get_children():
-			if child is State:
-				states[child.name] = child
-				child.Transitioned.connect(on_child_transition)
+		if child is State:
+			states[child.name] = child
+			child.Transitioned.connect(on_child_transition)
 				
 	if initial_state:
 		initial_state.Enter()

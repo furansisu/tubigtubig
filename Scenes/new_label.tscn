@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg2ycb4281fsn"]
+
+[ext_resource type="Script" path="res://Scenes/new_label.gd" id="1_pt2yk"]
+
+[node name="Label" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Entered!"
+script = ExtResource("1_pt2yk")

@@ -11,11 +11,12 @@ class_name Area
 @export var start_area : bool
 
 var inside : Dictionary = {}
-
 @onready var level = get_node("/root/World")
 
+var entered_label
+
 func Entered(person):
-	print(person.name, " entered ", self.name)
+	print(person.name, " entered ", name)
 	inside[person.name] = person
 	person.currentArea = self
 	if end_area:
@@ -61,9 +62,10 @@ func Exited(person):
 func _ready():
 	if not collider:
 		push_error("ERROR: Area has no collision detection!")
-	self.body_entered.connect(Entered)
-	self.body_exited.connect(Exited)
-	self.z_index = 3
+	body_entered.connect(Entered)
+	body_exited.connect(Exited)
+	z_index = 3
+	entered_label = LabelHelper.new_label(get_tree().root.get_node("World/UI"), global_position, Vector2(2, 2), "Entered!")
 	
 func _process(_delta):
 	self.queue_redraw()
