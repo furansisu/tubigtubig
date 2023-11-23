@@ -44,6 +44,16 @@ func getNextAreaOfCharacter(character):
 		returnArea = area
 	return returnArea
 
+func getNextLineOfCharacter(character):
+	var index = getIndexOfArea(character)
+	var area = areas[index]
+	var returnLine
+	if character.Returning:
+		returnLine = area.next_line_returning
+	else:
+		returnLine = area.next_line_from_home
+	return returnLine
+
 func getIndexOfArea(character):
 	var area = character.currentArea
 	if not area:

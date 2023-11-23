@@ -1,6 +1,7 @@
 extends Node2D
 
-var currchar = []
+var selectedTeam : Array
+var allChars = []
 var numchar = 0
 var Moving
 var ManualMove = false
@@ -11,40 +12,66 @@ var ManualMove = false
 @onready var Team2Score = 0
 var lerpspeed = .1
 
+@export var Team1 : Array = []
+@export var Team2 : Array = []
+@export var Runners = Team1
+@export var Taggers = Team2
+
+var maxPlayersInTeam = 3
+
 signal Scored
 
-var currnumchar = 0
+var selectedChar = 0
 @export var CurrentlySelected: CharacterBody2D
 
 func _ready():
 	for i in get_node("Players").get_children():
-		currchar.append(i)
+		allChars.append(i)
 		numchar += 1
-	cam.reparent(currchar[currnumchar])
-	CurrentlySelected = currchar[currnumchar]
+	print(allChars)
+	
+	TeamSetup(Team1)
+	TeamSetup(Team2)
+	
+	selectedTeam = Team1
+	
+	cam.reparent(selectedTeam[selectedChar])
+	CurrentlySelected = selectedTeam[selectedChar]
 	CurrentlySelected.Selected.emit(true)
 	cam.position = Vector2(0, 0)
+	
 	Scored.connect(score)
 
+func TeamSetup(team : Array):
+	for m in maxPlayersInTeam:
+		var picked = allChars.pick_random()
+		team.append(picked)
+		allChars.erase(picked)
+
+var timer = 0
+var waitTime = 1 # seconds
+var holdingChangeCharacter
 func _input(ev : InputEvent):
 	if ev.is_action_pressed("changechar"):
-		print("Changed character")
-		CurrentlySelected.Selected.emit(false)
-		if currnumchar == numchar-1:
-			currnumchar = 0
-		else:
-			currnumchar += 1
-		CurrentlySelected = currchar[currnumchar]
-		CurrentlySelected.Selected.emit(true)
-		cam.reparent(CurrentlySelected)
+		holdingChangeCharacter = true
+	if ev.is_action_released("changechar"):
+		holdingChangeCharacter = false
+		if timer < waitTime:
+			changeCharacter()
+		timer = 0
 	if ev.is_action_pressed("click"):
 		CurrentlySelected.MoveTo(get_global_mouse_position(), null)
 	if ev.is_action_pressed("run"):
 		CurrentlySelected.RunBool(true)
 	if ev.is_action_released("run"):
 		CurrentlySelected.RunBool(false)
-		
-func _process(_delta):
+
+func _process(delta):
+	if holdingChangeCharacter:
+		timer += delta
+		if timer > waitTime:
+			changeTeam()
+			holdingChangeCharacter = false
 	var direction = Input.get_vector("left", "right", "up", "down")	
 	if ManualMove:
 		CurrentlySelected.Move(direction, CurrentlySelected.defaultspd)
@@ -59,3 +86,25 @@ func _physics_process(_delta):
 func score():
 	Team1Score += 1
 	ui.scored(Team1Score)
+	
+func changeCharacter():
+	print("Changed character")
+	CurrentlySelected.Selected.emit(false)
+	if selectedChar == maxPlayersInTeam-1:
+		selectedChar = 0
+	else:
+		selectedChar += 1
+	if selectedTeam[selectedChar] == null:
+		selectedChar = 0
+	CurrentlySelected = selectedTeam[selectedChar]
+	CurrentlySelected.Selected.emit(true)
+	cam.reparent(CurrentlySelected)
+
+func changeTeam():
+	print("Changed team")
+	if selectedTeam.hash() == Team1.hash():
+		selectedTeam = Team2
+	else:
+		selectedTeam = Team1
+	selectedChar = maxPlayersInTeam-1
+	changeCharacter()

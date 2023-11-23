@@ -2101,97 +2101,81 @@ polygon = PackedVector2Array(54, -22, -1, -22, -1, -70, 54, -70, 54, -74, -1, -7
 [node name="PlayingAreas" type="Node" parent="."]
 script = ExtResource("8_56o53")
 
-[node name="TopLeft" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_area_returning", "next_line_from_home", "side_line", "next_line_returning")]
+[node name="TopLeft" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_area_returning")]
 position = Vector2(156, 244)
 script = ExtResource("8_y7syj")
 next_area_from_home = NodePath("../EndLeft")
 side_area = NodePath("../TopRight")
 next_area_returning = NodePath("../BottomLeft")
-next_line_from_home = NodePath("../../Lines/Line3")
-side_line = NodePath("../../Lines/MiddleLine")
-next_line_returning = NodePath("../../Lines/Line2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/TopLeft"]
 shape = SubResource("RectangleShape2D_uoexb")
 
-[node name="TopRight" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_area_returning", "next_line_from_home", "side_line", "next_line_returning")]
+[node name="TopRight" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_area_returning")]
 position = Vector2(215, 244)
 script = ExtResource("8_y7syj")
 next_area_from_home = NodePath("../EndRight")
 side_area = NodePath("../TopLeft")
 next_area_returning = NodePath("../BottomRight")
-next_line_from_home = NodePath("../../Lines/Line3")
-side_line = NodePath("../../Lines/MiddleLine")
-next_line_returning = NodePath("../../Lines/Line2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/TopRight"]
 shape = SubResource("RectangleShape2D_uoexb")
 
-[node name="BottomLeft" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_area_returning", "next_line_from_home", "side_line", "next_line_returning")]
+[node name="BottomLeft" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_area_returning")]
 position = Vector2(156, 296)
 script = ExtResource("8_y7syj")
 next_area_from_home = NodePath("../TopLeft")
 side_area = NodePath("../BottomRight")
 next_area_returning = NodePath("../StartingLeft")
-next_line_from_home = NodePath("../../Lines/Line2")
-side_line = NodePath("../../Lines/MiddleLine")
-next_line_returning = NodePath("../../Lines/Line1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/BottomLeft"]
 shape = SubResource("RectangleShape2D_uoexb")
 
-[node name="BottomRight" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_area_returning", "next_line_from_home", "side_line", "next_line_returning")]
+[node name="BottomRight" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_area_returning")]
 position = Vector2(215, 296)
 script = ExtResource("8_y7syj")
 next_area_from_home = NodePath("../TopRight")
 side_area = NodePath("../BottomLeft")
 next_area_returning = NodePath("../StartingRight")
-next_line_from_home = NodePath("../../Lines/Line2")
-side_line = NodePath("../../Lines/MiddleLine")
-next_line_returning = NodePath("../../Lines/Line1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/BottomRight"]
 shape = SubResource("RectangleShape2D_uoexb")
 
-[node name="EndLeft" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("side_area", "next_area_returning", "next_line_returning")]
+[node name="EndLeft" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("side_area", "next_area_returning")]
 position = Vector2(156, 192)
 script = ExtResource("8_y7syj")
 side_area = NodePath("../EndRight")
 next_area_returning = NodePath("../TopLeft")
-next_line_returning = NodePath("../../Lines/Line3")
 end_area = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/EndLeft"]
 shape = SubResource("RectangleShape2D_jhvgh")
 
-[node name="StartingLeft" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_line_from_home")]
+[node name="StartingLeft" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area")]
 position = Vector2(156, 345)
 script = ExtResource("8_y7syj")
 next_area_from_home = NodePath("../BottomLeft")
 side_area = NodePath("../StartingRight")
-next_line_from_home = NodePath("../../Lines/Line1")
 start_area = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/StartingLeft"]
 shape = SubResource("RectangleShape2D_jhvgh")
 
-[node name="StartingRight" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_line_from_home")]
+[node name="StartingRight" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area")]
 position = Vector2(215, 345)
 script = ExtResource("8_y7syj")
 next_area_from_home = NodePath("../BottomRight")
 side_area = NodePath("../StartingLeft")
-next_line_from_home = NodePath("../../Lines/Line1")
 start_area = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/StartingRight"]
 shape = SubResource("RectangleShape2D_jhvgh")
 
-[node name="EndRight" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("side_area", "next_area_returning", "next_line_returning")]
+[node name="EndRight" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("side_area", "next_area_returning")]
 position = Vector2(215, 192)
 script = ExtResource("8_y7syj")
 side_area = NodePath("../EndLeft")
 next_area_returning = NodePath("../TopRight")
-next_line_returning = NodePath("../../Lines/Line3")
 end_area = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayingAreas/EndRight"]
@@ -2253,7 +2237,7 @@ collision_mask = 64
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Lines/MiddleLine"]
 position = Vector2(0, 52)
 build_mode = 1
-polygon = PackedVector2Array(-6, 4, -6, -109, 6, -109, 6, 4)
+polygon = PackedVector2Array(-58, -5, -6, -5, -6, -109, 6, -109, 6, -5, 58, -5, 58, 4, -58, 4)
 
 [node name="Line2" type="StaticBody2D" parent="Lines"]
 position = Vector2(185, 270)
@@ -2261,14 +2245,5 @@ collision_layer = 32
 collision_mask = 32
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Lines/Line2"]
-build_mode = 1
-polygon = PackedVector2Array(-58, -5, 58, -5, 58, 4, -58, 4)
-
-[node name="Line1" type="StaticBody2D" parent="Lines"]
-position = Vector2(185, 322)
-collision_layer = 32
-collision_mask = 32
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Lines/Line1"]
 build_mode = 1
 polygon = PackedVector2Array(-58, -5, 58, -5, 58, 4, -58, 4)

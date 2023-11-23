@@ -13,7 +13,9 @@ func _ready():
 	character.Selected.connect(onSelect)
 	character.targetArea = AreaHandler.setStartingArea()
 	var nextArea = AreaHandler.getNextAreaOfCharacter(character)
+	var nextLine = AreaHandler.getNextLineOfCharacter(character)
 	character.nextScoreArea = [nextArea, nextArea.side_area]
+	character.nextLine = nextLine
 	for child in get_children():
 		if child is State:
 			states[child.name] = child
@@ -32,6 +34,8 @@ func _physics_process(delta):
 		current_state.Physics_Update(delta)
 		
 func on_child_transition(state, new_state_name):
+	if state == null:
+		push_error("NO INITIAL STATE SET")
 	print(character.name, " has transitioned from ", state.name, " to ", new_state_name)
 	if state != current_state:
 		return

@@ -16,8 +16,12 @@ var direction = Vector2.ZERO
 var prefDir = Vector2.ZERO
 var targetArea : Area
 var nextScoreArea : Array
+var nextLine : StaticBody2D
+@export var distanceToNextLine = 0
 var currentArea : Area
 @onready var currentTeam = "Runner"
+@export var teamNumber = 0
+@export var currentLine : StaticBody2D
 
 # ------------------------------------------------------------------------------------
 
@@ -113,6 +117,9 @@ func _physics_process(_delta):
 		spd = lastspd
 	
 	move_and_slide()
+	
+	if nextLine:
+		distanceToNextLine = abs(global_position.y - nextLine.global_position.y)
 	
 func OnSelect(selectedBool):
 	IsSelected = selectedBool

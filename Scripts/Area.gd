@@ -7,6 +7,10 @@ class_name Area
 @export var side_area : Area
 @export var next_area_returning : Area
 
+@export var next_line_from_home : StaticBody2D
+@export var side_line : StaticBody2D
+@export var next_line_returning : StaticBody2D
+
 @export var end_area : bool
 @export var start_area : bool
 
@@ -33,6 +37,7 @@ func Entered(person):
 		print(person.name + " scored! " + self.name)
 		var nextArea = AreaHandler.getNextAreaOfCharacter(person)
 		person.nextScoreArea = [nextArea, nextArea.side_area]
+		person.nextLine = AreaHandler.getNextLineOfCharacter(person)
 		
 		var newCollision = ["+1", Color.ORANGE, person.global_position, person]
 		scoreTexts.append(newCollision)
