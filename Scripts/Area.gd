@@ -32,7 +32,7 @@ func Entered(person):
 	for i in person.nextScoreArea:
 		if i == self:
 			scoreArea = true
-	if person.currentTeam == "Runner" and scoreArea:
+	if person.currentTeam == "Runners" and scoreArea:
 		level.Scored.emit()
 		print(person.name + " scored! " + self.name)
 		var nextArea = AreaHandler.getNextAreaOfCharacter(person)

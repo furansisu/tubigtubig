@@ -210,7 +210,6 @@ func debugCollision():
 				break
 		if not alreadyCollided:
 			var newCollision = ["collide", Color.RED, collision.get_position(), collision.get_collider()]
-			print("COLLIDE")
 			debugText.append(newCollision)
 		
 # ------------------------------------------------------------------------------------

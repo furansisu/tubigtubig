@@ -18,13 +18,14 @@ var targetArea : Area
 var nextScoreArea : Array
 var nextLine : StaticBody2D
 @export var distanceToNextLine = 0
-var currentArea : Area
+@export var currentArea : Area
 @onready var currentTeam = "Runner"
 @export var teamNumber = 0
 @export var currentLine : StaticBody2D
 
 # ------------------------------------------------------------------------------------
 
+signal setupReady
 signal ReachedTarget
 signal Selected
 signal DisableAreaRays

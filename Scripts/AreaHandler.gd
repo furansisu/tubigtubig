@@ -53,6 +53,7 @@ func getNextLineOfCharacter(character):
 	else:
 		returnLine = area.next_line_from_home
 	return returnLine
+	print("NEW NEXTLINE FOR " + character.name + " IS " + returnLine.name)
 
 func getIndexOfArea(character):
 	var area = character.currentArea

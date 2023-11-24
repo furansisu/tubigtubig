@@ -20,11 +20,18 @@ func _ready():
 		if child is State:
 			states[child.name] = child
 			child.Transitioned.connect(on_child_transition)
-				
+	
+	character.setupReady.connect(setInitialState)
+
+func setInitialState():
+	if character.currentTeam == "Runners":
+		initial_state = get_node("Strafe")
+	if character.currentTeam == "Taggers":
+		initial_state = get_node("Guard")
 	if initial_state:
 		initial_state.Enter()
 		current_state = initial_state
-				
+	
 func _process(delta):
 	if current_state:
 		current_state.Update(delta)

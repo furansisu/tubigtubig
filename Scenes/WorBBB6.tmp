@@ -2216,7 +2216,7 @@ position = Vector2(197, 403)
 position = Vector2(153, 407)
 
 [node name="Iking" parent="Players" instance=ExtResource("11_4uvj8")]
-position = Vector2(286, 383)
+position = Vector2(185, 270)
 collision_layer = 65
 collision_mask = 65
 

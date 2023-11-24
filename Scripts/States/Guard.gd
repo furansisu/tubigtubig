@@ -15,42 +15,40 @@ var distances : Dictionary = {}
 func getTarget():
 	for i in players:
 		if i.nextLine == character.currentLine:
-			if not possibleTargets.find(i):
+			if possibleTargets.find(i) == -1:
 				possibleTargets.append(i)
 		else:
+			print(character.name + ": " + i.name + "'s nextLine is not " + character.currentLine.name)
 			distances.erase(i)
 			possibleTargets.erase(i)
 	for i in possibleTargets:
-		distances[i] = i.distanceToNextLine
-	for i in distances:
-		pass
-
-func randomize_wander():
-	dir = Vector2(randf_range(-1,1), randf_range(-1,1)).normalized()
-	
-func random_newpos():
-	pos = Vector2(randi_range(-100,100), randi_range(-100,100)) + character.global_position
-	
-func random_pos_area():
-	pos = AreaHandler.random_pos(character.targetArea)
-	
-func changeToNextArea():
-	character.targetArea = AreaHandler.getNextAreaOfCharacter(character)
-	
-func checkInArea():
-	pass
+		distances[i.name] = i.distanceToNextLine
+	var lowestDist = 9999
+	var lowestTarget = ""
+	for target in distances:
+		if distances[target] <= lowestDist:
+			lowestDist = distances[target]
+			lowestTarget = target
+			
+	for target in possibleTargets:
+		if lowestTarget == target.name:
+			return target
 
 func Enter():
 	if not character:
 		character = get_parent().get_parent()
 	players = get_node("/root/World").Runners
+	character.DisableAreaRays.emit(true)
 
 func Exit():
-	pass
+	character.DisableAreaRays.emit(false)
 	
 func Update(_delta):
-	pass
+	currentTarget = getTarget()
 		
 func Physics_Update(_delta):
 	if character:
-		character.MoveTo(pos, 15)
+		if currentTarget:
+			character.MoveTo(currentTarget.global_position, 50)
+		else:
+			character.MoveTo(pos, 15)

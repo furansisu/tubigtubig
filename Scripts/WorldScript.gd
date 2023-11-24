@@ -44,13 +44,44 @@ func _ready():
 
 func TeamSetup(team : Array):
 	for m in maxPlayersInTeam:
+		if allChars.is_empty():
+			break
 		var picked = allChars.pick_random()
 		team.append(picked)
 		allChars.erase(picked)
+	var teamName
+	var lineSetup = false
+	if team.hash() == Runners.hash():
+		teamName = "Runners"
+	if team.hash() == Taggers.hash():
+		teamName = "Taggers"
+		lineSetup = true
+	if lineSetup:
+		lineSet(team)
+	print(team)
+	for player in team:
+		print("Set " + player.name + " to " + teamName + " team")
+		player.currentTeam = teamName
+		player.setupReady.emit()
+
+func lineSet(team : Array):
+	var emptyTeam = team.duplicate()
+	var lines = get_node("Lines").get_children()
+	for i in lines:
+		if i.name == "MiddleLine":
+			lines.erase(i)
+	for i in lines:
+		if emptyTeam.is_empty():
+			break
+		var player = emptyTeam.pick_random()
+		player.currentLine = i
+		player.global_position = i.global_position
+		emptyTeam.erase(player)
+	print(team)
 
 var timer = 0
 var waitTime = 1 # seconds
-var holdingChangeCharacter
+var holdingChangeCharacter = false
 func _input(ev : InputEvent):
 	if ev.is_action_pressed("changechar"):
 		holdingChangeCharacter = true
@@ -96,6 +127,7 @@ func changeCharacter():
 		selectedChar += 1
 	if selectedTeam[selectedChar] == null:
 		selectedChar = 0
+	
 	CurrentlySelected = selectedTeam[selectedChar]
 	CurrentlySelected.Selected.emit(true)
 	cam.reparent(CurrentlySelected)
