@@ -50,7 +50,6 @@ func checkLowestDistanceToTagger():
 		for i in players:
 			if i.middleLine == true:
 				return i.global_position.distance_to(character.global_position)
-		# print("NO ONE'S GUARDING MIDDLE LINE")
 		wander_time = 0
 		return 9999
 	

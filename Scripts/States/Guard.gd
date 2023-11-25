@@ -9,7 +9,6 @@ class_name Guard
 var dir : Vector2
 var pos : Vector2
 var players : Array
-var possibleTargets : Array
 
 @export var middleLineBool = false
 var switchingLine = false
@@ -19,6 +18,7 @@ var RUNNNN = false
 @export var currentTarget : CharacterBody2D
 
 func getTarget():
+	var possibleTargets : Array = []
 	var distances : Dictionary = {}
 	var lowestDist = 9999
 	var lowestTarget = ""
@@ -51,7 +51,7 @@ func getMidTarget():
 	var lowestDist = 9999
 	var lowestTarget = ""
 	for i in players:
-		if i.nextLine.name != "Line3" and i.Returning == false:
+		if i.nextLine.name != "Line3" or i.Returning == false:
 			distances[i.name] = i.distanceToMiddleLine
 	
 	for target in distances:
@@ -80,20 +80,17 @@ func successfulSwitch():
 	character.global_position = Vector2(middleLine.global_position.x, character.currentLine.global_position.y)
 	
 	middleLineBool = not middleLineBool
+	character.middleLine = not character.middleLine
 	if middleLineBool == true:
-		character.set_collision_layer(middleLine.get_collision_layer())
+		character.set_collision_layer(middleLine.get_collision_layer()+1)
 		character.set_collision_mask(middleLine.get_collision_mask()+1)
 	else:
-		character.set_collision_layer(character.currentLine.get_collision_layer())
+		character.set_collision_layer(character.currentLine.get_collision_layer()+1)
 		character.set_collision_mask(character.currentLine.get_collision_mask()+1)
-
-	character.middleLine = not character.middleLine
-	
 
 func Enter():
 	if not character:
 		character = get_parent().get_parent()
-	players = get_node("/root/World").Runners
 	character.DisableAreaRays.emit(true)
 	character.DisablePlayerRays.emit(true)
 
@@ -103,6 +100,8 @@ func Exit():
 
 var spd
 func Update(_delta):
+	players = get_node("/root/World").Runners
+	
 	var backupTarget
 	currentTarget = getTarget()
 	if middleLineBool == true:
@@ -115,7 +114,7 @@ func Update(_delta):
 		if backupTarget:
 			toggleMiddleLine()
 			print("Returning to line")
-		else: if not currentTarget and character.currentLine.name == "Line1":
+		else: if getMidTarget() and not currentTarget and character.currentLine.name == "Line1":
 			toggleMiddleLine()
 			print("Switching to middle")
 	

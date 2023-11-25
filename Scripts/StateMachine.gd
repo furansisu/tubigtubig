@@ -2,10 +2,11 @@ extends Node
 
 @export var initial_state : State
 @onready var AreaHandler = get_node("/root/World/PlayingAreas")
+@onready var level = get_node("/root/World")
 
 var character : CharacterBody2D
 
-var current_state : State
+@export var current_state : State
 var states : Dictionary = {}
 
 func _ready():
@@ -22,6 +23,7 @@ func _ready():
 			child.Transitioned.connect(on_child_transition)
 	
 	character.setupReady.connect(setInitialState)
+	level.Caught.connect(onTagged)
 
 func setInitialState():
 	if character.currentTeam == "Runners":
@@ -56,8 +58,14 @@ func on_child_transition(state, new_state_name):
 	
 	new_state.Enter()
 	current_state = new_state
-	
+
+func onTagged(caught : CharacterBody2D, _tagger : CharacterBody2D):
+	if caught == character:
+		on_child_transition(current_state, "OutOfGame")
+
 func onSelect(selectedBool):
+	if character.Caught == true:
+		return
 	if selectedBool == true:
 		on_child_transition(current_state, "Disable")
 		if character.currentLine:

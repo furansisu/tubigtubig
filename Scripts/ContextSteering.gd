@@ -7,7 +7,7 @@ var default_font = load("res://Resources/FONTS/november.tres")
 var debug = true
 
 var WEIGHTS = {
-	"CharacterBody2D": 10,
+	"CharacterBody2D": 15,
 	"TileMap": 2,
 	"Area2D": 10
 }
@@ -46,18 +46,28 @@ var colors = []
 var line
 var players
 var character : CharacterBody2D
+var border
+# ------------------------------------------------------------------------------
 func setup(newcharacter : CharacterBody2D):
+	
+	# EXCEPTIONS
 	exceptions = get_descendants(newcharacter.get_node("/root/World/PlayingAreas"))
+	# ------------------------------------------------------------------------------
 	line = newcharacter.get_node("/root/World/LineCollision")
 	players = newcharacter.get_node("/root/World/Players").get_children()
+	border = get_descendants(newcharacter.get_node("/root/World/SideBorder"))
 	character = newcharacter
+	# ------------------------------------------------------------------------------
+	exceptions.append(character)
+	exceptions.append(character.get_node("/root/World/MiddleLineSwitch"))
+	# ------------------------------------------------------------------------------
+	
 	rays.resize(num_rays)
 	interest.resize(num_rays)
 	danger.resize(num_rays)
 	debug_dirs.resize(num_rays*2)
 	colors.resize(num_rays)
-	exceptions.append(character)
-	exceptions.append(character.get_node("/root/World/MiddleLineSwitch"))
+	
 	for i in num_rays:
 		var angle = i * 2 * PI / num_rays
 		rays[i] = Vector2.RIGHT.rotated(angle)
@@ -65,6 +75,7 @@ func setup(newcharacter : CharacterBody2D):
 		debug_dirs[i*2+1] = rays[i] * ray_length
 	character.DisableAreaRays.connect(disableRays)
 	character.DisablePlayerRays.connect(disablePlayerRays)
+	character.DisableBorderRays.connect(disableBorder)
 # Sets up context steering for a character.
 # Resizes and sets up all needed arrays and creates all the directions for raycasting around a character and
 # 	saves them into the rays array.
@@ -165,7 +176,7 @@ func getInterest():
 
 # --------------------------------------
 func disablePlayerRays(disableBool : bool):
-	print("Disabling player CSB detection for ", character.name, ": ", disableBool)
+#	print("Disabling player CSB detection for ", character.name, ": ", disableBool)
 	if disableBool == true:
 		exceptions.append_array(players)
 	else:
@@ -178,6 +189,14 @@ func disableRays(disableBool : bool):
 		exceptions.append(line)
 	else:
 		exceptions.erase(line)
+	
+func disableBorder(disableBool : bool):
+#	print("Disabling border CSB detection for ", character.name, ": ", disableBool)
+	if disableBool == true:
+		exceptions.append_array(border)
+	else:
+		for i in border:
+			exceptions.erase(i)
 
 # ------------------------------------------------------------------------------------
 # DEBUG FUNCTIONS
@@ -207,7 +226,7 @@ func draw():
 			string = character.targetPlayer.name
 		else:
 			string = "NONE"
-	character.draw_string(default_font, Vector2(-23,-15), "TARGET: " + string + ", DNL: " + str(character.distanceToNextLine) + ", SPD: " + str(character.spd), HORIZONTAL_ALIGNMENT_CENTER, -1, size)
+	character.draw_string(default_font, Vector2(-23,-15), "TARGET: " + string + ", DNL: " + str(character.distanceToNextLine) + ", STATE: " + character.get_node("StateMachine").current_state.name, HORIZONTAL_ALIGNMENT_CENTER, -1, size)
 	# 166 - 167: DRAWING THE CONTEXT STEERING INTEREST AND DANGER
 	if character.target_position and character.MovingToPoint: #WHERE CHARACTER IS INTERESTED TO MOVE TO
 		character.draw_circle(character.target_position - character.global_position, 3, Color.CHARTREUSE)

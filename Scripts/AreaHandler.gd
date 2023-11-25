@@ -18,7 +18,7 @@ func _ready():
 			start.append(i)
 		if i.end_area:
 			end.append(i)
-	print("Areas set!")
+#	print("Areas set!")
 
 func checkIfInArea(character: CharacterBody2D):
 	var index = getIndexOfTargetArea(character)
@@ -29,7 +29,7 @@ func checkIfInArea(character: CharacterBody2D):
 	return false
 
 func setStartingArea():
-	print("Returning a starting area from ", start)
+#	print("Returning a starting area from ", start)
 	return start.pick_random()
 
 func getNextAreaOfCharacter(character):

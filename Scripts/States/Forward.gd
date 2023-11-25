@@ -52,6 +52,8 @@ func Enter():
 	character.RunBool(true)
 	character.ReachedTarget.connect(random_pos_area)
 	character.DisableAreaRays.emit(true)
+	
+	
 
 func Exit():
 	character.DisableAreaRays.emit(false)

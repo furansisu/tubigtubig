@@ -18,3 +18,6 @@ res://Scripts/StateMachine.gd
 res://Scripts/Area.gd
 res://Scenes/MiddleLineSwitch.gd
 res://Scripts/ui.gd
+res://Scripts/States/Caught.gd
+res://Scripts/States/OutOfGame.gd
+res://Resources/FONTS/new_label_settings.tres

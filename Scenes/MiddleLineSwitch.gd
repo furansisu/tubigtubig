@@ -1,10 +1,13 @@
 extends Area2D
 
-func Entered(person):
-	print("SOMEONE ENTERED")
+func Entered(_person):
+#	print("SOMEONE ENTERED")
+	pass
 	
 func Exited(person):
-	print("SOMEONE EXITED")
+#	print("SOMEONE EXITED")
+	if person.currentTeam != "Taggers":
+		return
 	if person.global_position.y > self.global_position.y:
 		print(person.name + " is in ORIGINAL LINE")
 		person.middleLine = false
@@ -22,5 +25,5 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass

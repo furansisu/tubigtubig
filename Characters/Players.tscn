@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://crftl4qp0adn1"]
+
+[ext_resource type="Script" path="res://Scripts/AIBase.gd" id="1_tdaj4"]
+[ext_resource type="PackedScene" uid="uid://drpr4dxl2kb0u" path="res://Characters/JunJun.tscn" id="2_h823t"]
+[ext_resource type="PackedScene" uid="uid://dbcsgqu8g7wfa" path="res://Characters/Analyn.tscn" id="3_g5l8e"]
+[ext_resource type="PackedScene" uid="uid://deifhdpsrkxdq" path="res://Characters/Bernilla.tscn" id="4_ufs0i"]
+[ext_resource type="PackedScene" uid="uid://ij3q675i38fa" path="res://Characters/Fortunato.tscn" id="5_h4rua"]
+[ext_resource type="PackedScene" uid="uid://dq2ayyja46vnl" path="res://Characters/Iking.tscn" id="6_jgr2j"]
+
+[node name="Players" type="Node2D"]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_tdaj4")
+
+[node name="JunJun" parent="." instance=ExtResource("2_h823t")]
+position = Vector2(232, 344)
+platform_on_leave = 2
+
+[node name="Analyn" parent="." instance=ExtResource("3_g5l8e")]
+position = Vector2(143, 340)
+
+[node name="Bernilla" parent="." instance=ExtResource("4_ufs0i")]
+position = Vector2(205, 348)
+
+[node name="Fortunato" parent="." instance=ExtResource("5_h4rua")]
+position = Vector2(185, 344)
+
+[node name="Iking" parent="." instance=ExtResource("6_jgr2j")]
+position = Vector2(161, 344)
+
+[node name="Iking2" parent="." instance=ExtResource("6_jgr2j")]
+position = Vector2(215, 340)

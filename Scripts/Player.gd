@@ -13,6 +13,7 @@ var lastspd = spd
 var direction = Vector2.ZERO
 @export var target_position = position
 
+var Caught
 var prefDir = Vector2.ZERO
 var targetArea : Area
 var targetPlayer : CharacterBody2D
@@ -34,8 +35,11 @@ var movingToSide = false
 signal setupReady
 signal ReachedTarget
 signal Selected
+
 signal DisableAreaRays
 signal DisablePlayerRays
+signal DisableBorderRays
+
 var MovingToPoint = false
 var running = false
 var LookAtPoint : Vector2
@@ -124,11 +128,22 @@ func _physics_process(_delta):
 	else:
 		spd = lastspd
 	
-	move_and_slide()
+	getCollisions()
 	
 	distanceToMiddleLine = abs(global_position.x - middleLineNode.global_position.x)
 	if nextLine:
 		distanceToNextLine = abs(global_position.y - nextLine.global_position.y)
 	
+	move_and_slide()
+	
 func OnSelect(selectedBool):
 	IsSelected = selectedBool
+	
+func getCollisions():
+	for i in self.get_slide_collision_count():
+		var collision = self.get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider.is_class("CharacterBody2D") and self.currentTeam == "Runners" and collider.currentTeam == "Taggers":
+			get_node("/root/World").Caught.emit(self, collider)
+		if collider.is_class("CharacterBody2D") and self.currentTeam == "Taggers" and collider.currentTeam == "Runners":
+			get_node("/root/World").Caught.emit(collider, self)

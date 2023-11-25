@@ -6,6 +6,9 @@ var numchar = 0
 var Moving
 var ManualMove = false
 
+@onready var AreaHandler = get_node("/root/World/PlayingAreas")
+
+@onready var players = %Players
 @onready var cam = $Camera
 @onready var ui = %UI
 @onready var Team1Score = 0
@@ -14,57 +17,89 @@ var lerpspeed = .1
 
 @export var Team1 : Array = []
 @export var Team2 : Array = []
-@export var Runners = Team1
-@export var Taggers = Team2
+@export var Runners : Array = []
+@export var Taggers : Array = []
 
 var maxPlayersInTeam = 3
 
 signal Scored
+signal Caught
 
 var selectedChar = 0
 @export var CurrentlySelected: CharacterBody2D
 
+var loads = []
+
 func _ready():
-	for i in get_node("Players").get_children():
+	for player in players.get_children():
+		var fname = player.scene_file_path
+		var loaded = load(fname)
+		loads.append(loaded)
+	
+	gameSetup()
+	Scored.connect(score)
+	Caught.connect(tagged)
+
+func gameSetup():
+	for i in players.get_children():
 		allChars.append(i)
 		numchar += 1
-	print(allChars)
 	
-	TeamSetup(Team1)
-	TeamSetup(Team2)
+	InitialTeamSetup(Team1)
+	InitialTeamSetup(Team2)
 	
-	selectedTeam = Team1
+	var random = randi_range(1,2)
+	match random:
+		1:
+			Runners = Team1.duplicate()
+			Taggers = Team2.duplicate()
+		2:
+			Taggers = Team1.duplicate()
+			Runners = Team2.duplicate()
 	
+	runnersSet(Runners)
+	taggersSet(Taggers)
+	
+	selectedTeam = Runners
+	print(selectedTeam.hash() == Runners.hash())
 	cam.reparent(selectedTeam[selectedChar])
 	CurrentlySelected = selectedTeam[selectedChar]
 	CurrentlySelected.Selected.emit(true)
 	cam.position = Vector2(0, 0)
-	
-	Scored.connect(score)
 
-func TeamSetup(team : Array):
+var Temp = []
+func switchTeams():
+	Runners = Taggers.duplicate()
+	Taggers = Temp.duplicate()
+	
+	print(Runners)
+	print(Taggers)
+	
+	runnersSet(Runners)
+	taggersSet(Taggers)
+
+func grabRandomAreaPos():
+	var random = randi_range(1,2)
+	var area : Area
+	
+	match random:
+		1:
+			area = AreaHandler.get_node("StartingLeft")
+		2:
+			area = AreaHandler.get_node("StartingRight")
+			
+	return AreaHandler.random_pos(area)
+
+func InitialTeamSetup(team : Array):
 	for m in maxPlayersInTeam:
 		if allChars.is_empty():
 			break
 		var picked = allChars.pick_random()
 		team.append(picked)
 		allChars.erase(picked)
-	var teamName
-	var lineSetup = false
-	if team.hash() == Runners.hash():
-		teamName = "Runners"
-	if team.hash() == Taggers.hash():
-		teamName = "Taggers"
-		lineSetup = true
-	if lineSetup:
-		lineSet(team)
-	print(team)
-	for player in team:
-		print("Set " + player.name + " to " + teamName + " team")
-		player.currentTeam = teamName
-		player.setupReady.emit()
 
-func lineSet(team : Array):
+func taggersSet(team : Array):
+	var teamName = "Taggers"
 	var emptyTeam = team.duplicate()
 	var lines = get_node("Lines").get_children()
 	for i in lines:
@@ -76,12 +111,24 @@ func lineSet(team : Array):
 		var player : CharacterBody2D = emptyTeam.pick_random()
 		player.currentLine = i
 		player.global_position = i.global_position
-		print("COLLISION LAYER: " + str(i.get_collision_layer()))
-		player.set_collision_layer(i.get_collision_layer())
+		player.set_collision_layer(i.get_collision_layer()+1)
 		player.set_collision_mask(i.get_collision_mask()+1)
-		print("COLLISION MASK: " + str(player.get_collision_mask()))
 		emptyTeam.erase(player)
-	print(team)
+	for player in team:
+		print("Set " + player.name + " to " + teamName + " team")
+		player.currentTeam = teamName
+		player.setupReady.emit()
+		
+func runnersSet(team : Array):
+	Temp = []
+	var teamName = "Runners"
+	for player in team:
+		player.global_position = grabRandomAreaPos()
+		player.set_collision_layer(1)
+		player.set_collision_mask(1)
+		print("Set " + player.name + " to " + teamName + " team")
+		player.currentTeam = teamName
+		player.setupReady.emit()
 
 var timer = 0
 var waitTime = 1 # seconds
@@ -123,26 +170,65 @@ func _process(delta):
 func _physics_process(_delta):
 	cam.position = lerp(cam.position, Vector2(0, 0), lerpspeed)
 
-func score():
-	Team1Score += 1
-	ui.scored(Team1Score)
+func score(player):
+	var team = 1
+	for i in Team2:
+		if i.name == player.name:
+			team = 2
+	
+	match team:
+		1:
+			Team1Score += 1
+			ui.scored(Team1Score, 1)
+		2:
+			Team2Score += 1
+			ui.scored(Team2Score, 2)
+	
+func gameEnd():
+	ui.endGame()
+#	switchTeams()
+
+func tagged(caught : CharacterBody2D, tagger : CharacterBody2D):
+	slowDown(0.1)
+	
+	print(caught.name + " WAS CAUGHT BY " + tagger.name)
+	
+	for i in Runners:
+		if i.name == caught.name:
+			Temp.append(i)
+			Runners.erase(i)
+			print(selectedTeam.hash() == Runners.hash())
+	
+	caught.Caught = true
+	
+	if caught == CurrentlySelected:
+		changeCharacter()
+
+func slowDown(time):
+	slowDownTimer = time
+	Engine.time_scale = 0.1
+	print("Slowing down time")
 
 func changeCharacter():
 	print("Changed character")
 	CurrentlySelected.Selected.emit(false)
-	if selectedChar == maxPlayersInTeam-1:
+	if selectedTeam.size() == 0:
+		print("GAME IS OVER!!")
+		
+		gameEnd()
+		return
+	
+	if selectedChar == selectedTeam.size()-1:
 		selectedChar = 0
 	else:
 		selectedChar += 1
-	if selectedTeam[selectedChar] == null:
+	if selectedChar > selectedTeam.size()-1:
 		selectedChar = 0
 	
 	CurrentlySelected = selectedTeam[selectedChar]
 	CurrentlySelected.Selected.emit(true)
 	cam.reparent(CurrentlySelected)
-	slowDownTimer = 0.05
-	Engine.time_scale = 0.1
-	print("Slowing down time")
+	slowDown(0.05)
 
 func changeTeam():
 	print("Changed team")
