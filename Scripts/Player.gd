@@ -15,9 +15,15 @@ var direction = Vector2.ZERO
 
 var prefDir = Vector2.ZERO
 var targetArea : Area
+var targetPlayer : CharacterBody2D
 var nextScoreArea : Array
 var nextLine : StaticBody2D
+@export var distanceToClosestTagger = 0
+var middleLine = false
+var movingToSide = false
+@onready var middleLineNode = get_node("/root/World/Lines/MiddleLine")
 @export var distanceToNextLine = 0
+@export var distanceToMiddleLine = 0
 @export var currentArea : Area
 @onready var currentTeam = "Runner"
 @export var teamNumber = 0
@@ -29,6 +35,7 @@ signal setupReady
 signal ReachedTarget
 signal Selected
 signal DisableAreaRays
+signal DisablePlayerRays
 var MovingToPoint = false
 var running = false
 var LookAtPoint : Vector2
@@ -50,7 +57,7 @@ func Move(newDir, newspd):
 func SetNewSpd(newspd):
 	if newspd == spd:
 		return
-	if newspd and newspd < defaultspd:
+	if newspd:
 		spd = newspd
 		lastspd = newspd
 	else:
@@ -119,6 +126,7 @@ func _physics_process(_delta):
 	
 	move_and_slide()
 	
+	distanceToMiddleLine = abs(global_position.x - middleLineNode.global_position.x)
 	if nextLine:
 		distanceToNextLine = abs(global_position.y - nextLine.global_position.y)
 	

@@ -43,7 +43,7 @@ func _physics_process(delta):
 func on_child_transition(state, new_state_name):
 	if state == null:
 		push_error("NO INITIAL STATE SET")
-	print(character.name, " has transitioned from ", state.name, " to ", new_state_name)
+#	print(character.name, " has transitioned from ", state.name, " to ", new_state_name)
 	if state != current_state:
 		return
 		
@@ -60,5 +60,12 @@ func on_child_transition(state, new_state_name):
 func onSelect(selectedBool):
 	if selectedBool == true:
 		on_child_transition(current_state, "Disable")
+		if character.currentLine:
+			if character.currentLine.name == "Line1":
+				var middleLine = get_node("/root/World/MiddleLinePlayer")
+				character.set_collision_mask(middleLine.get_collision_mask()+1)
 	else:
-		on_child_transition(current_state, "Strafe") # create function to check what state I'm supposed to be in?
+		if character.currentTeam == "Runners":
+			on_child_transition(current_state, "Strafe")
+		if character.currentTeam == "Taggers":
+			on_child_transition(current_state, "Guard")

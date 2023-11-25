@@ -20,7 +20,7 @@ var inside : Dictionary = {}
 var entered_label
 
 func Entered(person):
-	print(person.name, " entered ", name)
+	# print(person.name, " entered ", name)
 	inside[person.name] = person
 	person.currentArea = self
 	if end_area:
@@ -34,7 +34,7 @@ func Entered(person):
 			scoreArea = true
 	if person.currentTeam == "Runners" and scoreArea:
 		level.Scored.emit()
-		print(person.name + " scored! " + self.name)
+		# print(person.name + " scored! " + self.name)
 		var nextArea = AreaHandler.getNextAreaOfCharacter(person)
 		person.nextScoreArea = [nextArea, nextArea.side_area]
 		person.nextLine = AreaHandler.getNextLineOfCharacter(person)
@@ -59,7 +59,7 @@ func _draw():
 		newThread.wait_to_finish()	
 
 func Exited(person):
-	print(person.name, " exited ", self.name)
+	# print(person.name, " exited ", self.name)
 	inside.erase(person.name)
 
 @onready var collider : CollisionShape2D = get_node("CollisionShape2D")

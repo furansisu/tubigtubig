@@ -42,12 +42,14 @@ var colors = []
 # MAIN FUNCTIONS
 # meat of context steering behavior
 # ------------------------------------------------------------------------------------
-@onready var exceptions : Array
+@export var exceptions : Array
 var line
+var players
 var character : CharacterBody2D
 func setup(newcharacter : CharacterBody2D):
 	exceptions = get_descendants(newcharacter.get_node("/root/World/PlayingAreas"))
 	line = newcharacter.get_node("/root/World/LineCollision")
+	players = newcharacter.get_node("/root/World/Players").get_children()
 	character = newcharacter
 	rays.resize(num_rays)
 	interest.resize(num_rays)
@@ -55,13 +57,14 @@ func setup(newcharacter : CharacterBody2D):
 	debug_dirs.resize(num_rays*2)
 	colors.resize(num_rays)
 	exceptions.append(character)
+	exceptions.append(character.get_node("/root/World/MiddleLineSwitch"))
 	for i in num_rays:
 		var angle = i * 2 * PI / num_rays
 		rays[i] = Vector2.RIGHT.rotated(angle)
 		debug_dirs[i*2] = Vector2.ZERO
 		debug_dirs[i*2+1] = rays[i] * ray_length
 	character.DisableAreaRays.connect(disableRays)
-		
+	character.DisablePlayerRays.connect(disablePlayerRays)
 # Sets up context steering for a character.
 # Resizes and sets up all needed arrays and creates all the directions for raycasting around a character and
 # 	saves them into the rays array.
@@ -161,8 +164,16 @@ func getInterest():
 	character.queue_redraw()
 
 # --------------------------------------
+func disablePlayerRays(disableBool : bool):
+	print("Disabling player CSB detection for ", character.name, ": ", disableBool)
+	if disableBool == true:
+		exceptions.append_array(players)
+	else:
+		for i in players:
+			exceptions.erase(i)
+
 func disableRays(disableBool : bool):
-	print("Disabling line CSB detection for ", character.name, ": ", disableBool)
+	# print("Disabling line CSB detection for ", character.name, ": ", disableBool)
 	if disableBool == true:
 		exceptions.append(line)
 	else:
@@ -185,7 +196,18 @@ func draw():
 	#character.draw_line(Vector2.ZERO, Vector2.ZERO + character.prefDir.rotated(character.rotation) * 50, Color.GREEN_YELLOW, 2)
 	character.draw_multiline_colors(debug_dirs, colors, 0.75)
 	var size = 5.0
-	character.draw_string(default_font, Vector2(-23,-15), "TARGET: " + str(character.targetArea.name), HORIZONTAL_ALIGNMENT_CENTER, -1, size)
+	var string = ""
+	if character.currentTeam == "Runners":
+		if not character.targetArea:
+			string = "NONE" + " " + str(character.distanceToClosestTagger)
+		else:
+			string = character.targetArea.name + " " + str(character.distanceToClosestTagger)
+	if character.currentTeam == "Taggers":
+		if character.targetPlayer:
+			string = character.targetPlayer.name
+		else:
+			string = "NONE"
+	character.draw_string(default_font, Vector2(-23,-15), "TARGET: " + string + ", DNL: " + str(character.distanceToNextLine) + ", SPD: " + str(character.spd), HORIZONTAL_ALIGNMENT_CENTER, -1, size)
 	# 166 - 167: DRAWING THE CONTEXT STEERING INTEREST AND DANGER
 	if character.target_position and character.MovingToPoint: #WHERE CHARACTER IS INTERESTED TO MOVE TO
 		character.draw_circle(character.target_position - character.global_position, 3, Color.CHARTREUSE)
@@ -204,6 +226,8 @@ func debugCollision():
 	for i in character.get_slide_collision_count():
 		var collision = character.get_slide_collision(i)
 		var alreadyCollided = false
+		if collision.get_collider().is_class("StaticBody2D"):
+			alreadyCollided = true
 		for j in debugText:
 			if j[3] and j[3] == collision.get_collider():
 				alreadyCollided = true

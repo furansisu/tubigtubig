@@ -73,9 +73,13 @@ func lineSet(team : Array):
 	for i in lines:
 		if emptyTeam.is_empty():
 			break
-		var player = emptyTeam.pick_random()
+		var player : CharacterBody2D = emptyTeam.pick_random()
 		player.currentLine = i
 		player.global_position = i.global_position
+		print("COLLISION LAYER: " + str(i.get_collision_layer()))
+		player.set_collision_layer(i.get_collision_layer())
+		player.set_collision_mask(i.get_collision_mask()+1)
+		print("COLLISION MASK: " + str(player.get_collision_mask()))
 		emptyTeam.erase(player)
 	print(team)
 
@@ -97,6 +101,7 @@ func _input(ev : InputEvent):
 	if ev.is_action_released("run"):
 		CurrentlySelected.RunBool(false)
 
+var slowDownTimer = 0
 func _process(delta):
 	if holdingChangeCharacter:
 		timer += delta
@@ -110,6 +115,10 @@ func _process(delta):
 		ManualMove = false
 	if direction != Vector2.ZERO and not ManualMove:
 		ManualMove = true
+		
+	slowDownTimer -= delta
+	if slowDownTimer <= 0:
+		Engine.time_scale = 1
 
 func _physics_process(_delta):
 	cam.position = lerp(cam.position, Vector2(0, 0), lerpspeed)
@@ -117,7 +126,7 @@ func _physics_process(_delta):
 func score():
 	Team1Score += 1
 	ui.scored(Team1Score)
-	
+
 func changeCharacter():
 	print("Changed character")
 	CurrentlySelected.Selected.emit(false)
@@ -131,6 +140,9 @@ func changeCharacter():
 	CurrentlySelected = selectedTeam[selectedChar]
 	CurrentlySelected.Selected.emit(true)
 	cam.reparent(CurrentlySelected)
+	slowDownTimer = 0.05
+	Engine.time_scale = 0.1
+	print("Slowing down time")
 
 func changeTeam():
 	print("Changed team")

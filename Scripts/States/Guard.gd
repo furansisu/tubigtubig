@@ -4,51 +4,143 @@ class_name Guard
 @export var character : CharacterBody2D
 @onready var AreaHandler = get_node("/root/World/PlayingAreas")
 
+@onready var middleLine = get_node("/root/World/Lines/MiddleLine")
+
 var dir : Vector2
 var pos : Vector2
 var players : Array
 var possibleTargets : Array
-var distances : Dictionary = {}
+
+@export var middleLineBool = false
+var switchingLine = false
+
+var RUNNNN = false
 
 @export var currentTarget : CharacterBody2D
 
 func getTarget():
+	var distances : Dictionary = {}
+	var lowestDist = 9999
+	var lowestTarget = ""
 	for i in players:
 		if i.nextLine == character.currentLine:
 			if possibleTargets.find(i) == -1:
 				possibleTargets.append(i)
 		else:
-			print(character.name + ": " + i.name + "'s nextLine is not " + character.currentLine.name)
 			distances.erase(i)
 			possibleTargets.erase(i)
 	for i in possibleTargets:
 		distances[i.name] = i.distanceToNextLine
-	var lowestDist = 9999
-	var lowestTarget = ""
+	
 	for target in distances:
 		if distances[target] <= lowestDist:
 			lowestDist = distances[target]
 			lowestTarget = target
-			
+	
+	if lowestDist <= 10:
+		RUNNNN = true
+	else:
+		RUNNNN = false
+	
 	for target in possibleTargets:
 		if lowestTarget == target.name:
 			return target
+
+func getMidTarget():
+	var distances : Dictionary = {}
+	var lowestDist = 9999
+	var lowestTarget = ""
+	for i in players:
+		if i.nextLine.name != "Line3" and i.Returning == false:
+			distances[i.name] = i.distanceToMiddleLine
+	
+	for target in distances:
+		if distances[target] <= lowestDist:
+			lowestDist = distances[target]
+			lowestTarget = target
+	
+	if lowestDist <= 10:
+		RUNNNN = true
+	else:
+		RUNNNN = false
+	
+	for target in players:
+		if lowestTarget == target.name:
+			return target
+
+
+func toggleMiddleLine():
+	switchingLine = true
+	character.ReachedTarget.connect(successfulSwitch)
+	
+func successfulSwitch():
+	character.ReachedTarget.disconnect(successfulSwitch)
+	switchingLine = false
+	
+	character.global_position = Vector2(middleLine.global_position.x, character.currentLine.global_position.y)
+	
+	middleLineBool = not middleLineBool
+	if middleLineBool == true:
+		character.set_collision_layer(middleLine.get_collision_layer())
+		character.set_collision_mask(middleLine.get_collision_mask()+1)
+	else:
+		character.set_collision_layer(character.currentLine.get_collision_layer())
+		character.set_collision_mask(character.currentLine.get_collision_mask()+1)
+
+	character.middleLine = not character.middleLine
+	
 
 func Enter():
 	if not character:
 		character = get_parent().get_parent()
 	players = get_node("/root/World").Runners
 	character.DisableAreaRays.emit(true)
+	character.DisablePlayerRays.emit(true)
 
 func Exit():
 	character.DisableAreaRays.emit(false)
-	
+	character.DisablePlayerRays.emit(false)
+
+var spd
 func Update(_delta):
+	var backupTarget
 	currentTarget = getTarget()
-		
+	if middleLineBool == true:
+		backupTarget = currentTarget
+		currentTarget = getMidTarget()
+	
+	character.targetPlayer = currentTarget
+	
+	if not switchingLine:
+		if backupTarget:
+			toggleMiddleLine()
+			print("Returning to line")
+		else: if not currentTarget and character.currentLine.name == "Line1":
+			toggleMiddleLine()
+			print("Switching to middle")
+	
+	if switchingLine == true:
+		RUNNNN = true
+		character.MoveTo(Vector2(middleLine.global_position.x, character.currentLine.global_position.y), spd)
+	
+	if RUNNNN:
+		character.RunBool(true)
+		spd = 90
+	else:
+		character.RunBool(false)
+		spd = 50
+
 func Physics_Update(_delta):
+	if switchingLine == true:
+		return
 	if character:
 		if currentTarget:
-			character.MoveTo(currentTarget.global_position, 50)
+			var targetPos
+			if middleLineBool == false:
+				targetPos = Vector2(currentTarget.global_position.x, character.currentLine.global_position.y)
+			else:
+				targetPos = Vector2(character.currentLine.global_position.x, currentTarget.global_position.y)
+			character.MoveTo(targetPos, spd)
 		else:
 			character.MoveTo(pos, 15)
+	

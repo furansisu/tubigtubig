@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bfvq6ggo0uqc2"]
+[gd_scene load_steps=18 format=3 uid="uid://bfvq6ggo0uqc2"]
 
 [ext_resource type="PackedScene" uid="uid://deifhdpsrkxdq" path="res://Characters/Bernilla.tscn" id="1"]
 [ext_resource type="Script" path="res://Scripts/WorldScript.gd" id="1_50kh2"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://Scripts/AreaHandler.gd" id="8_56o53"]
 [ext_resource type="Script" path="res://Scripts/Area.gd" id="8_y7syj"]
 [ext_resource type="PackedScene" uid="uid://dq2ayyja46vnl" path="res://Characters/Iking.tscn" id="11_4uvj8"]
-[ext_resource type="Script" path="res://Scenes/MiddleLineSwitch.gd" id="12_1li7s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0k6y"]
 texture = ExtResource("3")
@@ -2068,9 +2067,6 @@ b = Vector2(0, 187)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ll4x1"]
 b = Vector2(0, 189)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ufpg2"]
-size = Vector2(14, 1)
-
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_50kh2")
@@ -2258,7 +2254,7 @@ collision_mask = 128
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Lines/MiddleLine"]
 position = Vector2(0, 52)
 build_mode = 1
-polygon = PackedVector2Array(-7, 4, -7, -109, 7, -109, 7, 4)
+polygon = PackedVector2Array(-6, 4, -6, -109, 6, -109, 6, 4)
 
 [node name="Line2" type="StaticBody2D" parent="Lines"]
 position = Vector2(185, 270)
@@ -2277,22 +2273,3 @@ collision_mask = 16
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Lines/Line1"]
 build_mode = 1
 polygon = PackedVector2Array(-58, -5, 58, -5, 58, 4, -58, 4)
-
-[node name="MiddleLinePlayer" type="StaticBody2D" parent="."]
-position = Vector2(185, 270)
-collision_layer = 256
-collision_mask = 256
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MiddleLinePlayer"]
-position = Vector2(0, 52)
-build_mode = 1
-polygon = PackedVector2Array(-58, 4, -58, -5, -7, -5, -7, -109, 7, -109, 7, -5, 58, -5, 58, 4)
-
-[node name="MiddleLineSwitch" type="Area2D" parent="."]
-position = Vector2(185, 316)
-collision_layer = 0
-collision_mask = 273
-script = ExtResource("12_1li7s")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleLineSwitch"]
-shape = SubResource("RectangleShape2D_ufpg2")

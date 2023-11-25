@@ -21,7 +21,7 @@ func _ready():
 	print("Areas set!")
 
 func checkIfInArea(character: CharacterBody2D):
-	var index = getIndexOfArea(character)
+	var index = getIndexOfTargetArea(character)
 	var peopleInsideArea = areas[index].inside
 	for i in peopleInsideArea:
 		if peopleInsideArea[i] == character:
@@ -53,10 +53,18 @@ func getNextLineOfCharacter(character):
 	else:
 		returnLine = area.next_line_from_home
 	return returnLine
-	print("NEW NEXTLINE FOR " + character.name + " IS " + returnLine.name)
+
+func getSideAreaOfCharacter(character):
+	var index = getIndexOfArea(character)
+	var area = areas[index]
+	return area.side_area
 
 func getIndexOfArea(character):
 	var area = character.currentArea
 	if not area:
 		area = character.targetArea
+	return areas.find(area)
+
+func getIndexOfTargetArea(character):
+	var area = character.targetArea
 	return areas.find(area)
