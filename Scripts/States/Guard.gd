@@ -75,6 +75,8 @@ func toggleMiddleLine():
 	
 func successfulSwitch():
 	character.ReachedTarget.disconnect(successfulSwitch)
+	if character.currentTeam == "Runners":
+		print("WARNING: why is a runner switching to middle line? -------------------------")
 	switchingLine = false
 	
 	character.global_position = Vector2(middleLine.global_position.x, character.currentLine.global_position.y)
@@ -95,12 +97,14 @@ func Enter():
 	character.DisablePlayerRays.emit(true)
 
 func Exit():
+	if character.ReachedTarget.is_connected(successfulSwitch):
+		character.ReachedTarget.disconnect(successfulSwitch)
 	character.DisableAreaRays.emit(false)
 	character.DisablePlayerRays.emit(false)
 
 var spd
 func Update(_delta):
-	players = get_node("/root/World").Runners
+	players = get_node("/root/World").RunnersOnField
 	
 	var backupTarget
 	currentTarget = getTarget()

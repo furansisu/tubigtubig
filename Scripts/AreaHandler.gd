@@ -22,10 +22,17 @@ func _ready():
 
 func checkIfInArea(character: CharacterBody2D):
 	var index = getIndexOfTargetArea(character)
-	var peopleInsideArea = areas[index].inside
+	var area : Area
+	if index == -1:
+		area = character.targetArea
+		if not area: area = character.currentArea
+	else: area = areas[index]
+	if not area: push_error(character.name + " has no area")
+	var peopleInsideArea = area.inside
 	for i in peopleInsideArea:
 		if peopleInsideArea[i] == character:
 			return true
+#	print(character.name + " was not in " + area.name)
 	return false
 
 func setStartingArea():

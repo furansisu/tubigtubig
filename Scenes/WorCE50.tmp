@@ -2064,10 +2064,10 @@ size = Vector2(38, 32)
 size = Vector2(38, 26)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_wf2fa"]
-b = Vector2(0, 199)
+b = Vector2(0, 187)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ll4x1"]
-b = Vector2(0, 199)
+b = Vector2(0, 189)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oe77m"]
 size = Vector2(36, 164)
@@ -2179,7 +2179,7 @@ end_area = true
 shape = SubResource("RectangleShape2D_jhvgh")
 
 [node name="StartingLeft" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_line_from_home")]
-position = Vector2(156, 356)
+position = Vector2(156, 345)
 script = ExtResource("8_y7syj")
 next_area_from_home = NodePath("../BottomLeft")
 side_area = NodePath("../StartingRight")
@@ -2190,7 +2190,7 @@ start_area = true
 shape = SubResource("RectangleShape2D_jhvgh")
 
 [node name="StartingRight" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_line_from_home")]
-position = Vector2(215, 356)
+position = Vector2(215, 345)
 script = ExtResource("8_y7syj")
 next_area_from_home = NodePath("../BottomRight")
 side_area = NodePath("../StartingLeft")
@@ -2260,6 +2260,16 @@ nonGameArea = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SideBorder/RestArea"]
 shape = SubResource("RectangleShape2D_oe77m")
 
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="SideBorder"]
+position = Vector2(0, 91)
+rotation = -1.57079
+shape = SubResource("SegmentShape2D_6obw6")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="SideBorder"]
+position = Vector2(0, -95)
+rotation = -1.57079
+shape = SubResource("SegmentShape2D_b0h22")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="SideBorder"]
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="SideBorder/StaticBody2D"]
@@ -2271,7 +2281,7 @@ position = Vector2(117, -95)
 shape = SubResource("SegmentShape2D_ll4x1")
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="SideBorder/StaticBody2D"]
-position = Vector2(0, 103)
+position = Vector2(0, 91)
 rotation = -1.57079
 shape = SubResource("SegmentShape2D_6obw6")
 

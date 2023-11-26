@@ -34,6 +34,9 @@ func setInitialState():
 		initial_state.Enter()
 		current_state = initial_state
 	
+	print("COLLISION MASK FOR " + character.name + ": " + str(character.get_collision_mask()))
+#	print("Entering initial state for " + character.name + ": " + initial_state.name)
+	
 func _process(delta):
 	if current_state:
 		current_state.Update(delta)
@@ -59,14 +62,17 @@ func on_child_transition(state, new_state_name):
 	new_state.Enter()
 	current_state = new_state
 
-func onTagged(caught : CharacterBody2D, _tagger : CharacterBody2D):
+func onTagged(caught : CharacterBody2D, tagger : CharacterBody2D):
+	
 	if caught == character:
+		print(character.name + " was caught by " + tagger.name + " | " + str(Time.get_ticks_msec()))
 		on_child_transition(current_state, "OutOfGame")
 
 func onSelect(selectedBool):
 	if character.Caught == true:
 		return
 	if selectedBool == true:
+		print(character.name + " was selected!")
 		on_child_transition(current_state, "Disable")
 		if character.currentLine:
 			if character.currentLine.name == "Line1":
@@ -77,3 +83,11 @@ func onSelect(selectedBool):
 			on_child_transition(current_state, "Strafe")
 		if character.currentTeam == "Taggers":
 			on_child_transition(current_state, "Guard")
+
+func reset():
+	character.targetArea = AreaHandler.setStartingArea()
+	var nextArea = AreaHandler.getNextAreaOfCharacter(character)
+	var nextLine = AreaHandler.getNextLineOfCharacter(character)
+	character.nextScoreArea = [nextArea, nextArea.side_area]
+	character.nextLine = nextLine
+	on_child_transition(current_state, "Disable")

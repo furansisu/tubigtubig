@@ -26,9 +26,10 @@ var movingToSide = false
 @export var distanceToNextLine = 0
 @export var distanceToMiddleLine = 0
 @export var currentArea : Area
-@onready var currentTeam = "Runner"
+@onready var currentTeam = ""
 @export var teamNumber = 0
 @export var currentLine : StaticBody2D
+@onready var StateMachine = get_node("StateMachine")
 
 # ------------------------------------------------------------------------------------
 
@@ -78,7 +79,6 @@ func setLookAt(LookAtBool, point : Vector2):
 		LookAtPoint = Vector2.ZERO
 
 # ------------------------------------------------------------------------------------
-
 var CSBShape = 'default'
 func _draw():
 	CSB.draw()
@@ -147,3 +147,33 @@ func getCollisions():
 			get_node("/root/World").Caught.emit(self, collider)
 		if collider.is_class("CharacterBody2D") and self.currentTeam == "Taggers" and collider.currentTeam == "Runners":
 			get_node("/root/World").Caught.emit(collider, self)
+
+# ------------------------------------------------------------------------------------
+func reset():
+	nextScoreArea = []
+	currentTeam = ""
+	
+	currentArea = null
+	currentLine = null
+	targetArea = null
+	targetPlayer = null
+	nextLine = null
+	
+	distanceToClosestTagger = 0
+	distanceToNextLine = 0
+	distanceToMiddleLine = 0
+	
+	direction = Vector2.ZERO
+	target_position = position
+	
+	middleLine = false
+	movingToSide = false
+	Caught = false
+	IsSelected = false
+	MovingToPoint = false
+	running = false
+	Returning = false
+	
+	StateMachine.reset()
+	CSB.reset()
+# ------------------------------------------------------------------------------------

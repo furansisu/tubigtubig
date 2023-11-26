@@ -80,6 +80,11 @@ func setup(newcharacter : CharacterBody2D):
 # Resizes and sets up all needed arrays and creates all the directions for raycasting around a character and
 # 	saves them into the rays array.
 
+func reset():
+	disableRays(false)
+	disablePlayerRays(false)
+	disableBorder(false)
+
 # --------------------------------------
 var prevMaxInterests : Array = []
 func chooseDir():
@@ -226,7 +231,11 @@ func draw():
 			string = character.targetPlayer.name
 		else:
 			string = "NONE"
-	character.draw_string(default_font, Vector2(-23,-15), "TARGET: " + string + ", DNL: " + str(character.distanceToNextLine) + ", STATE: " + character.get_node("StateMachine").current_state.name, HORIZONTAL_ALIGNMENT_CENTER, -1, size)
+	var stateString = "NONE"
+	var stateMachine = character.get_node("StateMachine")
+	if stateMachine and stateMachine.current_state:
+		stateString = stateMachine.current_state.name
+	character.draw_string(default_font, Vector2(-23,-15), "TARGET: " + string + ", TEAM: " + str(character.currentTeam) + ", STATE: " + stateString, HORIZONTAL_ALIGNMENT_CENTER, -1, size)
 	# 166 - 167: DRAWING THE CONTEXT STEERING INTEREST AND DANGER
 	if character.target_position and character.MovingToPoint: #WHERE CHARACTER IS INTERESTED TO MOVE TO
 		character.draw_circle(character.target_position - character.global_position, 3, Color.CHARTREUSE)

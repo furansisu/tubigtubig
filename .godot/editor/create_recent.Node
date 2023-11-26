@@ -1,13 +1,14 @@
+ColorRect
+Label
+Control
 StaticBody2D
 CollisionShape2D
 Button
 MarginContainer
-Control
 Area2D
 Node
 Node2D
 CollisionPolygon2D
-Label
 RichTextLabel
 CanvasLayer
 Strafe

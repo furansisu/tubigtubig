@@ -71,6 +71,9 @@ func Enter():
 	character.movingToSide = false
 	random_pos_area()
 	changeToNextArea()
+	character.DisableAreaRays.emit(false)
+	character.DisablePlayerRays.emit(false)
+	character.DisableBorderRays.emit(false)
 	character.ReachedTarget.connect(random_pos_area)
 	players = get_node("/root/World").Taggers
 

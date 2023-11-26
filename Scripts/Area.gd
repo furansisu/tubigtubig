@@ -14,13 +14,15 @@ class_name Area
 @export var end_area : bool
 @export var start_area : bool
 
+@export var nonGameArea : bool = false
+
 var inside : Dictionary = {}
 @onready var level = get_node("/root/World")
 
 var entered_label
 
 func Entered(person):
-	# print(person.name, " entered ", name)
+#	print(person.name, " entered ", name)
 	inside[person.name] = person
 	person.currentArea = self
 	if end_area:
@@ -28,6 +30,7 @@ func Entered(person):
 	if start_area:
 		person.Returning = false
 	
+	if nonGameArea: return
 	var scoreArea = false
 	for i in person.nextScoreArea:
 		if i == self:
