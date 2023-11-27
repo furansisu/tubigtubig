@@ -11,13 +11,12 @@ config_version=5
 [application]
 
 config/name="PixelTero"
-run/main_scene="res://Scenes/World.tscn"
+run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
-config/icon="res://icon.svg"
 
 [autoload]
 
-LabelHelper="*res://Scripts/label_helper.gd"
+Options="*res://Scenes/options.gd"
 
 [display]
 

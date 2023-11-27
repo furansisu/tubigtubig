@@ -35,12 +35,12 @@ func Enter():
 	players = get_node("/root/World").Taggers
 	if not character:
 		character = get_parent().get_parent()
-	character.RunBool(true)
+	character.running = true
 	character.DisableAreaRays.emit(true)
 
 func Exit():
 	character.DisableAreaRays.emit(false)
-	character.RunBool(false)
+	character.running = false
 	
 var direction
 func Update(_delta):

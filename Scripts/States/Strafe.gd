@@ -78,7 +78,8 @@ func Enter():
 	players = get_node("/root/World").Taggers
 
 func Exit():
-	character.ReachedTarget.disconnect(random_pos_area)
+	if character.ReachedTarget.is_connected(random_pos_area):
+		character.ReachedTarget.disconnect(random_pos_area)
 	
 func Update(delta):
 	if character.currentArea == character.targetArea:

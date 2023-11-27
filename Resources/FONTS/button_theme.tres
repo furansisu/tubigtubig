@@ -1,0 +1,27 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://c68fwqiogebru"]
+
+[ext_resource type="FontFile" uid="uid://bqu1naaxqcmxe" path="res://Resources/FONTS/PixelEmulator-xq08.ttf" id="1_n4t27"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iqsaq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wc215"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kpo3j"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ik3l2"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[resource]
+default_font = ExtResource("1_n4t27")
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/styles/focus = SubResource("StyleBoxFlat_iqsaq")
+Button/styles/hover = SubResource("StyleBoxFlat_wc215")
+Button/styles/normal = SubResource("StyleBoxFlat_kpo3j")
+Button/styles/pressed = SubResource("StyleBoxFlat_ik3l2")

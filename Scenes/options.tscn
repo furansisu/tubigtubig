@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://ba3xuudilwfht"]
+
+[ext_resource type="Theme" uid="uid://c68fwqiogebru" path="res://Resources/FONTS/button_theme.tres" id="1_dya1r"]
+[ext_resource type="Script" path="res://Scenes/options.gd" id="1_pmdib"]
+[ext_resource type="Theme" uid="uid://cbtypn1n6qnx6" path="res://Resources/FONTS/optionmenutheme.tres" id="1_wurfx"]
+[ext_resource type="Script" path="res://Scripts/TextChangeForButton.gd" id="2_w3f8t"]
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pmdib")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Debug" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+theme = ExtResource("1_wurfx")
+text = "Debug"
+
+[node name="ChangeChar" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_wurfx")
+text = "Change Character"
+
+[node name="ChangeTeam" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_wurfx")
+text = "change team "
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 58.0
+offset_bottom = 28.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_dya1r")
+text = "BACK"
+script = ExtResource("2_w3f8t")
+
+[connection signal="toggled" from="MarginContainer/VBoxContainer/Debug" to="." method="_on_debug_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/ChangeChar" to="." method="_on_change_char_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/ChangeTeam" to="." method="_on_change_team_toggled"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

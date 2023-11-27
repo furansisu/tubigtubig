@@ -49,13 +49,13 @@ func Enter():
 	if not character:
 		character = get_parent().get_parent()
 	random_pos_area()
-	character.RunBool(true)
+	character.running = true
 	character.ReachedTarget.connect(random_pos_area)
 	character.DisableAreaRays.emit(true)
 
 func Exit():
 	character.DisableAreaRays.emit(false)
-	character.RunBool(false)
+	character.running = false
 	character.ReachedTarget.disconnect(random_pos_area)
 	
 func Update(_delta):

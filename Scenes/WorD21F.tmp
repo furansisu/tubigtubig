@@ -11,8 +11,8 @@
 [ext_resource type="Script" path="res://Scripts/AreaHandler.gd" id="8_56o53"]
 [ext_resource type="Script" path="res://Scripts/Area.gd" id="8_y7syj"]
 [ext_resource type="PackedScene" uid="uid://dq2ayyja46vnl" path="res://Characters/Iking.tscn" id="11_4uvj8"]
+[ext_resource type="Script" path="res://Scenes/MiddleLineSwitch.gd" id="12_1li7s"]
 [ext_resource type="PackedScene" uid="uid://bs2jvtqwsdn7o" path="res://Characters/Iking2.tscn" id="12_aljkd"]
-[ext_resource type="Script" path="res://MiddleLineSwitch.gd" id="13_3orcf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0k6y"]
 texture = ExtResource("3")
@@ -2061,7 +2061,7 @@ sources/0 = SubResource("TileSetAtlasSource_e0k6y")
 size = Vector2(38, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jhvgh"]
-size = Vector2(38, 38)
+size = Vector2(38, 26)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_wf2fa"]
 b = Vector2(0, 199)
@@ -2179,7 +2179,7 @@ end_area = true
 shape = SubResource("RectangleShape2D_jhvgh")
 
 [node name="StartingLeft" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_line_from_home")]
-position = Vector2(156, 350)
+position = Vector2(156, 356)
 script = ExtResource("8_y7syj")
 next_area_from_home = NodePath("../BottomLeft")
 side_area = NodePath("../StartingRight")
@@ -2190,7 +2190,7 @@ start_area = true
 shape = SubResource("RectangleShape2D_jhvgh")
 
 [node name="StartingRight" type="Area2D" parent="PlayingAreas" node_paths=PackedStringArray("next_area_from_home", "side_area", "next_line_from_home")]
-position = Vector2(215, 350)
+position = Vector2(215, 356)
 script = ExtResource("8_y7syj")
 next_area_from_home = NodePath("../BottomRight")
 side_area = NodePath("../StartingLeft")
@@ -2333,7 +2333,7 @@ polygon = PackedVector2Array(-58, 4, -58, -5, -7, -5, -7, -109, 7, -109, 7, -5, 
 position = Vector2(185, 316)
 collision_layer = 0
 collision_mask = 273
-script = ExtResource("13_3orcf")
+script = ExtResource("12_1li7s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleLineSwitch"]
 shape = SubResource("RectangleShape2D_ufpg2")

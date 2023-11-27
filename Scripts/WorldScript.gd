@@ -177,9 +177,9 @@ func _input(ev : InputEvent):
 	if ev.is_action_pressed("click"):
 		CurrentlySelected.MoveTo(get_global_mouse_position(), null)
 	if ev.is_action_pressed("run"):
-		CurrentlySelected.RunBool(true)
+		CurrentlySelected.running = true
 	if ev.is_action_released("run"):
-		CurrentlySelected.RunBool(false)
+		CurrentlySelected.running = false
 
 var slowDownTimer = 0
 var gameEndCalled = false
@@ -201,10 +201,14 @@ func _process(delta):
 		ManualMove = false
 	if direction != Vector2.ZERO and not ManualMove:
 		ManualMove = true
-		
-	slowDownTimer -= delta
-	if slowDownTimer <= 0:
+	
+	if slowDownTimer > 0:
+		slowDownTimer -= delta
+	else:
 		Engine.time_scale = 1
+	
+	if tagDebugCooldown > 0:
+		tagDebugCooldown -= delta
 	
 	cam.position = lerp(cam.position, Vector2(0, 0), (lerpspeed * delta * 100)/Engine.time_scale)
 
@@ -221,17 +225,24 @@ func score(player):
 		2:
 			Team2Score += 1
 			ui.scored(Team2Score, 2)
-	
+
+var tagDebugCooldown = 0
+var lastGameStartTick = 0
 func gameEnd():
 	gameEndCalled = true
-	print(" GAME END! | " + str(Time.get_ticks_msec()))
+	print(" GAME END! ")
 #	ui.endGame()
 	await ui.switching_teams()
 	switchTeams()
 	await ui.start_game_timer(3)
 	gameEndCalled = false
+	lastGameStartTick = Time.get_ticks_msec()
+	
+	tagDebugCooldown = 4
 
-func tagged(caught : CharacterBody2D, tagger : CharacterBody2D):
+func tagged(caught : CharacterBody2D, _tagger : CharacterBody2D):
+	if gameEndCalled == true and tagDebugCooldown > 0:
+		return
 	slowDown(0.1)
 	
 #	print(caught.name + " WAS CAUGHT BY " + tagger.name)
@@ -251,6 +262,7 @@ func slowDown(time):
 #	print("Slowing down time")
 
 func changeCharacter():
+	if not Options.changeCharacter: return
 	print("Changed character")
 	CurrentlySelected.Selected.emit(false)
 	if selectedTeam.size() == 0:
@@ -273,6 +285,7 @@ func changeCharacter():
 	slowDown(0.05)
 
 func changeTeam():
+	if not Options.changeTeam: return
 	print("Changed team")
 	if selectedTeam.hash() == RunnersOnField.hash():
 		selectedTeam = Taggers

@@ -31,6 +31,8 @@ var movingToSide = false
 @export var currentLine : StaticBody2D
 @onready var StateMachine = get_node("StateMachine")
 
+var lowestDistDebug = 0
+
 # ------------------------------------------------------------------------------------
 
 signal setupReady
@@ -68,9 +70,6 @@ func SetNewSpd(newspd):
 	else:
 		spd = defaultspd
 		lastspd = spd
-
-func RunBool(newRunning):
-	running = newRunning
 
 func setLookAt(LookAtBool, point : Vector2):
 	if LookAtBool == true:
@@ -174,6 +173,7 @@ func reset():
 	running = false
 	Returning = false
 	
+	SetNewSpd(0)
 	StateMachine.reset()
 	CSB.reset()
 # ------------------------------------------------------------------------------------

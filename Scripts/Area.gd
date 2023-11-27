@@ -22,6 +22,7 @@ var inside : Dictionary = {}
 var entered_label
 
 func Entered(person):
+	if not person.is_class("CharacterBody2D"): return
 #	print(person.name, " entered ", name)
 	inside[person.name] = person
 	person.currentArea = self
@@ -73,7 +74,6 @@ func _ready():
 	body_entered.connect(Entered)
 	body_exited.connect(Exited)
 	z_index = 3
-	entered_label = LabelHelper.new_label(get_tree().root.get_node("World/UI"), global_position, Vector2(2, 2), "Entered!")
 	
 func _process(_delta):
 	self.queue_redraw()

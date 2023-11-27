@@ -36,7 +36,7 @@ func _physics_process(delta):
 		GRAY.show()
 		get_tree().paused = true
 		game_starting_timer = clampf(game_starting_timer - (delta/Engine.time_scale), 0, INF)
-		STARTING.text = "STARTING      GAME      IN\n" + str((floor(game_starting_timer + 1)))
+		STARTING.text = "STARTING GAME IN\n" + str((floor(game_starting_timer + 1)))
 		if game_starting_timer <= 0:
 			STARTING.hide()
 			GO.show()

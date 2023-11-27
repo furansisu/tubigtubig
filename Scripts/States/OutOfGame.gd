@@ -30,7 +30,7 @@ func Enter():
 	doubleCheckActive = true
 	if not character:
 		character = get_parent().get_parent()
-	character.RunBool(false)
+	character.running = false
 	character.DisableAreaRays.emit(true)
 	character.DisablePlayerRays.emit(true)
 	character.DisableBorderRays.emit(true)

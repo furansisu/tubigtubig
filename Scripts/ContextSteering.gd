@@ -1,10 +1,9 @@
 extends Node
 var default_font = load("res://Resources/FONTS/november.tres")
-
 # ------------------------ V A R I A B L E S ------------------------------------------
 # IMPORTANT SETTINGS HERE
 
-var debug = true
+var debug = false
 
 var WEIGHTS = {
 	"CharacterBody2D": 15,
@@ -49,7 +48,7 @@ var character : CharacterBody2D
 var border
 # ------------------------------------------------------------------------------
 func setup(newcharacter : CharacterBody2D):
-	
+	print(Options.drawDebug)
 	# EXCEPTIONS
 	exceptions = get_descendants(newcharacter.get_node("/root/World/PlayingAreas"))
 	# ------------------------------------------------------------------------------
@@ -215,27 +214,32 @@ var debug_dirs : Array = []
 # [DIRECTION, POSITION, WEIGHT]
 
 func draw():
-	if not debug:
+	if not Options.drawDebug:
 		return
 	#character.draw_line(Vector2.ZERO, Vector2.ZERO + character.prefDir.rotated(character.rotation) * 50, Color.GREEN_YELLOW, 2)
 	character.draw_multiline_colors(debug_dirs, colors, 0.75)
 	var size = 5.0
 	var string = ""
+	var string2 = ""
 	if character.currentTeam == "Runners":
 		if not character.targetArea:
 			string = "NONE" + " " + str(character.distanceToClosestTagger)
+			string2 = str(character.distanceToNextLine)
 		else:
 			string = character.targetArea.name + " " + str(character.distanceToClosestTagger)
+			string2 = str(character.distanceToNextLine)
 	if character.currentTeam == "Taggers":
 		if character.targetPlayer:
 			string = character.targetPlayer.name
+			string2 = str(character.lowestDistDebug)
 		else:
 			string = "NONE"
+			string2 = "NONE"
 	var stateString = "NONE"
 	var stateMachine = character.get_node("StateMachine")
 	if stateMachine and stateMachine.current_state:
 		stateString = stateMachine.current_state.name
-	character.draw_string(default_font, Vector2(-23,-15), "TARGET: " + string + ", TEAM: " + str(character.currentTeam) + ", STATE: " + stateString, HORIZONTAL_ALIGNMENT_CENTER, -1, size)
+	character.draw_string(default_font, Vector2(-23,-15), "TARGET: " + string + ", DNL: " + string2 + ", STATE: " + stateString, HORIZONTAL_ALIGNMENT_CENTER, -1, size)
 	# 166 - 167: DRAWING THE CONTEXT STEERING INTEREST AND DANGER
 	if character.target_position and character.MovingToPoint: #WHERE CHARACTER IS INTERESTED TO MOVE TO
 		character.draw_circle(character.target_position - character.global_position, 3, Color.CHARTREUSE)

@@ -1,18 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://6wm8u80ojxvr"]
+[gd_scene load_steps=12 format=3 uid="uid://6wm8u80ojxvr"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_1ickb"]
 [ext_resource type="LabelSettings" uid="uid://dtogw3x8hsp37" path="res://Resources/FONTS/new_label_settings.tres" id="1_76f7a"]
 [ext_resource type="FontFile" uid="uid://bd8onlx5n7o4m" path="res://Resources/FONTS/ARCADECLASSIC.TTF" id="2_q6srn"]
+[ext_resource type="FontFile" uid="uid://bqu1naaxqcmxe" path="res://Resources/FONTS/PixelEmulator-xq08.ttf" id="3_7asyg"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_i87yp"]
-font = ExtResource("2_q6srn")
-font_size = 50
+[sub_resource type="LabelSettings" id="LabelSettings_qv5co"]
+line_spacing = 1.0
+font = ExtResource("3_7asyg")
+font_size = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_lpjux"]
-font = ExtResource("2_q6srn")
+font = ExtResource("3_7asyg")
 
 [sub_resource type="LabelSettings" id="LabelSettings_di6ay"]
-font = ExtResource("2_q6srn")
+font = ExtResource("3_7asyg")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q613q"]
 bg_color = Color(0.333333, 0.701961, 0.478431, 1)
@@ -80,8 +82,9 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 40
 text = "GAME OVER"
-label_settings = SubResource("LabelSettings_i87yp")
+label_settings = SubResource("LabelSettings_qv5co")
 
 [node name="TEAM2" type="Label" parent="Control/MarginContainer"]
 unique_name_in_owner = true
@@ -158,10 +161,11 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Button" type="Button" parent="PauseMenu/MarginContainer"]
+clip_contents = true
 layout_mode = 2
 theme_override_colors/font_pressed_color = Color(0.333333, 0.701961, 0.478431, 1)
 theme_override_colors/font_hover_color = Color(0.513726, 1, 0.482353, 1)
-theme_override_fonts/font = ExtResource("2_q6srn")
+theme_override_fonts/font = ExtResource("3_7asyg")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_q613q")
 theme_override_styles/hover = SubResource("StyleBoxFlat_p6hvx")

@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cbtypn1n6qnx6"]
+
+[ext_resource type="FontFile" uid="uid://bqu1naaxqcmxe" path="res://Resources/FONTS/PixelEmulator-xq08.ttf" id="1_xr1tj"]
+
+[resource]
+default_font = ExtResource("1_xr1tj")
+default_font_size = 10
+CheckButton/constants/check_v_offset = 0
+CheckButton/constants/h_separation = 4

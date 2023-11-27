@@ -63,9 +63,11 @@ func on_child_transition(state, new_state_name):
 	current_state = new_state
 
 func onTagged(caught : CharacterBody2D, tagger : CharacterBody2D):
+	if level.gameEndCalled == true and level.tagDebugCooldown > 0:
+		return
 	
 	if caught == character:
-		print(character.name + " was caught by " + tagger.name + " | " + str(Time.get_ticks_msec()))
+		print(character.name + " was caught by " + tagger.name + " | " + str((Time.get_ticks_msec()-level.lastGameStartTick)/1000))
 		on_child_transition(current_state, "OutOfGame")
 
 func onSelect(selectedBool):

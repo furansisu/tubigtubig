@@ -10,6 +10,7 @@ var dir : Vector2
 var pos : Vector2
 var players : Array
 
+@export var alertDistance = 15
 @export var middleLineBool = false
 var switchingLine = false
 
@@ -21,14 +22,11 @@ func getTarget():
 	var possibleTargets : Array = []
 	var distances : Dictionary = {}
 	var lowestDist = 9999
-	var lowestTarget = ""
+	var lowestTarget = null
 	for i in players:
 		if i.nextLine == character.currentLine:
 			if possibleTargets.find(i) == -1:
 				possibleTargets.append(i)
-		else:
-			distances.erase(i)
-			possibleTargets.erase(i)
 	for i in possibleTargets:
 		distances[i.name] = i.distanceToNextLine
 	
@@ -37,14 +35,27 @@ func getTarget():
 			lowestDist = distances[target]
 			lowestTarget = target
 	
-	if lowestDist <= 10:
-		RUNNNN = true
+	character.lowestDistDebug = lowestDist
+	
+	if character.lowestDistDebug <= alertDistance:
+		character.running = true
 	else:
-		RUNNNN = false
+		character.running = false
+	
+	character.lowestDistDebug = lowestDist
 	
 	for target in possibleTargets:
 		if lowestTarget == target.name:
 			return target
+	
+	if possibleTargets.is_empty() and character.currentLine.name != "Line1":
+		for player in players:
+			var distance = abs(player.global_position.y - character.currentLine.global_position.y)
+			if distance <= lowestDist:
+				lowestDist = distance
+				lowestTarget = player
+		character.lowestDistDebug = lowestDist
+		return lowestTarget
 
 func getMidTarget():
 	var distances : Dictionary = {}
@@ -59,10 +70,12 @@ func getMidTarget():
 			lowestDist = distances[target]
 			lowestTarget = target
 	
-	if lowestDist <= 10:
-		RUNNNN = true
+	if lowestDist <= alertDistance:
+		character.running = true
 	else:
-		RUNNNN = false
+		character.running = false
+	
+	character.lowestDistDebug = lowestDist
 	
 	for target in players:
 		if lowestTarget == target.name:
@@ -118,20 +131,18 @@ func Update(_delta):
 		if backupTarget:
 			toggleMiddleLine()
 			print("Returning to line")
-		else: if getMidTarget() and not currentTarget and character.currentLine.name == "Line1":
-			toggleMiddleLine()
-			print("Switching to middle")
+		else: if not currentTarget and character.currentLine.name == "Line1":
+			if getMidTarget():
+				toggleMiddleLine()
+				print("Switching to middle")
+			elif not players.is_empty():
+				currentTarget = players[0]
+				toggleMiddleLine()
+				print("Returning to line")
 	
 	if switchingLine == true:
-		RUNNNN = true
+		character.running = true
 		character.MoveTo(Vector2(middleLine.global_position.x, character.currentLine.global_position.y), spd)
-	
-	if RUNNNN:
-		character.RunBool(true)
-		spd = 90
-	else:
-		character.RunBool(false)
-		spd = 50
 
 func Physics_Update(_delta):
 	if switchingLine == true:
@@ -147,3 +158,15 @@ func Physics_Update(_delta):
 		else:
 			character.MoveTo(pos, 15)
 	
+	if character.lowestDistDebug > alertDistance and character.running == true:
+#		push_error("WHY  THE FUCK")
+		character.running = false
+	elif character.lowestDistDebug < alertDistance and character.running == false:
+#		push_error("GET EMN")
+		character.running = true
+#	print(str(character.running) + " | " + character.name + ", " + str(character.lowestDistDebug))
+	
+	if character.running == true:
+		character.SetNewSpd(90)
+	else:
+		character.SetNewSpd(50)
