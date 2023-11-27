@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ba3xuudilwfht"]
 
 [ext_resource type="Theme" uid="uid://c68fwqiogebru" path="res://Resources/FONTS/button_theme.tres" id="1_dya1r"]
-[ext_resource type="Script" path="res://Scenes/options.gd" id="1_pmdib"]
+[ext_resource type="Script" path="res://options.gd" id="1_pdohg"]
 [ext_resource type="Theme" uid="uid://cbtypn1n6qnx6" path="res://Resources/FONTS/optionmenutheme.tres" id="1_wurfx"]
 [ext_resource type="Script" path="res://Scripts/TextChangeForButton.gd" id="2_w3f8t"]
 
@@ -12,7 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_pmdib")
+script = ExtResource("1_pdohg")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

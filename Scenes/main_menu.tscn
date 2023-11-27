@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cutt3mvunukgy"]
 
-[ext_resource type="Script" path="res://MainMenu.gd" id="1_7fopa"]
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_aa7yp"]
 [ext_resource type="Theme" uid="uid://c68fwqiogebru" path="res://Resources/FONTS/button_theme.tres" id="2_hafg7"]
 [ext_resource type="Script" path="res://Scripts/TextChangeForButton.gd" id="3_2qfvm"]
 [ext_resource type="FontFile" uid="uid://bqu1naaxqcmxe" path="res://Resources/FONTS/PixelEmulator-xq08.ttf" id="4_w6uct"]
@@ -19,7 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_7fopa")
+script = ExtResource("1_aa7yp")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1

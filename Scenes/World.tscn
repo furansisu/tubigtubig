@@ -11,8 +11,8 @@
 [ext_resource type="Script" path="res://Scripts/AreaHandler.gd" id="8_56o53"]
 [ext_resource type="Script" path="res://Scripts/Area.gd" id="8_y7syj"]
 [ext_resource type="PackedScene" uid="uid://dq2ayyja46vnl" path="res://Characters/Iking.tscn" id="11_4uvj8"]
-[ext_resource type="PackedScene" uid="uid://bs2jvtqwsdn7o" path="res://Characters/Iking2.tscn" id="12_aljkd"]
-[ext_resource type="Script" path="res://MiddleLineSwitch.gd" id="13_3orcf"]
+[ext_resource type="PackedScene" uid="uid://bi5qs8jetmpe" path="res://Characters/Amogus.tscn" id="12_aljkd"]
+[ext_resource type="Script" path="res://Scripts/MiddleLineSwitch.gd" id="13_bciir"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0k6y"]
 texture = ExtResource("3")
@@ -2233,8 +2233,8 @@ position = Vector2(293, 244)
 [node name="Iking" parent="Players" instance=ExtResource("11_4uvj8")]
 position = Vector2(348, 322)
 
-[node name="Iking2" parent="Players" instance=ExtResource("12_aljkd")]
-position = Vector2(278, 174)
+[node name="Amogus" parent="Players" instance=ExtResource("12_aljkd")]
+position = Vector2(340, 218)
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(161, 90)
@@ -2333,7 +2333,7 @@ polygon = PackedVector2Array(-58, 4, -58, -5, -7, -5, -7, -109, 7, -109, 7, -5, 
 position = Vector2(185, 316)
 collision_layer = 0
 collision_mask = 273
-script = ExtResource("13_3orcf")
+script = ExtResource("13_bciir")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleLineSwitch"]
 shape = SubResource("RectangleShape2D_ufpg2")

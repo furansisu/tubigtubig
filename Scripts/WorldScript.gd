@@ -107,7 +107,7 @@ func switchTeams():
 		lastSelected = "Runners"
 	
 	selectedChar = selectedChar
-	changeCharacter()
+	changeCharacter(true)
 	
 func grabRandomAreaPos():
 	var random = randi_range(1,2)
@@ -172,7 +172,7 @@ func _input(ev : InputEvent):
 	if ev.is_action_released("changechar"):
 		holdingChangeCharacter = false
 		if timer < waitTime:
-			changeCharacter()
+			changeCharacter(false)
 		timer = 0
 	if ev.is_action_pressed("click"):
 		CurrentlySelected.MoveTo(get_global_mouse_position(), null)
@@ -207,8 +207,8 @@ func _process(delta):
 	else:
 		Engine.time_scale = 1
 	
-	if tagDebugCooldown > 0:
-		tagDebugCooldown -= delta
+	if tagCooldown > 0:
+		tagCooldown -= delta
 	
 	cam.position = lerp(cam.position, Vector2(0, 0), (lerpspeed * delta * 100)/Engine.time_scale)
 
@@ -226,7 +226,7 @@ func score(player):
 			Team2Score += 1
 			ui.scored(Team2Score, 2)
 
-var tagDebugCooldown = 0
+var tagCooldown = 0
 var lastGameStartTick = 0
 func gameEnd():
 	gameEndCalled = true
@@ -238,10 +238,10 @@ func gameEnd():
 	gameEndCalled = false
 	lastGameStartTick = Time.get_ticks_msec()
 	
-	tagDebugCooldown = 4
+	tagCooldown = 1
 
 func tagged(caught : CharacterBody2D, _tagger : CharacterBody2D):
-	if gameEndCalled == true and tagDebugCooldown > 0:
+	if not gameEndCalled and tagCooldown > 0:
 		return
 	slowDown(0.1)
 	
@@ -254,15 +254,15 @@ func tagged(caught : CharacterBody2D, _tagger : CharacterBody2D):
 	caught.Caught = true
 	
 	if caught == CurrentlySelected:
-		changeCharacter()
+		changeCharacter(true)
 
 func slowDown(time):
 	slowDownTimer = time
 	Engine.time_scale = 0.1
 #	print("Slowing down time")
 
-func changeCharacter():
-	if not Options.changeCharacter: return
+func changeCharacter(forced):
+	if not Options.changeCharacter and not forced: return
 	print("Changed character")
 	CurrentlySelected.Selected.emit(false)
 	if selectedTeam.size() == 0:
@@ -294,4 +294,4 @@ func changeTeam():
 		selectedTeam = RunnersOnField
 		lastSelected = "Runners"
 	selectedChar = maxPlayersInTeam-1
-	changeCharacter()
+	changeCharacter(true)

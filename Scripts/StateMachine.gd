@@ -63,7 +63,7 @@ func on_child_transition(state, new_state_name):
 	current_state = new_state
 
 func onTagged(caught : CharacterBody2D, tagger : CharacterBody2D):
-	if level.gameEndCalled == true and level.tagDebugCooldown > 0:
+	if not level.gameEndCalled and level.tagCooldown > 0:
 		return
 	
 	if caught == character:

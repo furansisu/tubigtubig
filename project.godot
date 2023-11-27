@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.1", "Forward Plus")
 
 [autoload]
 
-Options="*res://Scenes/options.gd"
+Options="*res://Scripts/options.gd"
 
 [display]
 
