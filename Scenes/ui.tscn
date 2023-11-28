@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://6wm8u80ojxvr"]
+[gd_scene load_steps=10 format=3 uid="uid://6wm8u80ojxvr"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_1ickb"]
 [ext_resource type="LabelSettings" uid="uid://dtogw3x8hsp37" path="res://Resources/FONTS/new_label_settings.tres" id="1_76f7a"]
 [ext_resource type="FontFile" uid="uid://bd8onlx5n7o4m" path="res://Resources/FONTS/ARCADECLASSIC.TTF" id="2_q6srn"]
 [ext_resource type="FontFile" uid="uid://bqu1naaxqcmxe" path="res://Resources/FONTS/PixelEmulator-xq08.ttf" id="3_7asyg"]
+[ext_resource type="Theme" uid="uid://c68fwqiogebru" path="res://Resources/FONTS/button_theme.tres" id="4_pqad4"]
+[ext_resource type="Script" path="res://Scripts/TextChangeForButton.gd" id="5_s1tnx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qv5co"]
 line_spacing = 1.0
@@ -15,35 +17,6 @@ font = ExtResource("3_7asyg")
 
 [sub_resource type="LabelSettings" id="LabelSettings_di6ay"]
 font = ExtResource("3_7asyg")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q613q"]
-bg_color = Color(0.333333, 0.701961, 0.478431, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-corner_detail = 14
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6hvx"]
-bg_color = Color(0.627451, 0.952941, 0.741176, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lf03w"]
-bg_color = Color(0.87451, 0.87451, 0.87451, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewcvj"]
-bg_color = Color(0.87451, 0.87451, 0.87451, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 
 [node name="UI" type="CanvasLayer"]
 process_mode = 3
@@ -77,6 +50,15 @@ size_flags_vertical = 0
 text = "Team 1: 0"
 label_settings = ExtResource("1_76f7a")
 
+[node name="TIMERUI" type="Label" parent="Control/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "0:00
+"
+label_settings = ExtResource("1_76f7a")
+
 [node name="GAMEOVER" type="Label" parent="Control/MarginContainer"]
 unique_name_in_owner = true
 visible = false
@@ -85,6 +67,30 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 40
 text = "GAME OVER"
 label_settings = SubResource("LabelSettings_qv5co")
+
+[node name="TryAgain" type="Button" parent="Control/MarginContainer/GAMEOVER"]
+visible = false
+offset_left = 50.0
+offset_top = 37.0
+offset_right = 158.0
+offset_bottom = 57.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_pqad4")
+text = "TRY AGAIN"
+script = ExtResource("5_s1tnx")
+
+[node name="Quit" type="Button" parent="Control/MarginContainer/GAMEOVER"]
+visible = false
+offset_left = 80.0
+offset_top = 57.0
+offset_right = 134.0
+offset_bottom = 77.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_pqad4")
+text = "QUIT"
+script = ExtResource("5_s1tnx")
 
 [node name="TEAM2" type="Label" parent="Control/MarginContainer"]
 unique_name_in_owner = true
@@ -134,42 +140,9 @@ offset_right = 320.0
 offset_bottom = 180.0
 color = Color(0.14902, 0.14902, 0.14902, 0.72549)
 
-[node name="PauseMenu" type="Control" parent="."]
+[node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
-process_mode = 3
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
+process_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="PauseMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -72.0
-offset_top = -25.0
-offset_right = 72.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Button" type="Button" parent="PauseMenu/MarginContainer"]
-clip_contents = true
-layout_mode = 2
-theme_override_colors/font_pressed_color = Color(0.333333, 0.701961, 0.478431, 1)
-theme_override_colors/font_hover_color = Color(0.513726, 1, 0.482353, 1)
-theme_override_fonts/font = ExtResource("3_7asyg")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_q613q")
-theme_override_styles/hover = SubResource("StyleBoxFlat_p6hvx")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_lf03w")
-theme_override_styles/focus = SubResource("StyleBoxFlat_ewcvj")
-text = "RESUME"
-clip_text = true
+[connection signal="pressed" from="Control/MarginContainer/GAMEOVER/TryAgain" to="." method="_on_try_again_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/GAMEOVER/Quit" to="." method="_on_quit_pressed"]

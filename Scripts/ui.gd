@@ -1,8 +1,10 @@
 extends CanvasLayer
 
+@onready var PauseMenu = preload("res://Scenes/main_menu.tscn").instantiate()
+@onready var OptionsMenu = preload("res://Scenes/options.tscn").instantiate()
+
 @onready var TEAM1 = %TEAM1
 @onready var TEAM2 = %TEAM2
-@onready var PAUSE = %PauseMenu
 @onready var SWITCH = %SWITCH
 @onready var STARTING = %STARTING
 @onready var GO = %GO
@@ -12,13 +14,20 @@ extends CanvasLayer
 # Variables
 var switch_team_length = 1
 var game_starting_timer = 0
+var main_timer = 0
 
 var go_max_time = 1
 var go_timer = 0
 
+var paused2 = false
+
 func _ready():
-	var button = PAUSE.get_node("MarginContainer/Button")
-	button.pressed.connect(PAUSEFUNC)
+	self.add_child(PauseMenu)
+	self.add_child(OptionsMenu)
+	PauseMenu.setupAsPause()
+	PauseMenu.Resume.connect(PAUSEFUNC)
+	print(OptionsMenu.name)
+	OptionsMenu.setupAsPause()
 
 func scored(value, team):
 	match team:
@@ -32,6 +41,7 @@ func _input(ev):
 		PAUSEFUNC()
 
 func _physics_process(delta):
+	if paused2: return
 	if game_starting_timer > 0:
 		GRAY.show()
 		get_tree().paused = true
@@ -47,22 +57,39 @@ func _physics_process(delta):
 		if go_timer >= go_max_time:
 			GO.hide()
 			go_timer = 0
+	
+	var minutes = str(int(%Timer.time_left/60))
+	var seconds = str(int(%Timer.time_left)%60)
+	if int(seconds) < 10:
+		seconds = "0" + seconds
+	%TIMERUI.text = minutes + ":" + seconds
 
 func endGame():
-	get_tree().paused = true
+	%Timer.paused = true
 	%GAMEOVER.show()
+	await get_tree().create_timer(2).timeout
+	for button in %GAMEOVER.get_children():
+		await get_tree().create_timer(1).timeout
+		button.show()
 
 func PAUSEFUNC():
-	var paused = get_tree().paused
-	if not paused:
+	if not paused2:
 		GRAY.show()
+		%TEAM1.hide()
+		%TEAM2.hide()
+		%GO.hide()
+		STARTING.hide()
 		print("PAUSING")
-		PAUSE.show()
+		PauseMenu.show()
 	else:
 		GRAY.hide()
+		%TEAM1.show()
+		%TEAM2.show()
+		STARTING.show()
 		print("UNPAUSING")
-		PAUSE.hide()
-	get_tree().paused = !paused
+		PauseMenu.hide()
+	get_tree().paused = !paused2
+	paused2 = !paused2
 
 func switching_teams():
 	GRAY.show()
@@ -75,4 +102,13 @@ func start_game_timer(length: int):
 	game_starting_timer = float(length)
 	STARTING.show()
 	
+func game_timer(length: int):
+	%Timer.start(length)
 	
+
+
+func _on_try_again_pressed():
+	get_tree().change_scene_to_file("res://Scenes/World.tscn")
+
+func _on_quit_pressed():
+	get_tree().quit()

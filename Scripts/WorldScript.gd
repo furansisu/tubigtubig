@@ -7,6 +7,7 @@ var Moving
 var ManualMove = false
 
 @onready var AreaHandler = get_node("/root/World/PlayingAreas")
+@onready var gameTimeLength = 120
 
 @onready var players = %Players
 @onready var cam = $Camera
@@ -20,6 +21,9 @@ var lerpspeed = .1
 @export var Runners : Array = []
 @export var RunnersOnField : Array = []
 @export var Taggers : Array = []
+
+@onready var rounds = 1
+@export var currentRound = 0
 
 var maxPlayersInTeam = 3
 
@@ -46,6 +50,8 @@ func _ready():
 	Caught.connect(tagged)
 	
 	ui.start_game_timer(3)
+	ui.game_timer(gameTimeLength)
+	ui.get_node("Timer").timeout.connect(gameEnd)
 
 var lastSelected = ""
 func gameSetup():
@@ -108,6 +114,7 @@ func switchTeams():
 	
 	selectedChar = selectedChar
 	changeCharacter(true)
+	currentRound += 1
 	
 func grabRandomAreaPos():
 	var random = randi_range(1,2)
@@ -184,6 +191,11 @@ func _input(ev : InputEvent):
 var slowDownTimer = 0
 var gameEndCalled = false
 func _process(delta):
+	if slowDownTimer > 0:
+		slowDownTimer -= delta
+	else:
+		Engine.time_scale = 1
+	
 	if RunnersOnField.is_empty() and not gameEndCalled:
 		gameEnd()
 	elif gameEndCalled:
@@ -201,11 +213,6 @@ func _process(delta):
 		ManualMove = false
 	if direction != Vector2.ZERO and not ManualMove:
 		ManualMove = true
-	
-	if slowDownTimer > 0:
-		slowDownTimer -= delta
-	else:
-		Engine.time_scale = 1
 	
 	if tagCooldown > 0:
 		tagCooldown -= delta
@@ -231,10 +238,13 @@ var lastGameStartTick = 0
 func gameEnd():
 	gameEndCalled = true
 	print(" GAME END! ")
-#	ui.endGame()
+	if currentRound == rounds:
+		ui.endGame()
+		return
 	await ui.switching_teams()
 	switchTeams()
 	await ui.start_game_timer(3)
+	ui.game_timer(gameTimeLength)
 	gameEndCalled = false
 	lastGameStartTick = Time.get_ticks_msec()
 	

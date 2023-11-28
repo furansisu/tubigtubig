@@ -6,7 +6,7 @@ var default_font = load("res://Resources/FONTS/november.tres")
 var debug = false
 
 var WEIGHTS = {
-	"CharacterBody2D": 15,
+	"CharacterBody2D": 40,
 	"TileMap": 2,
 	"Area2D": 10
 }
