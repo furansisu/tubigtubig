@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/AreaHandler.gd" id="8_56o53"]
 [ext_resource type="Script" path="res://Scripts/Area.gd" id="8_y7syj"]
 [ext_resource type="PackedScene" uid="uid://dq2ayyja46vnl" path="res://Characters/Iking.tscn" id="11_4uvj8"]
-[ext_resource type="PackedScene" uid="uid://bi5qs8jetmpe" path="res://Characters/Amogus.tscn" id="12_aljkd"]
+[ext_resource type="PackedScene" uid="uid://g4av0u2djx2q" path="res://Characters/Silya.tscn" id="13_4wtce"]
 [ext_resource type="Script" path="res://Scripts/MiddleLineSwitch.gd" id="13_bciir"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0k6y"]
@@ -2233,8 +2233,8 @@ position = Vector2(293, 244)
 [node name="Iking" parent="Players" instance=ExtResource("11_4uvj8")]
 position = Vector2(348, 322)
 
-[node name="Amogus" parent="Players" instance=ExtResource("12_aljkd")]
-position = Vector2(340, 218)
+[node name="Silya" parent="Players" instance=ExtResource("13_4wtce")]
+position = Vector2(348, 240)
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(161, 90)

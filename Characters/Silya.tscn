@@ -1,8 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bs2jvtqwsdn7o"]
+[gd_scene load_steps=11 format=3 uid="uid://g4av0u2djx2q"]
 
-[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_oirdr"]
-[ext_resource type="Texture2D" uid="uid://c0aklg1awv30n" path="res://Resources/PNG/iking.png" id="2_gqknb"]
-[ext_resource type="PackedScene" uid="uid://xxufy8l2hbtw" path="res://Scenes/StateMachine.tscn" id="3_thkiu"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_y2uga"]
+[ext_resource type="Texture2D" uid="uid://dxm0522m1rc3x" path="res://Resources/PNG/silya.png" id="2_1ctop"]
+[ext_resource type="PackedScene" uid="uid://xxufy8l2hbtw" path="res://Scenes/StateMachine.tscn" id="3_vm75b"]
 
 [sub_resource type="CapsuleShape2D" id="25"]
 radius = 4.0
@@ -86,14 +86,14 @@ _data = {
 "WalkRight": SubResource("4")
 }
 
-[node name="Iking2" type="CharacterBody2D"]
+[node name="Silya" type="CharacterBody2D"]
 y_sort_enabled = true
 platform_floor_layers = 4294901760
-script = ExtResource("1_oirdr")
+script = ExtResource("1_y2uga")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -4)
-texture = ExtResource("2_gqknb")
+texture = ExtResource("2_1ctop")
 hframes = 7
 vframes = 3
 frame = 8
@@ -109,4 +109,4 @@ libraries = {
 "": SubResource("AnimationLibrary_sxwnh")
 }
 
-[node name="StateMachine" parent="." instance=ExtResource("3_thkiu")]
+[node name="StateMachine" parent="." instance=ExtResource("3_vm75b")]
