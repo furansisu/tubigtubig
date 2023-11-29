@@ -25,6 +25,8 @@ var lerpspeed = .1
 @onready var rounds = 1
 @export var currentRound = 0
 
+var roundSwitch = false
+
 var maxPlayersInTeam = 3
 
 signal Scored
@@ -114,7 +116,6 @@ func switchTeams():
 	
 	selectedChar = selectedChar
 	changeCharacter(true)
-	currentRound += 1
 	
 func grabRandomAreaPos():
 	var random = randi_range(1,2)
@@ -238,6 +239,12 @@ var lastGameStartTick = 0
 func gameEnd():
 	gameEndCalled = true
 	print(" GAME END! ")
+	if roundSwitch:
+		currentRound += 1
+		roundSwitch = false
+	else:
+		roundSwitch = true
+	rounds = Options.totalRounds
 	if currentRound == rounds:
 		ui.endGame()
 		return

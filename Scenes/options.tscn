@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ba3xuudilwfht"]
+[gd_scene load_steps=6 format=3 uid="uid://ba3xuudilwfht"]
 
 [ext_resource type="Theme" uid="uid://c68fwqiogebru" path="res://Resources/FONTS/button_theme.tres" id="1_dya1r"]
 [ext_resource type="Script" path="res://Scripts/options.gd" id="1_tp64n"]
 [ext_resource type="Theme" uid="uid://cbtypn1n6qnx6" path="res://Resources/FONTS/optionmenutheme.tres" id="1_wurfx"]
 [ext_resource type="Script" path="res://Scripts/TextChangeForButton.gd" id="2_w3f8t"]
+[ext_resource type="LabelSettings" uid="uid://dtogw3x8hsp37" path="res://Resources/FONTS/new_label_settings.tres" id="3_tw5pu"]
 
 [node name="Options" type="Control"]
 layout_mode = 3
@@ -52,6 +53,21 @@ layout_mode = 2
 theme = ExtResource("1_wurfx")
 text = "change team "
 
+[node name="RoundLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Total Rounds: "
+label_settings = ExtResource("3_tw5pu")
+
+[node name="Round" type="HSlider" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Total Rounds
+"
+focus_neighbor_left = NodePath("../RoundLabel")
+max_value = 10.0
+value = 3.0
+
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 1
 offset_left = 7.0
@@ -76,4 +92,5 @@ script = ExtResource("2_w3f8t")
 [connection signal="toggled" from="MarginContainer/VBoxContainer/Debug" to="." method="_on_debug_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/ChangeChar" to="." method="_on_change_char_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/ChangeTeam" to="." method="_on_change_team_toggled"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/Round" to="." method="_on_round_value_changed"]
 [connection signal="pressed" from="MarginContainer2/Control/Back" to="." method="_on_back_pressed"]

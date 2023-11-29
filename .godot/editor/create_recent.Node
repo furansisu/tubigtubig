@@ -1,6 +1,9 @@
+Label
+HSlider
+HScrollBar
+SpinBox
 Control
 Container
-Label
 Timer
 VBoxContainer
 CheckButton

@@ -3,6 +3,7 @@ extends Control
 var drawDebug = false
 var changeCharacter = true
 var changeTeam = false
+var totalRounds = 3
 
 var mainMenu = null
 var pauseMenu = false
@@ -15,9 +16,11 @@ func setupAsPause():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if self.get_children().is_empty() == false:
-		%Debug.button_pressed = drawDebug
-		%ChangeChar.button_pressed = changeCharacter
-		%ChangeTeam.button_pressed = changeTeam
+		%Debug.button_pressed = Options.drawDebug
+		%ChangeChar.button_pressed = Options.changeCharacter
+		%ChangeTeam.button_pressed = Options.changeTeam
+		%Round.value = Options.totalRounds
+		%RoundLabel.text = "Total Rounds: " + str(Options.totalRounds)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -42,3 +45,8 @@ func _on_back_pressed():
 		mainMenu.show()
 	else:
 		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+
+
+func _on_round_value_changed(value):
+	Options.totalRounds = value
+	%RoundLabel.text = "Total Rounds: " + str(%Round.value)
