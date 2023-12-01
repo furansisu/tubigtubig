@@ -1,4 +1,5 @@
 extends Node2D
+var default_font = load("res://Resources/FONTS/PixelEmulator-xq08.ttf")
 
 var selectedTeam : Array
 var allChars = []
@@ -149,7 +150,7 @@ func taggersSet(team : Array):
 		player.Caught = false
 		player.currentTeam = teamName
 		player.setupReady.emit()
-		
+
 func runnersSet(team : Array):
 	RunnersOnField = Runners.duplicate()
 	var teamName = "Runners"
@@ -228,6 +229,7 @@ func score(player):
 
 var tagCooldown = 0
 var lastGameStartTick = 0
+
 func gameEnd():
 	$GameOver.play()
 	gameEndCalled = true
@@ -247,10 +249,9 @@ func gameEnd():
 	ui.game_timer(gameTimeLength)
 	gameEndCalled = false
 	lastGameStartTick = Time.get_ticks_msec()
-	
 	tagCooldown = 1
 
-func tagged(caught : CharacterBody2D, _tagger : CharacterBody2D):
+func tagged(caught : CharacterBody2D, _tagger : CharacterBody2D, pos : Vector2):
 	if not gameEndCalled and tagCooldown > 0:
 		return
 	slowDown(0.1)

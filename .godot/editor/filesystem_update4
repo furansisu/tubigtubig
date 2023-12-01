@@ -1,6 +1,7 @@
 res://default_env.tres
 res://Scenes/World.tscn
 res://Resources/FONTS/button_theme.tres
+res://Resources/FONTS/new_label_settings.tres
 res://Scenes/main_menu.tscn
 res://Scenes/ui.tscn
 res://Scenes/new_label.tscn
@@ -12,4 +13,9 @@ res://Characters/Amogus.tscn
 res://Scenes/options.tscn
 res://Scenes/tutorial.tscn
 res://Scenes/menumusic.tscn
+res://Scripts/options.gd
+res://Scripts/States/Strafe.gd
+res://Scripts/Player.gd
 res://Scripts/WorldScript.gd
+res://Scripts/StateMachine.gd
+res://Scripts/MainMenu.gd

@@ -63,6 +63,15 @@ func checkLowestDistanceToTagger():
 	character.distanceToClosestTagger = lowestDist
 	return lowestDist
 
+func checkTeammateGoingSide():
+	var sideArea = AreaHandler.getSideAreaOfCharacter(character)
+	var runners = get_node("/root/World").RunnersOnField
+	for player in runners:
+		if player.currentArea == sideArea or player.targetArea == sideArea:
+			print("A TEAMMATE IS GOING TO THE SIDE!")
+			return true
+	return false
+
 func Enter():
 	if not character:
 		character = get_parent().get_parent()
@@ -91,7 +100,7 @@ func Update(delta):
 	if wander_time > 0:
 		wander_time -= delta
 	else:
-		if lowestDist <= 35 and sideLook == false:
+		if lowestDist <= 35 and sideLook == false and not checkTeammateGoingSide():
 			changeToSideArea()
 #			print("Moving to other side for " + character.name)
 		else:

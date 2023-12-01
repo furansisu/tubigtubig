@@ -1,5 +1,6 @@
 extends CharacterBody2D
 const contextsteeringscript = preload("res://Scripts/ContextSteering.gd")
+var default_font = load("res://Resources/FONTS/PixelEmulator-xq08.ttf")
 @onready var CSB = contextsteeringscript.new()
 
 # ------------------------ V A R I A B L E S ------------------------------------------
@@ -78,9 +79,19 @@ func setLookAt(LookAtBool, point : Vector2):
 		LookAtPoint = Vector2.ZERO
 
 # ------------------------------------------------------------------------------------
+var tagText = false
+var tagPos = null
 var CSBShape = 'default'
 func _draw():
 	CSB.draw()
+	if tagText == true:
+		draw_string(default_font, tagPos - global_position, "TAGGED!", HORIZONTAL_ALIGNMENT_CENTER, -1, 5, Color.ORANGE_RED)
+		var newThread = Thread.new()
+		newThread.start(func wait():
+			await get_tree().create_timer(1).timeout
+			tagText = false, Thread.PRIORITY_HIGH)
+		newThread.wait_to_finish()
+		
 
 func _ready():
 	CSB.setup(self)
@@ -143,12 +154,17 @@ func getCollisions():
 		var collision = self.get_slide_collision(i)
 		var collider = collision.get_collider()
 		if collider.is_class("CharacterBody2D") and self.currentTeam == "Runners" and collider.currentTeam == "Taggers":
-			get_node("/root/World").Caught.emit(self, collider)
+			get_node("/root/World").Caught.emit(self, collider, collision.get_position())
 		if collider.is_class("CharacterBody2D") and self.currentTeam == "Taggers" and collider.currentTeam == "Runners":
-			get_node("/root/World").Caught.emit(collider, self)
+			get_node("/root/World").Caught.emit(collider, self, collision.get_position())
+			tagPos = collision.get_position()
+			tagText = true
+			queue_redraw()
+		
 
 # ------------------------------------------------------------------------------------
 func reset():
+	tagText = false
 	nextScoreArea = []
 	currentTeam = ""
 	

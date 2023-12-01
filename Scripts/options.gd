@@ -27,11 +27,6 @@ func _ready():
 	else:
 		autoload = true
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
 func _on_debug_toggled(button_pressed):
 	%click.play()
 	Options.drawDebug = button_pressed
