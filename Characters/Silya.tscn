@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_y2uga"]
 [ext_resource type="Texture2D" uid="uid://dxm0522m1rc3x" path="res://Resources/PNG/silya.png" id="2_1ctop"]
-[ext_resource type="PackedScene" uid="uid://xxufy8l2hbtw" path="res://Scenes/StateMachine.tscn" id="3_vm75b"]
+[ext_resource type="PackedScene" uid="uid://b8dhaowd3g2js" path="res://Scenes/StateMachine.tscn" id="3_vm75b"]
 
 [sub_resource type="CapsuleShape2D" id="25"]
 radius = 4.0

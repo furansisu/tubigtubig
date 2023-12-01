@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/AIBase.gd" id="3_6b4vj"]
 [ext_resource type="PackedScene" uid="uid://drpr4dxl2kb0u" path="res://Characters/JunJun.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://ij3q675i38fa" path="res://Characters/Fortunato.tscn" id="6"]
-[ext_resource type="PackedScene" uid="uid://dbcsgqu8g7wfa" path="res://Characters/Analyn.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://bbrijnmm6dj11" path="res://Characters/Analyn.tscn" id="7"]
 [ext_resource type="Script" path="res://Scripts/AreaHandler.gd" id="8_56o53"]
 [ext_resource type="Script" path="res://Scripts/Area.gd" id="8_y7syj"]
 [ext_resource type="PackedScene" uid="uid://dq2ayyja46vnl" path="res://Characters/Iking.tscn" id="11_4uvj8"]
@@ -2237,7 +2237,7 @@ position = Vector2(348, 322)
 position = Vector2(348, 240)
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(161, 90)
+position = Vector2(185, 269)
 
 [node name="SideBorder" type="Area2D" parent="."]
 position = Vector2(127, 269)

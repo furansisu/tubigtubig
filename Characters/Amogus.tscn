@@ -1,8 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bi5qs8jetmpe"]
+[gd_scene load_steps=11 format=3 uid="uid://ddksvwgrbdfo4"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_oirdr"]
 [ext_resource type="Texture2D" uid="uid://sy8pipkgxf2q" path="res://Resources/PNG/walkcycle+static.png" id="2_jv55p"]
-[ext_resource type="PackedScene" uid="uid://xxufy8l2hbtw" path="res://Scenes/StateMachine.tscn" id="3_thkiu"]
+[ext_resource type="PackedScene" uid="uid://b8dhaowd3g2js" path="res://Scenes/StateMachine.tscn" id="3_thkiu"]
 
 [sub_resource type="CapsuleShape2D" id="25"]
 radius = 4.0

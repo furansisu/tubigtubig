@@ -1,3 +1,4 @@
+TextureRect
 Label
 HSlider
 HScrollBar
@@ -7,7 +8,6 @@ Container
 Timer
 VBoxContainer
 CheckButton
-TextureRect
 ColorRect
 Button
 MarginContainer

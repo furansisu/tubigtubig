@@ -35,17 +35,8 @@ signal Caught
 var selectedChar = 0
 @export var CurrentlySelected: CharacterBody2D
 
-var loads = {}
-
 func _ready():
 	cam.global_position = Vector2(0, 0)
-	for player in players.get_children():
-		var fname = player.scene_file_path
-		var loaded = load(fname)
-		loads[player.name] = loaded
-	
-	print("SAVED PLAYERS: ")
-	print(loads)
 	
 	gameSetup()
 	Scored.connect(score)

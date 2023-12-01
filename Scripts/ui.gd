@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var PauseMenu = preload("res://Scenes/main_menu.tscn").instantiate()
 @onready var OptionsMenu = preload("res://Scenes/options.tscn").instantiate()
+@onready var Tutorial = preload("res://Scenes/tutorial.tscn").instantiate()
 
 @onready var TEAM1 = %TEAM1
 @onready var TEAM2 = %TEAM2
@@ -24,10 +25,12 @@ var paused2 = false
 func _ready():
 	self.add_child(PauseMenu)
 	self.add_child(OptionsMenu)
+	self.add_child(Tutorial)
 	PauseMenu.setupAsPause()
 	PauseMenu.Resume.connect(PAUSEFUNC)
 	print(OptionsMenu.name)
 	OptionsMenu.setupAsPause()
+	Tutorial.setupAsPause()
 
 func scored(value, team):
 	match team:
@@ -85,7 +88,8 @@ func PAUSEFUNC():
 		GRAY.hide()
 		%TEAM1.show()
 		%TEAM2.show()
-		STARTING.show()
+		if game_starting_timer > 0:
+			STARTING.show()
 		print("UNPAUSING")
 		PauseMenu.hide()
 	get_tree().paused = !paused2

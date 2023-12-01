@@ -22,6 +22,13 @@ font = ExtResource("3_7asyg")
 process_mode = 3
 script = ExtResource("1_1ickb")
 
+[node name="GRAY" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0.14902, 0.14902, 0.14902, 0.72549)
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -132,15 +139,6 @@ text = "GO!"
 label_settings = SubResource("LabelSettings_di6ay")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="GRAY" type="ColorRect" parent="Control"]
-unique_name_in_owner = true
-visible = false
-z_index = -1
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 180.0
-color = Color(0.14902, 0.14902, 0.14902, 0.72549)
 
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
