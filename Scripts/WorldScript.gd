@@ -212,6 +212,7 @@ func _process(delta):
 	cam.position = lerp(cam.position, Vector2(0, 0), (lerpspeed * delta * 100)/Engine.time_scale)
 
 func score(player):
+	$Point.play()
 	var team = 1
 	for i in Team2:
 		if i.name == player.name:
@@ -228,6 +229,7 @@ func score(player):
 var tagCooldown = 0
 var lastGameStartTick = 0
 func gameEnd():
+	$GameOver.play()
 	gameEndCalled = true
 	print(" GAME END! ")
 	if roundSwitch:
@@ -252,6 +254,7 @@ func tagged(caught : CharacterBody2D, _tagger : CharacterBody2D):
 	if not gameEndCalled and tagCooldown > 0:
 		return
 	slowDown(0.1)
+	$Tag.play()
 	
 #	print(caught.name + " WAS CAUGHT BY " + tagger.name)
 	

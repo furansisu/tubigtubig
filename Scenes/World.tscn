@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bfvq6ggo0uqc2"]
+[gd_scene load_steps=28 format=3 uid="uid://bfvq6ggo0uqc2"]
 
 [ext_resource type="PackedScene" uid="uid://deifhdpsrkxdq" path="res://Characters/Bernilla.tscn" id="1"]
 [ext_resource type="Script" path="res://Scripts/WorldScript.gd" id="1_50kh2"]
@@ -14,6 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://g4av0u2djx2q" path="res://Characters/Silya.tscn" id="13_4wtce"]
 [ext_resource type="Script" path="res://Scripts/MiddleLineSwitch.gd" id="13_bciir"]
 [ext_resource type="AudioStream" uid="uid://ce3q6c3dtekem" path="res://Resources/WAV/Dancing Robot - zakiro.wav" id="14_l0ene"]
+[ext_resource type="AudioStream" uid="uid://coslrt8mfxnsm" path="res://Resources/WAV/Tag.wav" id="15_moj88"]
+[ext_resource type="AudioStream" uid="uid://cd6ngj0mup21" path="res://Resources/WAV/Game over.mp3" id="16_gny34"]
+[ext_resource type="AudioStream" uid="uid://cg486wlfsnm1b" path="res://Resources/WAV/Point.wav" id="17_xdh5x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0k6y"]
 texture = ExtResource("3")
@@ -2343,3 +2346,14 @@ shape = SubResource("RectangleShape2D_ufpg2")
 process_mode = 3
 stream = ExtResource("14_l0ene")
 autoplay = true
+
+[node name="Tag" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("15_moj88")
+
+[node name="GameOver" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("16_gny34")
+
+[node name="Point" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_xdh5x")
