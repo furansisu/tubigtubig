@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cutt3mvunukgy"]
+[gd_scene load_steps=8 format=3 uid="uid://cutt3mvunukgy"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_aa7yp"]
 [ext_resource type="Texture2D" uid="uid://dl03a3ko5yrs6" path="res://Resources/PNG/bg.png" id="2_6vxaf"]
 [ext_resource type="Theme" uid="uid://c68fwqiogebru" path="res://Resources/FONTS/button_theme.tres" id="2_hafg7"]
 [ext_resource type="Script" path="res://Scripts/TextChangeForButton.gd" id="3_2qfvm"]
 [ext_resource type="FontFile" uid="uid://bqu1naaxqcmxe" path="res://Resources/FONTS/PixelEmulator-xq08.ttf" id="4_w6uct"]
+[ext_resource type="AudioStream" uid="uid://20kjt02rga5k" path="res://Resources/WAV/The Shepherd - zakiro.wav" id="6_ddrx0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3x1bn"]
 font = ExtResource("4_w6uct")
@@ -40,6 +41,7 @@ texture = ExtResource("2_6vxaf")
 
 [node name="GRAY" type="ColorRect" parent="."]
 unique_name_in_owner = true
+layout_mode = 0
 offset_right = 320.0
 offset_bottom = 180.0
 color = Color(0.14902, 0.14902, 0.14902, 0.72549)
@@ -120,6 +122,10 @@ text = "PIXELTERO"
 label_settings = SubResource("LabelSettings_3x1bn")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ddrx0")
+autoplay = true
 
 [connection signal="pressed" from="MarginContainer/Buttons/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/Buttons/Tutorial" to="." method="_on_tutorial_pressed"]

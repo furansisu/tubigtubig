@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ce3q6c3dtekem"
+path="res://.godot/imported/Dancing Robot - zakiro.wav-b61e6ea080b4c7fe1fd5e57ad0e16ab1.sample"
+
+[deps]
+
+source_file="res://Resources/WAV/Dancing Robot - zakiro.wav"
+dest_files=["res://.godot/imported/Dancing Robot - zakiro.wav-b61e6ea080b4c7fe1fd5e57ad0e16ab1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

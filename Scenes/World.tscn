@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bfvq6ggo0uqc2"]
+[gd_scene load_steps=25 format=3 uid="uid://bfvq6ggo0uqc2"]
 
 [ext_resource type="PackedScene" uid="uid://deifhdpsrkxdq" path="res://Characters/Bernilla.tscn" id="1"]
 [ext_resource type="Script" path="res://Scripts/WorldScript.gd" id="1_50kh2"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dq2ayyja46vnl" path="res://Characters/Iking.tscn" id="11_4uvj8"]
 [ext_resource type="PackedScene" uid="uid://g4av0u2djx2q" path="res://Characters/Silya.tscn" id="13_4wtce"]
 [ext_resource type="Script" path="res://Scripts/MiddleLineSwitch.gd" id="13_bciir"]
+[ext_resource type="AudioStream" uid="uid://ce3q6c3dtekem" path="res://Resources/WAV/Dancing Robot - zakiro.wav" id="14_l0ene"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0k6y"]
 texture = ExtResource("3")
@@ -2337,3 +2338,8 @@ script = ExtResource("13_bciir")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleLineSwitch"]
 shape = SubResource("RectangleShape2D_ufpg2")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("14_l0ene")
+autoplay = true

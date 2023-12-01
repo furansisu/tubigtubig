@@ -34,6 +34,7 @@ texture = ExtResource("2_tug0n")
 
 [node name="GRAY" type="ColorRect" parent="."]
 unique_name_in_owner = true
+layout_mode = 0
 offset_right = 320.0
 offset_bottom = 180.0
 color = Color(0.14902, 0.14902, 0.14902, 0.72549)

@@ -3,6 +3,7 @@ extends Control
 var optionsMenu = null
 var tutorial = null
 var pauseMenu = false
+@onready var music = get_node("Music")
 signal Resume
 
 # Called when the node enters the scene tree for the first time.
@@ -10,6 +11,7 @@ func _ready():
 	pass # Replace with function body.
 
 func setupAsPause():
+	music.playing = false
 	pauseMenu = true
 	%Play.text = "RESUME"
 	%Play.defaultText = "RESUME"

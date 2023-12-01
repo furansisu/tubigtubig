@@ -12,8 +12,4 @@ res://Characters/Analyn.tscn
 res://Characters/Amogus.tscn
 res://Scenes/options.tscn
 res://Scenes/tutorial.tscn
-res://Scenes/tutorial.gd
-res://Scripts/WorldScript.gd
 res://Scripts/MainMenu.gd
-res://Scripts/ui.gd
-res://Scripts/options.gd
