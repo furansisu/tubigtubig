@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://6wm8u80ojxvr"]
+[gd_scene load_steps=13 format=3 uid="uid://6wm8u80ojxvr"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_1ickb"]
 [ext_resource type="LabelSettings" uid="uid://dtogw3x8hsp37" path="res://Resources/FONTS/new_label_settings.tres" id="1_76f7a"]
@@ -6,6 +6,9 @@
 [ext_resource type="FontFile" uid="uid://bqu1naaxqcmxe" path="res://Resources/FONTS/PixelEmulator-xq08.ttf" id="3_7asyg"]
 [ext_resource type="Theme" uid="uid://c68fwqiogebru" path="res://Resources/FONTS/button_theme.tres" id="4_pqad4"]
 [ext_resource type="Script" path="res://Scripts/TextChangeForButton.gd" id="5_s1tnx"]
+[ext_resource type="AudioStream" uid="uid://ddvsqqy5bnv8x" path="res://Resources/WAV/MI_SFX 10.wav" id="7_e1ruo"]
+[ext_resource type="AudioStream" uid="uid://bbb7d015dceob" path="res://Resources/WAV/MI_SFX 11.wav" id="8_bbrin"]
+[ext_resource type="AudioStream" uid="uid://b74oqc6klnicn" path="res://Resources/WAV/MI_SFX 08.wav" id="9_0rc8m"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qv5co"]
 line_spacing = 1.0
@@ -143,6 +146,20 @@ vertical_alignment = 1
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
 process_mode = 1
+
+[node name="FX" type="Node" parent="."]
+
+[node name="hover" type="AudioStreamPlayer" parent="FX"]
+unique_name_in_owner = true
+stream = ExtResource("7_e1ruo")
+
+[node name="back" type="AudioStreamPlayer" parent="FX"]
+unique_name_in_owner = true
+stream = ExtResource("8_bbrin")
+
+[node name="click" type="AudioStreamPlayer" parent="FX"]
+unique_name_in_owner = true
+stream = ExtResource("9_0rc8m")
 
 [connection signal="pressed" from="Control/MarginContainer/GAMEOVER/TryAgain" to="." method="_on_try_again_pressed"]
 [connection signal="pressed" from="Control/MarginContainer/GAMEOVER/Quit" to="." method="_on_quit_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://hj6a23h1dqdu"]
+[gd_scene load_steps=18 format=3 uid="uid://hj6a23h1dqdu"]
 
 [ext_resource type="Texture2D" uid="uid://cspevcj201n32" path="res://Resources/PNG/tutorial/page1.png" id="1_jo3oc"]
 [ext_resource type="Script" path="res://Scenes/tutorial.gd" id="1_rglwl"]
@@ -14,6 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://1subybe0y7h7" path="res://Resources/PNG/tutorial/page11.png" id="11_y3ujd"]
 [ext_resource type="Texture2D" uid="uid://b6fy8pv15g346" path="res://Resources/PNG/tutorial/page12.png" id="12_66u3k"]
 [ext_resource type="Texture2D" uid="uid://dqiag6c68iu0l" path="res://Resources/PNG/tutorial/page13.png" id="13_vkm2r"]
+[ext_resource type="AudioStream" uid="uid://ddvsqqy5bnv8x" path="res://Resources/WAV/MI_SFX 10.wav" id="15_owtf1"]
+[ext_resource type="AudioStream" uid="uid://bbb7d015dceob" path="res://Resources/WAV/MI_SFX 11.wav" id="16_8lulf"]
+[ext_resource type="AudioStream" uid="uid://b74oqc6klnicn" path="res://Resources/WAV/MI_SFX 08.wav" id="17_0mnuw"]
 
 [node name="pages" type="Control"]
 layout_mode = 3
@@ -126,3 +129,17 @@ offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.25045, 0.253309)
 texture = ExtResource("13_vkm2r")
+
+[node name="FX" type="Node" parent="."]
+
+[node name="hover" type="AudioStreamPlayer" parent="FX"]
+unique_name_in_owner = true
+stream = ExtResource("15_owtf1")
+
+[node name="back" type="AudioStreamPlayer" parent="FX"]
+unique_name_in_owner = true
+stream = ExtResource("16_8lulf")
+
+[node name="click" type="AudioStreamPlayer" parent="FX"]
+unique_name_in_owner = true
+stream = ExtResource("17_0mnuw")

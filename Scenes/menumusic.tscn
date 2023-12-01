@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cegscqy6k28sl"]
+
+[ext_resource type="AudioStream" uid="uid://20kjt02rga5k" path="res://Resources/WAV/The Shepherd - zakiro.wav" id="1_ib71p"]
+
+[node name="Music" type="AudioStreamPlayer"]
+stream = ExtResource("1_ib71p")
+autoplay = true

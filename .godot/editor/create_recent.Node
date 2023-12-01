@@ -1,3 +1,4 @@
+Node
 AudioStreamPlayer
 TextureRect
 Label
@@ -15,7 +16,6 @@ MarginContainer
 StaticBody2D
 CollisionShape2D
 Area2D
-Node
 Node2D
 CollisionPolygon2D
 RichTextLabel

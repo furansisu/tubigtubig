@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://cutt3mvunukgy"]
+[gd_scene load_steps=10 format=3 uid="uid://cutt3mvunukgy"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_aa7yp"]
 [ext_resource type="Texture2D" uid="uid://dl03a3ko5yrs6" path="res://Resources/PNG/bg.png" id="2_6vxaf"]
 [ext_resource type="Theme" uid="uid://c68fwqiogebru" path="res://Resources/FONTS/button_theme.tres" id="2_hafg7"]
 [ext_resource type="Script" path="res://Scripts/TextChangeForButton.gd" id="3_2qfvm"]
 [ext_resource type="FontFile" uid="uid://bqu1naaxqcmxe" path="res://Resources/FONTS/PixelEmulator-xq08.ttf" id="4_w6uct"]
-[ext_resource type="AudioStream" uid="uid://20kjt02rga5k" path="res://Resources/WAV/The Shepherd - zakiro.wav" id="6_ddrx0"]
+[ext_resource type="AudioStream" uid="uid://ddvsqqy5bnv8x" path="res://Resources/WAV/MI_SFX 10.wav" id="7_38t2t"]
+[ext_resource type="PackedScene" uid="uid://boq3dud7u0hlh" path="res://Scenes/back.tscn" id="7_b8n65"]
+[ext_resource type="AudioStream" uid="uid://b74oqc6klnicn" path="res://Resources/WAV/MI_SFX 08.wav" id="9_7b4cm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3x1bn"]
 font = ExtResource("4_w6uct")
@@ -123,9 +125,18 @@ label_settings = SubResource("LabelSettings_3x1bn")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_ddrx0")
-autoplay = true
+[node name="FX" type="Node" parent="."]
+
+[node name="hover" type="AudioStreamPlayer" parent="FX"]
+unique_name_in_owner = true
+stream = ExtResource("7_38t2t")
+
+[node name="back" parent="FX" instance=ExtResource("7_b8n65")]
+unique_name_in_owner = true
+
+[node name="click" type="AudioStreamPlayer" parent="FX"]
+unique_name_in_owner = true
+stream = ExtResource("9_7b4cm")
 
 [connection signal="pressed" from="MarginContainer/Buttons/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/Buttons/Tutorial" to="." method="_on_tutorial_pressed"]

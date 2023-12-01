@@ -1,6 +1,5 @@
 extends Control
 var currentPage = 1
-@onready var maxPages = get_children().size()
 var pauseMenu = false
 var mainMenu
 
@@ -9,7 +8,7 @@ func _ready():
 	changePage(currentPage)
 
 func changePage(page):
-	if page != maxPages + 1:
+	if page != 14:
 		get_node("page"+str(currentPage)).hide()
 		get_node("page"+str(page)).show()
 		currentPage = page
@@ -22,6 +21,7 @@ func setupAsPause():
 	self.hide()
 
 func back():
+	Back.play()
 	if pauseMenu == true:
 		changePage(1)
 		self.hide()
@@ -36,3 +36,4 @@ func _input(ev : InputEvent):
 		back()
 	elif not ev is InputEventMouseMotion and ev.is_released():
 		changePage(currentPage+1)
+		%click.play()

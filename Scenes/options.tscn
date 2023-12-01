@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ba3xuudilwfht"]
+[gd_scene load_steps=10 format=3 uid="uid://ba3xuudilwfht"]
 
 [ext_resource type="Theme" uid="uid://c68fwqiogebru" path="res://Resources/FONTS/button_theme.tres" id="1_dya1r"]
 [ext_resource type="Script" path="res://Scripts/options.gd" id="1_tp64n"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://dl03a3ko5yrs6" path="res://Resources/PNG/bg.png" id="2_tug0n"]
 [ext_resource type="Script" path="res://Scripts/TextChangeForButton.gd" id="2_w3f8t"]
 [ext_resource type="LabelSettings" uid="uid://dtogw3x8hsp37" path="res://Resources/FONTS/new_label_settings.tres" id="3_tw5pu"]
+[ext_resource type="AudioStream" uid="uid://ddvsqqy5bnv8x" path="res://Resources/WAV/MI_SFX 10.wav" id="7_2pt5r"]
+[ext_resource type="AudioStream" uid="uid://bbb7d015dceob" path="res://Resources/WAV/MI_SFX 11.wav" id="8_lidga"]
+[ext_resource type="AudioStream" uid="uid://b74oqc6klnicn" path="res://Resources/WAV/MI_SFX 08.wav" id="9_cy21o"]
 
 [node name="Options" type="Control"]
 layout_mode = 3
@@ -113,6 +116,20 @@ size_flags_vertical = 4
 theme = ExtResource("1_dya1r")
 text = "BACK"
 script = ExtResource("2_w3f8t")
+
+[node name="FX" type="Node" parent="."]
+
+[node name="hover" type="AudioStreamPlayer" parent="FX"]
+unique_name_in_owner = true
+stream = ExtResource("7_2pt5r")
+
+[node name="back" type="AudioStreamPlayer" parent="FX"]
+unique_name_in_owner = true
+stream = ExtResource("8_lidga")
+
+[node name="click" type="AudioStreamPlayer" parent="FX"]
+unique_name_in_owner = true
+stream = ExtResource("9_cy21o")
 
 [connection signal="toggled" from="MarginContainer/VBoxContainer/Debug" to="." method="_on_debug_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/ChangeChar" to="." method="_on_change_char_toggled"]

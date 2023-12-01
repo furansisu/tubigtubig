@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://boq3dud7u0hlh"]
+
+[ext_resource type="AudioStream" uid="uid://bbb7d015dceob" path="res://Resources/WAV/MI_SFX 11.wav" id="1_whwif"]
+
+[node name="back" type="AudioStreamPlayer"]
+stream = ExtResource("1_whwif")

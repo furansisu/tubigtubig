@@ -13,3 +13,7 @@ res://Characters/Amogus.tscn
 res://Scenes/options.tscn
 res://Scenes/tutorial.tscn
 res://Scripts/MainMenu.gd
+res://Scripts/options.gd
+res://Scenes/tutorial.gd
+res://Scripts/ui.gd
+res://Scenes/menumusic.tscn

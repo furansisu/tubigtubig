@@ -17,6 +17,8 @@ config/features=PackedStringArray("4.1", "Forward Plus")
 [autoload]
 
 Options="*res://Scripts/options.gd"
+Menumusic="*res://Scenes/menumusic.tscn"
+Back="*res://Scenes/back.tscn"
 
 [display]
 

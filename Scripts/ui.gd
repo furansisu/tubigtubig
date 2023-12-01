@@ -31,6 +31,7 @@ func _ready():
 	print(OptionsMenu.name)
 	OptionsMenu.setupAsPause()
 	Tutorial.setupAsPause()
+	%click.play()
 
 func scored(value, team):
 	match team:
@@ -77,6 +78,7 @@ func endGame():
 
 func PAUSEFUNC():
 	if not paused2:
+		%hover.play()
 		GRAY.show()
 		%TEAM1.hide()
 		%TEAM2.hide()
@@ -85,6 +87,7 @@ func PAUSEFUNC():
 		print("PAUSING")
 		PauseMenu.show()
 	else:
+		%back.play()
 		GRAY.hide()
 		%TEAM1.show()
 		%TEAM2.show()
@@ -108,7 +111,6 @@ func start_game_timer(length: int):
 	
 func game_timer(length: int):
 	%Timer.start(length)
-	
 
 
 func _on_try_again_pressed():

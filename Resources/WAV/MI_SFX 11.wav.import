@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bbb7d015dceob"
+path="res://.godot/imported/MI_SFX 11.wav-f2074d2e583112651674cbae378e5bf1.sample"
+
+[deps]
+
+source_file="res://Resources/WAV/MI_SFX 11.wav"
+dest_files=["res://.godot/imported/MI_SFX 11.wav-f2074d2e583112651674cbae378e5bf1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

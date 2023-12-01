@@ -33,27 +33,31 @@ func _process(delta):
 
 
 func _on_debug_toggled(button_pressed):
+	%click.play()
 	Options.drawDebug = button_pressed
 	print("Set debug to " + str(button_pressed))
 
 
 func _on_change_char_toggled(button_pressed):
+	%click.play()
 	Options.changeCharacter = button_pressed
 
 
 func _on_change_team_toggled(button_pressed):
+	%click.play()
 	Options.changeTeam = button_pressed
 
 func _on_round_value_changed(value):
+	%click.play()
 	Options.totalRounds = value
 	%RoundLabel.text = "Total Rounds: " + str(%Round.value)
 
 func _on_back_pressed():
+	Back.play()
 	if pauseMenu == true:
 		self.hide()
 		mainMenu.show()
 	elif not autoload:
-		print("Options is returning to main menu " + str(pauseMenu))
 		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 
 func _input(ev : InputEvent):
