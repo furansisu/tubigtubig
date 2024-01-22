@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://deifhdpsrkxdq"]
+[gd_scene load_steps=12 format=3 uid="uid://deifhdpsrkxdq"]
 
 [ext_resource type="Texture2D" uid="uid://d3f6duxott6cl" path="res://Resources/PNG/bernilla.png" id="1"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://b8dhaowd3g2js" path="res://Scenes/StateMachine.tscn" id="3_ie11f"]
+[ext_resource type="PackedScene" uid="uid://bltypewpkfs7j" path="res://Scenes/stamina_bar.tscn" id="4_s8wpt"]
 
 [sub_resource type="CapsuleShape2D" id="25"]
 radius = 4.0
@@ -86,16 +87,6 @@ _data = {
 "WalkRight": SubResource("4")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dhgef"]
-bg_color = Color(0.160784, 0.160784, 0.160784, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlhpe"]
-bg_color = Color(1, 0.976471, 0.490196, 1)
-
-[sub_resource type="Theme" id="Theme_rivhv"]
-ProgressBar/styles/background = SubResource("StyleBoxFlat_dhgef")
-ProgressBar/styles/fill = SubResource("StyleBoxFlat_rlhpe")
-
 [node name="Bernilla" type="CharacterBody2D"]
 y_sort_enabled = true
 platform_floor_layers = 4294901760
@@ -120,10 +111,4 @@ libraries = {
 
 [node name="StateMachine" parent="." instance=ExtResource("3_ie11f")]
 
-[node name="StaminaBar" type="ProgressBar" parent="."]
-offset_left = -13.0
-offset_top = -15.0
-offset_right = 13.0
-offset_bottom = -13.0
-theme = SubResource("Theme_rivhv")
-show_percentage = false
+[node name="StaminaBar" parent="." instance=ExtResource("4_s8wpt")]

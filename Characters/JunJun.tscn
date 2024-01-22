@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://drpr4dxl2kb0u"]
+[gd_scene load_steps=12 format=3 uid="uid://drpr4dxl2kb0u"]
 
 [ext_resource type="Texture2D" uid="uid://coa4o1xitpsb6" path="res://Resources/PNG/junjun.png" id="1"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://b8dhaowd3g2js" path="res://Scenes/StateMachine.tscn" id="3_to0v5"]
+[ext_resource type="PackedScene" uid="uid://bltypewpkfs7j" path="res://Scenes/stamina_bar.tscn" id="4_gwan5"]
 
 [sub_resource type="CapsuleShape2D" id="25"]
 radius = 4.0
@@ -86,16 +87,6 @@ _data = {
 "WalkRight": SubResource("4")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_31h65"]
-bg_color = Color(0.160784, 0.160784, 0.160784, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0qdw"]
-bg_color = Color(1, 0.976471, 0.490196, 1)
-
-[sub_resource type="Theme" id="Theme_mk5u6"]
-ProgressBar/styles/background = SubResource("StyleBoxFlat_31h65")
-ProgressBar/styles/fill = SubResource("StyleBoxFlat_y0qdw")
-
 [node name="JunJun" type="CharacterBody2D"]
 y_sort_enabled = true
 platform_floor_layers = 4294901760
@@ -121,10 +112,4 @@ libraries = {
 
 [node name="StateMachine" parent="." instance=ExtResource("3_to0v5")]
 
-[node name="StaminaBar" type="ProgressBar" parent="."]
-offset_left = -13.0
-offset_top = -15.0
-offset_right = 13.0
-offset_bottom = -13.0
-theme = SubResource("Theme_mk5u6")
-show_percentage = false
+[node name="StaminaBar" parent="." instance=ExtResource("4_gwan5")]

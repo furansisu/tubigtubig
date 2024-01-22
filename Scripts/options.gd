@@ -3,7 +3,7 @@ extends Control
 var drawDebug = false
 var changeCharacter = true
 var changeTeam = false
-var totalRounds = 3
+var totalRounds = 2
 
 var mainMenu = null
 var pauseMenu = false

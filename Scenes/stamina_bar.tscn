@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bltypewpkfs7j"]
+
+[ext_resource type="Script" path="res://Scripts/StaminaBar.gd" id="1_wq8ne"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_31h65"]
+bg_color = Color(0.160784, 0.160784, 0.160784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0qdw"]
+bg_color = Color(1, 0.976471, 0.490196, 1)
+
+[sub_resource type="Theme" id="Theme_mk5u6"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_31h65")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_y0qdw")
+
+[node name="StaminaBar" type="ProgressBar"]
+offset_left = -13.0
+offset_top = -15.0
+offset_right = 13.0
+offset_bottom = -13.0
+theme = SubResource("Theme_mk5u6")
+show_percentage = false
+script = ExtResource("1_wq8ne")

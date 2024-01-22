@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bbrijnmm6dj11"]
+[gd_scene load_steps=12 format=3 uid="uid://bbrijnmm6dj11"]
 
 [ext_resource type="Texture2D" uid="uid://klr0p8qnfbh4" path="res://Resources/PNG/analyn.png" id="1"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://b8dhaowd3g2js" path="res://Scenes/StateMachine.tscn" id="3_7tug6"]
+[ext_resource type="PackedScene" uid="uid://bltypewpkfs7j" path="res://Scenes/stamina_bar.tscn" id="4_axk43"]
 
 [sub_resource type="CapsuleShape2D" id="25"]
 radius = 4.0
@@ -86,16 +87,6 @@ _data = {
 "WalkRight": SubResource("4")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5a8jk"]
-bg_color = Color(0.160784, 0.160784, 0.160784, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hpfyb"]
-bg_color = Color(1, 0.976471, 0.490196, 1)
-
-[sub_resource type="Theme" id="Theme_uolm4"]
-ProgressBar/styles/background = SubResource("StyleBoxFlat_5a8jk")
-ProgressBar/styles/fill = SubResource("StyleBoxFlat_hpfyb")
-
 [node name="Analyn" type="CharacterBody2D"]
 y_sort_enabled = true
 platform_floor_layers = 4294901760
@@ -120,10 +111,4 @@ libraries = {
 
 [node name="StateMachine" parent="." instance=ExtResource("3_7tug6")]
 
-[node name="StaminaBar" type="ProgressBar" parent="."]
-offset_left = -13.0
-offset_top = -15.0
-offset_right = 13.0
-offset_bottom = -13.0
-theme = SubResource("Theme_uolm4")
-show_percentage = false
+[node name="StaminaBar" parent="." instance=ExtResource("4_axk43")]

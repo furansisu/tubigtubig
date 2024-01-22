@@ -33,6 +33,7 @@ var movingToSide = false
 @export var teamNumber = 0
 @export var currentLine : StaticBody2D
 @onready var StateMachine = get_node("StateMachine")
+@onready var staminaBar = get_node("StaminaBar")
 
 var lowestDistDebug = 0
 
@@ -113,9 +114,13 @@ func _physics_process(_delta):
             MovingToPoint = false
             direction = Vector2.ZERO
     
+    if staminaBar.value <= 10:
+        running = false
+        spd = defaultspd * 0.5
+    
     # animation handling
     if (direction != Vector2.ZERO and velocity != Vector2.ZERO):
-        if running:
+        if running and staminaBar.value > 0:
             $AnimationPlayer.play("Run")
         else:
             $AnimationPlayer.play("WalkRight")
@@ -136,12 +141,14 @@ func _physics_process(_delta):
     
     var desired_velocity = direction * spd
     velocity = velocity.lerp(desired_velocity, 0.15)
-        
+    
     # run test
     if running:
         spd = lastspd * 1.5
     else:
         spd = lastspd
+    
+    
     
     getCollisions()
     

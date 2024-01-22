@@ -94,7 +94,7 @@ tooltip_text = "Total Rounds
 focus_neighbor_left = NodePath("../RoundLabel")
 min_value = 1.0
 max_value = 10.0
-value = 2.0
+value = 1.0
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 1

@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://dq2ayyja46vnl"]
+[gd_scene load_steps=12 format=3 uid="uid://dq2ayyja46vnl"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_fkyoj"]
 [ext_resource type="Texture2D" uid="uid://c0aklg1awv30n" path="res://Resources/PNG/iking.png" id="2_1oejo"]
 [ext_resource type="PackedScene" uid="uid://b8dhaowd3g2js" path="res://Scenes/StateMachine.tscn" id="3_k8hbu"]
+[ext_resource type="PackedScene" uid="uid://bltypewpkfs7j" path="res://Scenes/stamina_bar.tscn" id="4_kop6c"]
 
 [sub_resource type="CapsuleShape2D" id="25"]
 radius = 4.0
@@ -86,16 +87,6 @@ _data = {
 "WalkRight": SubResource("4")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rawkd"]
-bg_color = Color(0.160784, 0.160784, 0.160784, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2twwm"]
-bg_color = Color(1, 0.976471, 0.490196, 1)
-
-[sub_resource type="Theme" id="Theme_3cnl4"]
-ProgressBar/styles/background = SubResource("StyleBoxFlat_rawkd")
-ProgressBar/styles/fill = SubResource("StyleBoxFlat_2twwm")
-
 [node name="Iking" type="CharacterBody2D"]
 y_sort_enabled = true
 platform_floor_layers = 4294901760
@@ -121,10 +112,4 @@ libraries = {
 
 [node name="StateMachine" parent="." instance=ExtResource("3_k8hbu")]
 
-[node name="StaminaBar" type="ProgressBar" parent="."]
-offset_left = -13.0
-offset_top = -15.0
-offset_right = 13.0
-offset_bottom = -13.0
-theme = SubResource("Theme_3cnl4")
-show_percentage = false
+[node name="StaminaBar" parent="." instance=ExtResource("4_kop6c")]
