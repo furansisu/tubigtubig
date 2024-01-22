@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ddksvwgrbdfo4"]
+[gd_scene load_steps=14 format=3 uid="uid://ddksvwgrbdfo4"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_oirdr"]
 [ext_resource type="Texture2D" uid="uid://sy8pipkgxf2q" path="res://Resources/PNG/walkcycle+static.png" id="2_jv55p"]
@@ -86,6 +86,16 @@ _data = {
 "WalkRight": SubResource("4")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yc4y"]
+bg_color = Color(0.160784, 0.160784, 0.160784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0snw5"]
+bg_color = Color(1, 0.976471, 0.490196, 1)
+
+[sub_resource type="Theme" id="Theme_i0ejp"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_3yc4y")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_0snw5")
+
 [node name="Amogus" type="CharacterBody2D"]
 y_sort_enabled = true
 platform_floor_layers = 4294901760
@@ -109,3 +119,11 @@ libraries = {
 }
 
 [node name="StateMachine" parent="." instance=ExtResource("3_thkiu")]
+
+[node name="StaminaBar" type="ProgressBar" parent="."]
+offset_left = -13.0
+offset_top = -15.0
+offset_right = 13.0
+offset_bottom = -13.0
+theme = SubResource("Theme_i0ejp")
+show_percentage = false

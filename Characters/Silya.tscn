@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://g4av0u2djx2q"]
+[gd_scene load_steps=14 format=3 uid="uid://g4av0u2djx2q"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_y2uga"]
 [ext_resource type="Texture2D" uid="uid://dxm0522m1rc3x" path="res://Resources/PNG/silya.png" id="2_1ctop"]
@@ -86,6 +86,16 @@ _data = {
 "WalkRight": SubResource("4")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7ynf"]
+bg_color = Color(0.160784, 0.160784, 0.160784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pldsx"]
+bg_color = Color(1, 0.976471, 0.490196, 1)
+
+[sub_resource type="Theme" id="Theme_brfmy"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_s7ynf")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_pldsx")
+
 [node name="Silya" type="CharacterBody2D"]
 y_sort_enabled = true
 platform_floor_layers = 4294901760
@@ -110,3 +120,11 @@ libraries = {
 }
 
 [node name="StateMachine" parent="." instance=ExtResource("3_vm75b")]
+
+[node name="StaminaBar" type="ProgressBar" parent="."]
+offset_left = -13.0
+offset_top = -15.0
+offset_right = 13.0
+offset_bottom = -13.0
+theme = SubResource("Theme_brfmy")
+show_percentage = false

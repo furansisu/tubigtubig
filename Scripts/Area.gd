@@ -22,29 +22,29 @@ var inside : Dictionary = {}
 var entered_label
 
 func Entered(person):
-	if not person.is_class("CharacterBody2D"): return
+    if not person.is_class("CharacterBody2D"): return
 #	print(person.name, " entered ", name)
-	inside[person.name] = person
-	person.currentArea = self
-	if end_area:
-		person.Returning = true
-	if start_area:
-		person.Returning = false
-	
-	if nonGameArea: return
-	var scoreArea = false
-	for i in person.nextScoreArea:
-		if i == self:
-			scoreArea = true
-	if person.currentTeam == "Runners" and scoreArea:
-		level.Scored.emit(person)
-		# print(person.name + " scored! " + self.name)
-		var nextArea = AreaHandler.getNextAreaOfCharacter(person)
-		person.nextScoreArea = [nextArea, nextArea.side_area]
-		person.nextLine = AreaHandler.getNextLineOfCharacter(person)
-		
-		var newCollision = ["+1", Color.ORANGE, person.global_position, person]
-		scoreTexts.append(newCollision)
+    inside[person.name] = person
+    person.currentArea = self
+    if end_area:
+        person.Returning = true
+    if start_area:
+        person.Returning = false
+    
+    if nonGameArea: return
+    var scoreArea = false
+    for i in person.nextScoreArea:
+        if i == self:
+            scoreArea = true
+    if person.currentTeam == "Runners" and scoreArea:
+        level.Scored.emit(person)
+        # print(person.name + " scored! " + self.name)
+        var nextArea = AreaHandler.getNextAreaOfCharacter(person)
+        person.nextScoreArea = [nextArea, nextArea.side_area]
+        person.nextLine = AreaHandler.getNextLineOfCharacter(person)
+        
+        var newCollision = ["+1", Color.ORANGE, person.global_position, person]
+        scoreTexts.append(newCollision)
 
 var scoreTexts : Array = []
 # [["TEXT", Color, Vector2, Collider], ["COLLIDE", Color, Vector2, TileMap]]
@@ -53,27 +53,27 @@ var scoreTexts : Array = []
 var size = 10
 
 func _draw():
-	for i in scoreTexts:
-		self.draw_string(default_font, i[2] - self.global_position, i[0], HORIZONTAL_ALIGNMENT_LEFT, -1, size, i[1])
-		
-		var newThread = Thread.new()
-		newThread.start(func wait():
-			await self.get_tree().create_timer(1).timeout
-			scoreTexts.erase(i), Thread.PRIORITY_HIGH)
-		newThread.wait_to_finish()	
+    for i in scoreTexts:
+        self.draw_string(default_font, i[2] - self.global_position, i[0], HORIZONTAL_ALIGNMENT_LEFT, -1, size, i[1])
+        
+        var newThread = Thread.new()
+        newThread.start(func wait():
+            await self.get_tree().create_timer(1).timeout
+            scoreTexts.erase(i), Thread.PRIORITY_HIGH)
+        newThread.wait_to_finish()	
 
 func Exited(person):
-	# print(person.name, " exited ", self.name)
-	inside.erase(person.name)
+    # print(person.name, " exited ", self.name)
+    inside.erase(person.name)
 
 @onready var collider : CollisionShape2D = get_node("CollisionShape2D")
 
 func _ready():
-	if not collider:
-		push_error("ERROR: Area has no collision detection!")
-	body_entered.connect(Entered)
-	body_exited.connect(Exited)
-	z_index = 3
-	
+    if not collider:
+        push_error("ERROR: Area has no collision detection!")
+    body_entered.connect(Entered)
+    body_exited.connect(Exited)
+    z_index = 3
+    
 func _process(_delta):
-	self.queue_redraw()
+    self.queue_redraw()
