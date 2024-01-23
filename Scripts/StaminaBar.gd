@@ -22,6 +22,8 @@ func _process(delta):
         updateValue(-delta * 10 * spdmultiplier)
     else:
         updateValue(delta * 5  * spdmultiplier)
+    if player.dashing:
+        updateValue(-100)
         
 
 func updateValue(valueAdded):

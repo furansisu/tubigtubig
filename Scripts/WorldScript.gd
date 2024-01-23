@@ -180,6 +180,8 @@ func _input(ev : InputEvent):
         CurrentlySelected.running = true
     if ev.is_action_released("run"):
         CurrentlySelected.running = false
+    if ev.is_action_pressed("dash"):
+        CurrentlySelected.dash()
 
 var slowDownTimer = 0
 var gameEndCalled = false

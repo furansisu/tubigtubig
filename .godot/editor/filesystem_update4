@@ -3,7 +3,6 @@ res://Scenes/World.tscn
 res://Characters/Outline.gdshader
 res://Resources/FONTS/button_theme.tres
 res://Resources/FONTS/new_label_settings.tres
-res://Scripts/Player.gd
 res://Scenes/main_menu.tscn
 res://Scenes/ui.tscn
 res://Scenes/new_label.tscn
@@ -14,7 +13,8 @@ res://Characters/Amogus.tscn
 res://Characters/Fortunato.tscn
 res://Characters/Bernilla.tscn
 res://Characters/Iking.tscn
-res://Scripts/StaminaBar.gd
 res://Scenes/stamina_bar.tscn
 res://Scenes/options.tscn
-res://Scripts/options.gd
+res://Scripts/Player.gd
+res://Scripts/WorldScript.gd
+res://Scripts/StaminaBar.gd
