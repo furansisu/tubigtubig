@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://6wm8u80ojxvr"]
+[gd_scene load_steps=16 format=3 uid="uid://6wm8u80ojxvr"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_1ickb"]
 [ext_resource type="LabelSettings" uid="uid://dtogw3x8hsp37" path="res://Resources/FONTS/new_label_settings.tres" id="1_76f7a"]
@@ -9,6 +9,8 @@
 [ext_resource type="AudioStream" uid="uid://ddvsqqy5bnv8x" path="res://Resources/WAV/MI_SFX 10.wav" id="7_e1ruo"]
 [ext_resource type="AudioStream" uid="uid://bbb7d015dceob" path="res://Resources/WAV/MI_SFX 11.wav" id="8_bbrin"]
 [ext_resource type="AudioStream" uid="uid://b74oqc6klnicn" path="res://Resources/WAV/MI_SFX 08.wav" id="9_0rc8m"]
+[ext_resource type="PackedScene" uid="uid://dlx2kgrs1aa8" path="res://Scenes/joystick.tscn" id="10_xehf6"]
+[ext_resource type="Texture2D" uid="uid://c344mkshujp60" path="res://Resources/PNG/joystick/Button.png" id="11_fg6sx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qv5co"]
 line_spacing = 1.0
@@ -20,6 +22,9 @@ font = ExtResource("3_7asyg")
 
 [sub_resource type="LabelSettings" id="LabelSettings_di6ay"]
 font = ExtResource("3_7asyg")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7be18"]
+radius = 50.2
 
 [node name="UI" type="CanvasLayer"]
 process_mode = 3
@@ -161,47 +166,16 @@ stream = ExtResource("8_bbrin")
 unique_name_in_owner = true
 stream = ExtResource("9_0rc8m")
 
-[node name="Team2Players" type="Control" parent="."]
-unique_name_in_owner = true
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 269.0
-offset_top = 35.0
-offset_right = -8.0
-offset_bottom = -14.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Team2Players"]
-custom_minimum_size = Vector2(10, 10)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -13.5
-offset_top = -75.5
-offset_right = 13.5
-offset_bottom = 76.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-alignment = 1
-
 [node name="Team1Players" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
+offset_left = 22.0
 offset_top = 35.0
-offset_right = -269.0
-offset_bottom = -14.0
+offset_right = -255.0
+offset_bottom = -72.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -214,14 +188,98 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -13.5
-offset_top = -62.5
+offset_top = -36.5
 offset_right = 13.5
-offset_bottom = 62.5
+offset_bottom = 36.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 alignment = 1
+
+[node name="Team2Players" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 262.0
+offset_top = 35.0
+offset_right = -15.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Team2Players"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -13.5
+offset_top = -36.5
+offset_right = 13.5
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+alignment = 1
+
+[node name="joystick" parent="." instance=ExtResource("10_xehf6")]
+position = Vector2(43, 139)
+scale = Vector2(0.217164, 0.217164)
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+self_modulate = Color(1, 1, 1, 0.282353)
+position = Vector2(228, 131)
+scale = Vector2(0.36, 0.366429)
+texture_normal = ExtResource("11_fg6sx")
+shape = SubResource("CircleShape2D_7be18")
+
+[node name="Label" type="Label" parent="TouchScreenButton"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -10.0
+offset_right = 25.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "DASH"
+label_settings = SubResource("LabelSettings_di6ay")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TouchScreenButton2" type="TouchScreenButton" parent="."]
+self_modulate = Color(1, 1, 1, 0.282353)
+position = Vector2(270, 108)
+scale = Vector2(0.36, 0.366429)
+texture_normal = ExtResource("11_fg6sx")
+shape = SubResource("CircleShape2D_7be18")
+
+[node name="Label" type="Label" parent="TouchScreenButton2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -10.0
+offset_right = 25.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CHANGE
+CHAR"
+label_settings = SubResource("LabelSettings_di6ay")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="Control/MarginContainer/GAMEOVER/TryAgain" to="." method="_on_try_again_pressed"]
 [connection signal="pressed" from="Control/MarginContainer/GAMEOVER/Quit" to="." method="_on_quit_pressed"]
