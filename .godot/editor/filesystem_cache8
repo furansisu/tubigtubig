@@ -106,3 +106,4 @@ Forward.gd::GDScript::-1::1709259656::0::1::::Forward<>State<>::
 Guard.gd::GDScript::-1::1709259656::0::1::::Guard<>State<>::
 OutOfGame.gd::GDScript::-1::1709259656::0::1::::OutOfGame<>State<>::
 Strafe.gd::GDScript::-1::1709259656::0::1::::Strafe<>State<>::
+

@@ -36,6 +36,8 @@ res://Characters/Bernilla.tscn
 res://Characters/Iking.tscn
 res://Scenes/stamina_bar.tscn
 res://Scenes/options.tscn
+
 res://Resources/FONTS/new_label_settings.tres
 res://Scenes/ui/player_name.tscn
 res://Scenes/ui/playerui.tscn
+

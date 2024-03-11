@@ -161,26 +161,25 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func dash():
-	if staminaBar.value <= 50:
-		var redFill = staminaBar.get_theme_stylebox("fill").duplicate()
-		var redbgFill = staminaBar.get_theme_stylebox("background").duplicate()
-		redFill.bg_color = Color.RED
-		redbgFill.bg_color = Color.DARK_RED
-		staminaBar.add_theme_stylebox_override("fill", redFill)
-		staminaBar.add_theme_stylebox_override("background", redbgFill)
-		await get_tree().create_timer(0.5).timeout
-		staminaBar.remove_theme_stylebox_override("fill")
-		staminaBar.remove_theme_stylebox_override("background")
-		return
-	if canDash:
-		var desired_velocity = direction * 2000
-		velocity = velocity.lerp(desired_velocity, 0.15)
-		canDash = false
-		dashing = true
-		await get_tree().create_timer(1.0).timeout
-		canDash = true
-		dashing = false
-	
+    if staminaBar.value <= 30:
+        var redFill = staminaBar.get_theme_stylebox("fill").duplicate()
+        var redbgFill = staminaBar.get_theme_stylebox("background").duplicate()
+        redFill.bg_color = Color.RED
+        redbgFill.bg_color = Color.DARK_RED
+        staminaBar.add_theme_stylebox_override("fill", redFill)
+        staminaBar.add_theme_stylebox_override("background", redbgFill)
+        await get_tree().create_timer(0.5).timeout
+        staminaBar.remove_theme_stylebox_override("fill")
+        staminaBar.remove_theme_stylebox_override("background")
+        return
+    if canDash:
+        var desired_velocity = direction * 2000
+        velocity = velocity.lerp(desired_velocity, 0.15)
+        canDash = false
+        dashing = true
+        await get_tree().create_timer(1.0).timeout
+        canDash = true
+        dashing = false
 
 func OnSelect(selectedBool):
 	IsSelected = selectedBool

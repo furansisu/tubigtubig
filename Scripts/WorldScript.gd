@@ -126,34 +126,34 @@ func InitialTeamSetup(team : Array):
 		allChars.erase(picked)
 
 func taggersSet(team : Array):
-	var teamName = "Taggers"
-	var emptyTeam = team.duplicate()
-	var lines = get_node("Lines").get_children()
-	for i in lines:
-		if i.name == "MiddleLine":
-			lines.erase(i)
-	for i in lines:
-		if emptyTeam.is_empty():
-			break
-		var player : CharacterBody2D = emptyTeam.pick_random()
-		player.currentLine = i
-		player.global_position = i.global_position
-		player.set_collision_layer(i.get_collision_layer()+1)
-		player.set_collision_mask(i.get_collision_mask()+1)
-		emptyTeam.erase(player)
-	for player in team:
+    var teamName = "Taggers"
+    var emptyTeam = team.duplicate()
+    var lines = get_node("Lines").get_children()
+    for i in lines:
+        if i.name == "MiddleLine":
+            lines.erase(i)
+    for i in lines:
+        if emptyTeam.is_empty():
+            break
+        var player : CharacterBody2D = emptyTeam.pick_random()
+        player.currentLine = i
+        player.global_position = i.global_position
+        player.set_collision_layer(i.get_collision_layer()+512)
+        player.set_collision_mask(i.get_collision_mask()+1024)
+        emptyTeam.erase(player)
+    for player in team:
 #		print("Set " + player.name + " to " + teamName + " team")
 		player.Caught = false
 		player.currentTeam = teamName
 		player.setupReady.emit()
 
 func runnersSet(team : Array):
-	RunnersOnField = Runners.duplicate()
-	var teamName = "Runners"
-	for player in team:
-		player.global_position = grabRandomAreaPos()
-		player.set_collision_layer(1)
-		player.set_collision_mask(1)
+    RunnersOnField = Runners.duplicate()
+    var teamName = "Runners"
+    for player : CharacterBody2D in team:
+        player.global_position = grabRandomAreaPos()
+        player.set_collision_layer(1)
+        player.set_collision_mask(513+1024) # 9 AND 1
 #		print("Set " + player.name + " to " + teamName + " team")
 		player.currentTeam = teamName
 		player.Caught = false
