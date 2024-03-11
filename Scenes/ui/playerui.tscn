@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://deavq6n1jckne"]
+
+[ext_resource type="Texture2D" uid="uid://2cr1qa6pgy5g" path="res://Resources/PNG/logo.png" id="1_h3itf"]
+[ext_resource type="FontFile" uid="uid://bqu1naaxqcmxe" path="res://Resources/FONTS/PixelEmulator-xq08.ttf" id="2_gbgxn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lv5uq"]
+line_spacing = 1.0
+font = ExtResource("2_gbgxn")
+font_size = 6
+
+[node name="Player_Name" type="VBoxContainer"]
+custom_minimum_size = Vector2(100, 30)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Profile" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_right = 8.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_h3itf")
+expand_mode = 1
+
+[node name="Name" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -13.0
+offset_top = 20.0
+offset_right = 14.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "analyn"
+label_settings = SubResource("LabelSettings_lv5uq")
+horizontal_alignment = 1
+vertical_alignment = 1
