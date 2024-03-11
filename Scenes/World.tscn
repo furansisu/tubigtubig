@@ -2263,6 +2263,8 @@ nonGameArea = true
 shape = SubResource("RectangleShape2D_oe77m")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="SideBorder"]
+collision_layer = 1024
+collision_mask = 1024
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="SideBorder/StaticBody2D"]
 position = Vector2(0, -95)
@@ -2281,6 +2283,102 @@ shape = SubResource("SegmentShape2D_6obw6")
 position = Vector2(0, -95)
 rotation = -1.57079
 shape = SubResource("SegmentShape2D_b0h22")
+
+[node name="Line3" type="StaticBody2D" parent="SideBorder"]
+collision_layer = 64
+collision_mask = 64
+
+[node name="Line3Border1" type="CollisionPolygon2D" parent="SideBorder/Line3"]
+position = Vector2(58, -42)
+build_mode = 1
+polygon = PackedVector2Array(-58, -5, 58, -5, 58, 4, -58, 4)
+
+[node name="Line3Border2" type="CollisionPolygon2D" parent="SideBorder/Line3"]
+position = Vector2(58, -60)
+build_mode = 1
+polygon = PackedVector2Array(-58, -5, 58, -5, 58, 4, -38.6112, 3.99999, -58, 4)
+
+[node name="Line3Border4" type="CollisionPolygon2D" parent="SideBorder/Line3"]
+position = Vector2(49, -60)
+build_mode = 1
+polygon = PackedVector2Array(-58, -5, -49, -5, -49, 22, -58, 22)
+
+[node name="Line3Border3" type="CollisionPolygon2D" parent="SideBorder/Line3"]
+position = Vector2(174, -60)
+build_mode = 1
+polygon = PackedVector2Array(-58, -5, -49, -5, -49, 22, -58, 22)
+
+[node name="Line2" type="StaticBody2D" parent="SideBorder"]
+collision_layer = 32
+collision_mask = 32
+
+[node name="Line3Border1" type="CollisionPolygon2D" parent="SideBorder/Line2"]
+position = Vector2(58, 10)
+build_mode = 1
+polygon = PackedVector2Array(-58, -5, 58, -5, 58, 4, -58, 4)
+
+[node name="Line3Border2" type="CollisionPolygon2D" parent="SideBorder/Line2"]
+position = Vector2(58, -8)
+build_mode = 1
+polygon = PackedVector2Array(-58, -5, 58, -5, 58, 4, -38.6112, 3.99999, -58, 4)
+
+[node name="Line3Border4" type="CollisionPolygon2D" parent="SideBorder/Line2"]
+position = Vector2(49, -8)
+build_mode = 1
+polygon = PackedVector2Array(-58, -5, -49, -5, -49, 22, -58, 22)
+
+[node name="Line3Border3" type="CollisionPolygon2D" parent="SideBorder/Line2"]
+position = Vector2(174, -8)
+build_mode = 1
+polygon = PackedVector2Array(-58, -5, -49, -5, -49, 22, -58, 22)
+
+[node name="Line1" type="StaticBody2D" parent="SideBorder"]
+collision_layer = 16
+collision_mask = 16
+
+[node name="Line3Border1" type="CollisionPolygon2D" parent="SideBorder/Line1"]
+position = Vector2(58, 62)
+build_mode = 1
+polygon = PackedVector2Array(-58, -5, 58, -5, 58, 4, -58, 4)
+
+[node name="Line3Border2" type="CollisionPolygon2D" parent="SideBorder/Line1"]
+position = Vector2(58, 44)
+build_mode = 1
+polygon = PackedVector2Array(-58, -5, 58, -5, 58, 4, -38.6112, 3.99999, -58, 4)
+
+[node name="Line3Border4" type="CollisionPolygon2D" parent="SideBorder/Line1"]
+position = Vector2(49, 44)
+build_mode = 1
+polygon = PackedVector2Array(-58, -5, -49, -5, -49, 22, -58, 22)
+
+[node name="Line3Border3" type="CollisionPolygon2D" parent="SideBorder/Line1"]
+position = Vector2(174, 44)
+build_mode = 1
+polygon = PackedVector2Array(-58, -5, -49, -5, -49, 22, -58, 22)
+
+[node name="MiddleLine" type="StaticBody2D" parent="SideBorder"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="Line3Border1" type="CollisionPolygon2D" parent="SideBorder/MiddleLine"]
+position = Vector2(100, 61)
+build_mode = 1
+polygon = PackedVector2Array(-58, -5, -26, -5, -26, 4, -58, 4)
+
+[node name="Line3Border2" type="CollisionPolygon2D" parent="SideBorder/MiddleLine"]
+position = Vector2(109, -60)
+build_mode = 1
+polygon = PackedVector2Array(-58, -5, -35, -5, -35, 4, -38.6112, 3.99999, -58, 4)
+
+[node name="Line3Border4" type="CollisionPolygon2D" parent="SideBorder/MiddleLine"]
+position = Vector2(100, -60)
+build_mode = 1
+polygon = PackedVector2Array(-58, -5, -49, -5, -49, 117, -58, 117)
+
+[node name="Line3Border5" type="CollisionPolygon2D" parent="SideBorder/MiddleLine"]
+position = Vector2(123, -59)
+build_mode = 1
+polygon = PackedVector2Array(-58, -5, -49, -5, -49, 117, -58, 117)
 
 [node name="Lines" type="Node" parent="."]
 

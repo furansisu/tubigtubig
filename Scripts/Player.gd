@@ -161,7 +161,7 @@ func _physics_process(_delta):
     move_and_slide()
 
 func dash():
-    if staminaBar.value <= 50:
+    if staminaBar.value <= 30:
         var redFill = staminaBar.get_theme_stylebox("fill").duplicate()
         var redbgFill = staminaBar.get_theme_stylebox("background").duplicate()
         redFill.bg_color = Color.RED

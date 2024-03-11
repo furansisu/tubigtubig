@@ -142,8 +142,8 @@ func taggersSet(team : Array):
         var player : CharacterBody2D = emptyTeam.pick_random()
         player.currentLine = i
         player.global_position = i.global_position
-        player.set_collision_layer(i.get_collision_layer()+1)
-        player.set_collision_mask(i.get_collision_mask()+1)
+        player.set_collision_layer(i.get_collision_layer()+512)
+        player.set_collision_mask(i.get_collision_mask()+1024)
         emptyTeam.erase(player)
     for player in team:
 #		print("Set " + player.name + " to " + teamName + " team")
@@ -154,10 +154,10 @@ func taggersSet(team : Array):
 func runnersSet(team : Array):
     RunnersOnField = Runners.duplicate()
     var teamName = "Runners"
-    for player in team:
+    for player : CharacterBody2D in team:
         player.global_position = grabRandomAreaPos()
         player.set_collision_layer(1)
-        player.set_collision_mask(1)
+        player.set_collision_mask(513+1024) # 9 AND 1
 #		print("Set " + player.name + " to " + teamName + " team")
         player.currentTeam = teamName
         player.Caught = false

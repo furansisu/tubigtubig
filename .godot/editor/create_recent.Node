@@ -1,8 +1,11 @@
+StaticBody2D
+Line2D
+Area2D
+Node
 Polygon2D
 ProgressBar
 AudioStreamPlayer2D
 AudioStreamPlayer
-Node
 TextureRect
 Label
 HSlider
@@ -10,6 +13,3 @@ HScrollBar
 SpinBox
 Control
 Container
-Timer
-VBoxContainer
-CheckButton

@@ -15,6 +15,3 @@ res://Characters/Bernilla.tscn
 res://Characters/Iking.tscn
 res://Scenes/stamina_bar.tscn
 res://Scenes/options.tscn
-res://Scripts/Player.gd
-res://Scripts/WorldScript.gd
-res://Scripts/StaminaBar.gd
