@@ -108,6 +108,16 @@ func Update(delta):
                 changeToNextArea()
 #			print("Moving FORWARD for " + character.name + ", since lowestDist = " + str(lowestDist))
 #			print("GOING TO THE SIDE? " + str(sideLook) + " towards " + character.targetArea.name)
+            
+            var dashOrNot = randi_range(1,4)
+            # this is ridiculously stupid code but whatever im tired
+            match dashOrNot:
+                1: # 1 in 4 chance of dashing
+                    character.dash()
+                2: # if the character is the LAST PERSON, then now it's 50/50 dash
+                    if character.LastPerson:
+                        character.dash()
+            
             Transitioned.emit(self, "Forward")
         
 func Physics_Update(_delta):

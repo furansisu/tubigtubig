@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://6wm8u80ojxvr"]
+[gd_scene load_steps=17 format=3 uid="uid://6wm8u80ojxvr"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_1ickb"]
 [ext_resource type="LabelSettings" uid="uid://dtogw3x8hsp37" path="res://Resources/FONTS/new_label_settings.tres" id="1_76f7a"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://b74oqc6klnicn" path="res://Resources/WAV/MI_SFX 08.wav" id="9_0rc8m"]
 [ext_resource type="PackedScene" uid="uid://dlx2kgrs1aa8" path="res://Scenes/joystick.tscn" id="10_xehf6"]
 [ext_resource type="Texture2D" uid="uid://c344mkshujp60" path="res://Resources/PNG/joystick/Button.png" id="11_fg6sx"]
+[ext_resource type="Texture2D" uid="uid://clvfx1jtpr4oc" path="res://Resources/PNG/joystick/PressedButton.png" id="12_mjq1x"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qv5co"]
 line_spacing = 1.0
@@ -148,6 +149,84 @@ label_settings = SubResource("LabelSettings_di6ay")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SelectTeam" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelSelectRole" type="Label" parent="SelectTeam"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 14.0
+offset_right = 204.0
+offset_bottom = 26.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "SELECT A ROLE"
+label_settings = ExtResource("1_76f7a")
+
+[node name="Runners" type="Button" parent="SelectTeam"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -29.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_pqad4")
+theme_override_font_sizes/font_size = 26
+text = "RUNNERS"
+
+[node name="Taggers" type="Button" parent="SelectTeam"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 13.0
+offset_top = -29.0
+offset_right = 173.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_pqad4")
+theme_override_font_sizes/font_size = 26
+text = "TAGGERS
+"
+alignment = 0
+
+[node name="Random" type="Button" parent="SelectTeam"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = 18.0
+offset_right = 95.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_pqad4")
+theme_override_font_sizes/font_size = 32
+text = "random
+"
+
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
 process_mode = 1
@@ -168,6 +247,7 @@ stream = ExtResource("9_0rc8m")
 
 [node name="Team1Players" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -199,6 +279,7 @@ alignment = 1
 
 [node name="Team2Players" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -228,18 +309,22 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 alignment = 1
 
-[node name="joystick" parent="." instance=ExtResource("10_xehf6")]
+[node name="MobileControls" type="Node2D" parent="."]
+
+[node name="joystick" parent="MobileControls" instance=ExtResource("10_xehf6")]
 position = Vector2(43, 139)
 scale = Vector2(0.217164, 0.217164)
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+[node name="RunButton" type="TouchScreenButton" parent="MobileControls"]
 self_modulate = Color(1, 1, 1, 0.282353)
 position = Vector2(228, 131)
 scale = Vector2(0.36, 0.366429)
 texture_normal = ExtResource("11_fg6sx")
+texture_pressed = ExtResource("12_mjq1x")
 shape = SubResource("CircleShape2D_7be18")
+action = "run"
 
-[node name="Label" type="Label" parent="TouchScreenButton"]
+[node name="Label" type="Label" parent="MobileControls/RunButton"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -256,14 +341,16 @@ label_settings = SubResource("LabelSettings_di6ay")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TouchScreenButton2" type="TouchScreenButton" parent="."]
+[node name="ChangeCharButton" type="TouchScreenButton" parent="MobileControls"]
 self_modulate = Color(1, 1, 1, 0.282353)
 position = Vector2(270, 108)
 scale = Vector2(0.36, 0.366429)
 texture_normal = ExtResource("11_fg6sx")
+texture_pressed = ExtResource("12_mjq1x")
 shape = SubResource("CircleShape2D_7be18")
+action = "changechar"
 
-[node name="Label" type="Label" parent="TouchScreenButton2"]
+[node name="Label" type="Label" parent="MobileControls/ChangeCharButton"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -283,3 +370,6 @@ vertical_alignment = 1
 
 [connection signal="pressed" from="Control/MarginContainer/GAMEOVER/TryAgain" to="." method="_on_try_again_pressed"]
 [connection signal="pressed" from="Control/MarginContainer/GAMEOVER/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="SelectTeam/Runners" to="." method="_on_runners_pressed"]
+[connection signal="pressed" from="SelectTeam/Taggers" to="." method="_on_taggers_pressed"]
+[connection signal="pressed" from="SelectTeam/Random" to="." method="_on_random_pressed"]

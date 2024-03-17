@@ -1,3 +1,4 @@
+Node2D
 TouchScreenButton
 Button
 Control
@@ -12,4 +13,3 @@ Container
 TextureRect
 Polygon2D
 ProgressBar
-AudioStreamPlayer2D

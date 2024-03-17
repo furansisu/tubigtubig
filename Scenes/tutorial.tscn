@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://hj6a23h1dqdu"]
+[gd_scene load_steps=22 format=3 uid="uid://hj6a23h1dqdu"]
 
 [ext_resource type="Script" path="res://Scripts/tutorial.gd" id="1_eyglr"]
 [ext_resource type="Texture2D" uid="uid://cspevcj201n32" path="res://Resources/PNG/tutorial/page1.png" id="1_jo3oc"]
@@ -14,9 +14,13 @@
 [ext_resource type="Texture2D" uid="uid://1subybe0y7h7" path="res://Resources/PNG/tutorial/page11.png" id="11_y3ujd"]
 [ext_resource type="Texture2D" uid="uid://b6fy8pv15g346" path="res://Resources/PNG/tutorial/page12.png" id="12_66u3k"]
 [ext_resource type="Texture2D" uid="uid://dqiag6c68iu0l" path="res://Resources/PNG/tutorial/page13.png" id="13_vkm2r"]
+[ext_resource type="Texture2D" uid="uid://1fsqvyrwixf4" path="res://Resources/PNG/tutorial/page14.png" id="15_bluoc"]
 [ext_resource type="AudioStream" uid="uid://ddvsqqy5bnv8x" path="res://Resources/WAV/MI_SFX 10.wav" id="15_owtf1"]
 [ext_resource type="AudioStream" uid="uid://bbb7d015dceob" path="res://Resources/WAV/MI_SFX 11.wav" id="16_8lulf"]
+[ext_resource type="Texture2D" uid="uid://c2x8t0sik6npq" path="res://Resources/PNG/tutorial/page15.png" id="16_nl2jt"]
 [ext_resource type="AudioStream" uid="uid://b74oqc6klnicn" path="res://Resources/WAV/MI_SFX 08.wav" id="17_0mnuw"]
+[ext_resource type="Texture2D" uid="uid://brdst1qxj1rdv" path="res://Resources/PNG/tutorial/page16.png" id="17_76q8b"]
+[ext_resource type="Texture2D" uid="uid://ddpfqqvkxigg6" path="res://Resources/PNG/tutorial/page17.png" id="18_srtr5"]
 
 [node name="pages" type="Control"]
 layout_mode = 3
@@ -129,6 +133,38 @@ offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.25045, 0.253309)
 texture = ExtResource("13_vkm2r")
+
+[node name="page14" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.25045, 0.253309)
+texture = ExtResource("15_bluoc")
+
+[node name="page15" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.25045, 0.253309)
+texture = ExtResource("16_nl2jt")
+
+[node name="page16" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.25045, 0.253309)
+texture = ExtResource("17_76q8b")
+
+[node name="page17" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.25045, 0.253309)
+texture = ExtResource("18_srtr5")
 
 [node name="FX" type="Node" parent="."]
 

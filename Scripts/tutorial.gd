@@ -8,7 +8,7 @@ func _ready():
     changePage(currentPage)
 
 func changePage(page):
-    if page != 14:
+    if page != 18:
         get_node("page"+str(currentPage)).hide()
         get_node("page"+str(page)).show()
         currentPage = page

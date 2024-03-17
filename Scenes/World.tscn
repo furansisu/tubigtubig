@@ -2220,23 +2220,23 @@ y_sort_enabled = true
 script = ExtResource("3_6b4vj")
 
 [node name="JunJun" parent="Players" instance=ExtResource("5")]
-position = Vector2(278, 332)
+position = Vector2(465, 237)
 platform_on_leave = 2
 
 [node name="Analyn" parent="Players" instance=ExtResource("7")]
-position = Vector2(332, 188)
+position = Vector2(519, 93)
 
 [node name="Bernilla" parent="Players" instance=ExtResource("1")]
-position = Vector2(369, 281)
+position = Vector2(556, 186)
 
 [node name="Fortunato" parent="Players" instance=ExtResource("6")]
-position = Vector2(293, 244)
+position = Vector2(480, 149)
 
 [node name="Iking" parent="Players" instance=ExtResource("11_4uvj8")]
-position = Vector2(348, 322)
+position = Vector2(535, 227)
 
 [node name="Silya" parent="Players" instance=ExtResource("13_4wtce")]
-position = Vector2(348, 240)
+position = Vector2(535, 145)
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(185, 269)

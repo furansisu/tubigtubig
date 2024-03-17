@@ -10,7 +10,7 @@ var dir : Vector2
 var pos : Vector2
 var players : Array
 
-@export var alertDistance = 15
+@export var alertDistance = 10
 @export var middleLineBool = false
 var switchingLine = false
 

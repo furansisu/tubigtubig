@@ -1,4 +1,6 @@
 extends Node2D
+enum {RUNNER, TAGGER, RANDOM}
+
 var default_font = load("res://Resources/FONTS/PixelEmulator-xq08.ttf")
 
 var selectedTeam : Array
@@ -8,6 +10,7 @@ var Moving
 var ManualMove = false
 
 @onready var AreaHandler = get_node("/root/World/PlayingAreas")
+@onready var joystick = get_node("/root/World/UI/MobileControls/joystick")
 @onready var gameTimeLength = 120
 
 @onready var players = %Players
@@ -39,13 +42,10 @@ var selectedChar = 0
 func _ready():
     cam.global_position = Vector2(0, 0)
     
-    gameSetup()
+    ui.showSelectTeam()
+    ui.team_selected.connect(gameSetup)
     Scored.connect(score)
     Caught.connect(tagged)
-    
-    ui.start_game_timer(3)
-    ui.game_timer(gameTimeLength)
-    ui.get_node("Timer").timeout.connect(gameEnd)
 
 var lastSelected = ""
 func gameSetup():
@@ -62,9 +62,22 @@ func gameSetup():
     runnersSet(Runners)
     taggersSet(Taggers)
     
-    # CHANGE!
-    selectedTeam = RunnersOnField
-    lastSelected = "Runners"
+    if ui.chosenTeam == RUNNER:
+        selectedTeam = RunnersOnField
+        lastSelected = "Runners"
+    elif ui.chosenTeam == TAGGER:
+        selectedTeam = Taggers
+        lastSelected = "Taggers"
+    elif ui.chosenTeam == RANDOM:
+        var rng = RandomNumberGenerator.new()
+        var num = rng.randi_range(1,2)
+        match num:
+            1:
+                selectedTeam = RunnersOnField
+                lastSelected = "Runners"
+            2:
+                selectedTeam = Taggers
+                lastSelected = "Taggers"
     
     ui.setupTeammateUI(Team1, Team2)
     
@@ -73,6 +86,10 @@ func gameSetup():
     CurrentlySelected = selectedTeam[selectedChar]
     CurrentlySelected.Selected.emit(true)
     cam.position = Vector2(0, 0)
+    
+    ui.start_game_timer(3)
+    ui.game_timer(gameTimeLength)
+    ui.get_node("Timer").timeout.connect(gameEnd)
 
 func reloadTeams():
     for player in players.get_children():
@@ -198,7 +215,7 @@ func _process(delta):
         if timer >= waitTime:
             changeTeam()
             holdingChangeCharacter = false
-    var direction = Input.get_vector("left", "right", "up", "down")	
+    var direction = Input.get_vector("left", "right", "up", "down") + joystick.posVector
     if ManualMove:
         CurrentlySelected.Move(direction, CurrentlySelected.defaultspd)
     if direction == Vector2.ZERO and ManualMove:
@@ -220,9 +237,19 @@ func score(player):
     
     match team:
         1:
-            Team1Score += 1
-            ui.scored(Team1Score, 1)
+            for i in Team1:
+                if i == CurrentlySelected:
+                    Team1Score += 1
+                    ui.scored(Team1Score, 1)
+                    return
+            Team2Score += 1
+            ui.scored(Team2Score, 2)
         2:
+            for i in Team2:
+                if i == CurrentlySelected:
+                    Team1Score += 1
+                    ui.scored(Team1Score, 1)
+                    return
             Team2Score += 1
             ui.scored(Team2Score, 2)
 
@@ -266,6 +293,9 @@ func tagged(caught : CharacterBody2D, _tagger : CharacterBody2D, pos : Vector2):
     
     if caught == CurrentlySelected:
         changeCharacter(true)
+        
+    if RunnersOnField.size() == 1:
+        RunnersOnField[0].LastPerson = true
 
 func slowDown(time):
     slowDownTimer = time

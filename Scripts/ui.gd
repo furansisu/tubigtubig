@@ -1,4 +1,5 @@
 extends CanvasLayer
+enum {RUNNER, TAGGER, RANDOM}
 
 @onready var PauseMenu = preload("res://Scenes/main_menu.tscn").instantiate()
 @onready var OptionsMenu = preload("res://Scenes/options.tscn").instantiate()
@@ -20,8 +21,14 @@ var switch_team_length = 1
 var game_starting_timer = 0
 var main_timer = 0
 
+var selectingTeam = false
+
+signal team_selected
+
 var go_max_time = 1
 var go_timer = 0
+
+var chosenTeam
 
 var paused2 = false
 
@@ -58,6 +65,10 @@ func setupTeammateUI(Team1 : Array, Team2 : Array):
 func _input(ev):
     if ev.is_action_pressed("pause"):
         PAUSEFUNC()
+        
+func _notification(what):
+    if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+        PAUSEFUNC()
 
 func _physics_process(delta):
     if paused2: return
@@ -76,6 +87,8 @@ func _physics_process(delta):
         if go_timer >= go_max_time:
             GO.hide()
             go_timer = 0
+    if selectingTeam == true:
+        get_tree().paused = true
     
     var minutes = str(int(%Timer.time_left/60))
     var seconds = str(int(%Timer.time_left)%60)
@@ -97,7 +110,10 @@ func PAUSEFUNC():
         GRAY.show()
         %TEAM1.hide()
         %TEAM2.hide()
+        #TEAM1CONTAINERS.hide()
+        #TEAM2CONTAINERS.hide()
         %GO.hide()
+        $MobileControls.hide()
         STARTING.hide()
         print("PAUSING")
         PauseMenu.show()
@@ -106,6 +122,9 @@ func PAUSEFUNC():
         GRAY.hide()
         %TEAM1.show()
         %TEAM2.show()
+        #TEAM1CONTAINERS.show()
+        #TEAM2CONTAINERS.show()
+        $MobileControls.show()
         if game_starting_timer > 0:
             STARTING.show()
         print("UNPAUSING")
@@ -127,9 +146,35 @@ func start_game_timer(length: int):
 func game_timer(length: int):
     %Timer.start(length)
 
+func showSelectTeam():
+    selectingTeam = true
+    %GRAY.show()
+    $SelectTeam.show()
+    $Control.hide()
+    $MobileControls.hide()
+    
+func SelectedTeam():
+    selectingTeam = false
+    team_selected.emit()
+    %GRAY.hide()
+    $SelectTeam.hide()
+    $Control.show()
+    $MobileControls.show()
 
 func _on_try_again_pressed():
     get_tree().change_scene_to_file("res://Scenes/World.tscn")
 
 func _on_quit_pressed():
     get_tree().quit()
+
+func _on_runners_pressed():
+    chosenTeam = RUNNER
+    SelectedTeam()
+
+func _on_taggers_pressed():
+    chosenTeam = TAGGER
+    SelectedTeam()
+
+func _on_random_pressed():
+    chosenTeam = RANDOM
+    SelectedTeam()

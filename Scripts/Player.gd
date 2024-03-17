@@ -53,6 +53,7 @@ var canDash = true
 var dashing = false
 var LookAtPoint : Vector2
 var Returning = false
+var LastPerson = false
 
 func MoveTo(Position: Vector2, newspd):
     MovingToPoint = true
@@ -149,9 +150,7 @@ func _physics_process(_delta):
         spd = lastspd * 1.5
     else:
         spd = lastspd
-    
-    
-    
+        
     getCollisions()
     
     distanceToMiddleLine = abs(global_position.x - middleLineNode.global_position.x)
@@ -228,6 +227,7 @@ func reset():
     MovingToPoint = false
     running = false
     Returning = false
+    LastPerson = false
     
     SetNewSpd(0)
     StateMachine.reset()
