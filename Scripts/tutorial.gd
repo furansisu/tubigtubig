@@ -34,6 +34,7 @@ func _input(ev : InputEvent):
     if visible == false: return
     if ev.is_action_pressed("pause"):
         back()
-    elif not ev is InputEventMouseMotion and ev.is_released():
+    if ev is InputEventMouseButton and ev.is_released():
         changePage(currentPage+1)
         %click.play()
+        
